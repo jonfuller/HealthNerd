@@ -2,7 +2,7 @@
 using LanguageExt;
 using LanguageExt.Common;
 
-namespace HealthNerd.ViewModels
+namespace HealthNerd.iOS.Services
 {
     public interface IAuthorizer
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using HealthNerd.Annotations;
+using HealthNerd.iOS.Services;
 using Xamarin.Forms;
 
-namespace HealthNerd.ViewModels
+namespace HealthNerd.iOS.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
@@ -17,7 +17,7 @@ namespace HealthNerd.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
+        [iOS.NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

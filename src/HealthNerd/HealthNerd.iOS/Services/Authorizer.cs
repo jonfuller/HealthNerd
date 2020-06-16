@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using Foundation;
 using HealthKit;
-using HealthNerd.ViewModels;
 using LanguageExt;
 using LanguageExt.Common;
 
-namespace HealthNerd.iOS
+namespace HealthNerd.iOS.Services
 {
     public class Authorizer : IAuthorizer
     {
@@ -31,13 +30,13 @@ namespace HealthNerd.iOS
                 , HKCategoryType.Create(HKCategoryTypeIdentifier.HighHeartRateEvent)
                 );
 
-            var value = await new HKHealthStore().RequestAuthorizationToShareAsync(
+            var result = await new HKHealthStore().RequestAuthorizationToShareAsync(
                 typesToShare: new NSSet(),
                 typesToRead: typesToRead);
 
-            return value.Item1
+            return result.Item1
                 ? Option<Error>.None
-                : Option<Error>.Some(CreateError(value.Item2));
+                : Option<Error>.Some(CreateError(result.Item2));
 
             Error CreateError(NSError error)
             {

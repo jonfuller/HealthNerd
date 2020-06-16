@@ -1,5 +1,6 @@
 ﻿using Foundation;
-using HealthNerd.ViewModels;
+using HealthNerd.iOS.Services;
+using HealthNerd.iOS.ViewModels;
 using UIKit;
 using Xamarin.Forms;
 

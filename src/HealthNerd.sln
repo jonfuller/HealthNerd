@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNerd.iOS", "HealthNerd\HealthNerd.iOS\HealthNerd.iOS.csproj", "{90F754AA-B8A5-49E8-9DB7-201E715264E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthNerd", "HealthNerd\HealthNerd\HealthNerd.csproj", "{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,24 +33,6 @@ Global
 		{90F754AA-B8A5-49E8-9DB7-201E715264E7}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{90F754AA-B8A5-49E8-9DB7-201E715264E7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{90F754AA-B8A5-49E8-9DB7-201E715264E7}.Release|iPhoneSimulator.Deploy.0 = Release|iPhoneSimulator
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhone.Deploy.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhone.Build.0 = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhone.Deploy.0 = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{8F0E604D-9F5E-410E-8E82-BCB890CE1A54}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

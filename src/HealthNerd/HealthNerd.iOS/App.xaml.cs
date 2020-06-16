@@ -1,9 +1,11 @@
-﻿using HealthNerd.ViewModels;
+﻿using HealthNerd.iOS.Pages;
+using HealthNerd.iOS.Services;
+using HealthNerd.iOS.ViewModels;
 using Xamarin.Forms;
 
-namespace HealthNerd
+namespace HealthNerd.iOS
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
