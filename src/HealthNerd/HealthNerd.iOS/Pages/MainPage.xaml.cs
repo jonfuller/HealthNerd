@@ -16,13 +16,5 @@ namespace HealthNerd.iOS.Pages
         }
 
         private MainPageViewModel ViewModel => (MainPageViewModel)BindingContext;
-
-        private async void On_AuthorizeHealthClicked(object sender, EventArgs e)
-        {
-            var answer = await DisplayAlert("title", "message", "accept", "cancel");
-
-            if (answer)
-                ViewModel.AuthorizeHealthCommand.Execute(null);
-        }
     }
 }
