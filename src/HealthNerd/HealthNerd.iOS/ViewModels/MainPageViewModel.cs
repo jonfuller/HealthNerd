@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using HealthKit;
 using HealthNerd.iOS.Services;
 using NodaTime;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace HealthNerd.iOS.ViewModels
@@ -67,20 +68,13 @@ namespace HealthNerd.iOS.ViewModels
             var steps = await HealthKitQueries.GetSteps(store, dateRange);
             var weight = await HealthKitQueries.GetWeight(store, dateRange);
 
-            steps.IfSome(stepss =>
+            Output.Create(steps).IfSome(async f =>
             {
-                foreach (var s in stepss)
+                await Share.RequestAsync(new ShareFileRequest
                 {
-                    Console.WriteLine($"{s.Interval.Start} - {s.Value}");
-                }
-            });
-
-            weight.IfSome(weights =>
-            {
-                foreach (var w in weights)
-                {
-                    Console.WriteLine($"{w.Interval.Start} - {w.Value.Pounds} lbs");
-                }
+                    Title = "So close to nerdery!",
+                    File = new ShareFile(f.filename.FullName, f.contentType.Name)
+                });
             });
         });
 

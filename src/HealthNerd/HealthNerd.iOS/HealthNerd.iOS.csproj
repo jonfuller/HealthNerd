@@ -84,8 +84,10 @@
     <Compile Include="Services\IAuthorizer.cs" />
     <Compile Include="Utility\Intervaled.cs" />
     <Compile Include="Services\HealthKitQueries.cs" />
+    <Compile Include="Services\Csv\InstantConverter.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Utility\NodaTimeExtensions.cs" />
+    <Compile Include="Services\Output.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Pages\MainPage.xaml.cs">
@@ -147,6 +149,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CsvHelper">
+      <Version>15.0.5</Version>
+    </PackageReference>
     <PackageReference Include="LanguageExt.Core">
       <Version>3.4.15</Version>
     </PackageReference>
