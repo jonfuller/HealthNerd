@@ -12,19 +12,41 @@ namespace HealthNerd.iOS.ViewModels
     {
         private readonly IAuthorizer _authorizer;
 
+        private bool _hasAuthorizedWithHealth;
+        private bool _needsHealthAuthorization;
+
         public MainPageViewModel(IAuthorizer authorizer)
         {
             _authorizer = authorizer;
+            _needsHealthAuthorization = true;
+            _hasAuthorizedWithHealth = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public bool NeedsHealthAuthorization
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _needsHealthAuthorization;
+            set
+            {
+                _needsHealthAuthorization = value;
+                OnPropertyChanged();
+            }
         }
 
+        public bool HasAuthorizedWithHealth
+        {
+            get => _hasAuthorizedWithHealth;
+            set
+            {
+                _hasAuthorizedWithHealth = value;
+                OnPropertyChanged();
+            }
+        }
+        public Command DoDataSelection => new Command(() =>
+        {
+            App.Current.MainPage.DisplayAlert("You did it!", "You found the edge of the simulation. Check back later.", "Bye now!");
+        });
         public Command AuthorizeHealthCommand => new Command(async () =>
         {
             (await _authorizer.RequestAuthorizeAppleHealth()).Match(
@@ -60,7 +82,12 @@ namespace HealthNerd.iOS.ViewModels
                     Console.WriteLine($"{w.Interval.Start} - {w.Value.Pounds} lbs");
                 }
             });
-
         });
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

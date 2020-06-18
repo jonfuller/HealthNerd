@@ -11,10 +11,10 @@ namespace HealthNerd.iOS
         {
             InitializeComponent();
 
-            MainPage = new MainPage
+            MainPage = new NavigationPage(new MainPage
             {
                 BindingContext = new MainPageViewModel(DependencyService.Resolve<IAuthorizer>())
-            };
+            });
         }
 
         protected override void OnStart()

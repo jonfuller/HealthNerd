@@ -28,10 +28,8 @@ namespace HealthNerd.iOS.Services
             return RunQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates,
                 sample => Intervaled.Create(GetMass(sample), sample.GetInterval()));
 
-            static Mass GetMass(HKQuantitySample sample)
-            {
-                return Mass.FromPounds(sample.Quantity.GetDoubleValue(HKUnit.Pound));
-            }
+            static Mass GetMass(HKQuantitySample sample) =>
+                Mass.FromPounds(sample.Quantity.GetDoubleValue(HKUnit.Pound));
         }
 
         public static Task<Option<IEnumerable<TOut>>> RunQuery<TOut>(HKHealthStore store, HKQuantityType type, DateInterval dates, Func<HKQuantitySample, TOut> mapper)
@@ -54,6 +52,7 @@ namespace HealthNerd.iOS.Services
                        .Cast<HKQuantitySample>()
                        .Select(mapper)
                        .ToSome();
+
                 waitHandle.Set();
             });
 

@@ -3,21 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
+             Title="HealthNerd ❤️🤓"
              x:Class="HealthNerd.iOS.Pages.MainPage">
 
-    <StackLayout>
-         <!--Place new controls here-->
-         <Label Text="Welcome to HealthNerd ❤️🤓. Let's get started." 
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" />
-         <Label Text="First, we'll need to get access to your Health data." 
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" />
-         <Button Text="Click here to start granting HealthNerd access to your Health data." 
-                 Command="{Binding AuthorizeHealthCommand}"/>
-         <Button Text="Let's go get some data"
-                 Command="{Binding QueryHealthCommand}"/>
+    <StackLayout Margin="10">
+        <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}" CornerRadius="3" BackgroundColor="WhiteSmoke" Padding="10">
+            <yummy:PancakeView.Shadow>
+                <yummy:DropShadow Color="#000000" Offset="2,2" Opacity="0.2" />
+            </yummy:PancakeView.Shadow>
+            <StackLayout >
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="Let's Get Started." TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="End">🎉</Label>
+                </StackLayout>
+                <Label Text="First, we'll need to get access to your Health data." 
+                       VerticalOptions="CenterAndExpand"  FontSize="Body"/>
+                <Button Text="Grant HealthNerd Access" Command="{Binding AuthorizeHealthCommand}"/>
+                <Label HorizontalOptions="End">⚙</Label>
+            </StackLayout>
+        </yummy:PancakeView>
+        <yummy:PancakeView IsVisible="{Binding HasAuthorizedWithHealth}" CornerRadius="3" Margin="0,10,0,0" BackgroundColor="WhiteSmoke" Padding="10">
+            <yummy:PancakeView.Shadow>
+                <yummy:DropShadow Color="#000000" Offset="2,2" Opacity="0.2" />
+            </yummy:PancakeView.Shadow>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="First Time Here?" TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="End">🤔</Label>
+                </StackLayout>
+                <Label Text="Let's see what kind of data you have, and decide what data you'd like to nerd out on." 
+                       VerticalOptions="CenterAndExpand"  FontSize="Body"/>
+                <Button Text="Data Nerdery Setup 🗃️"
+                        Command="{Binding DoDataSelection}"/>
+            </StackLayout>
+        </yummy:PancakeView>
+        <yummy:PancakeView IsVisible="{Binding HasAuthorizedWithHealth}" CornerRadius="3" Margin="0,10,0,0" BackgroundColor="WhiteSmoke" Padding="10">
+            <yummy:PancakeView.Shadow>
+                <yummy:DropShadow Color="#000000" Offset="2,2" Opacity="0.2" />
+            </yummy:PancakeView.Shadow>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="Time to Nerd Out!" TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="End">🤓</Label>
+                </StackLayout>
+                <Button Text="Nerd My Data"
+                        Command="{Binding QueryHealthCommand}"/>
+            </StackLayout>
+        </yummy:PancakeView>
     </StackLayout>
 
 </ContentPage>
