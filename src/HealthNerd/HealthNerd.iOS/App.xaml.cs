@@ -1,6 +1,7 @@
 ﻿using HealthNerd.iOS.Pages;
 using HealthNerd.iOS.Services;
 using HealthNerd.iOS.ViewModels;
+using OfficeOpenXml;
 using Xamarin.Forms;
 
 namespace HealthNerd.iOS
@@ -11,6 +12,7 @@ namespace HealthNerd.iOS
         {
             InitializeComponent();
 
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             MainPage = new NavigationPage(new MainPage
             {
                 BindingContext = new MainPageViewModel(DependencyService.Resolve<IAuthorizer>())
