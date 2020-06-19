@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using HealthKit;
+using HealthKitData.iOS;
 using HealthNerd.iOS.Services;
 using NodaTime;
 using Xamarin.Essentials;
@@ -68,8 +69,9 @@ namespace HealthNerd.iOS.ViewModels
             var weight = await HealthKitQueries.GetWeight(store, dateRange);
             var bodyFatPct = await HealthKitQueries.GetBodyFatPercentage(store, dateRange);
             var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
+            var records = await HealthKitQueries.GetHealthRecords(store, dateRange);
 
-            Output.Create(steps).IfSome(async f =>
+            Output.CreateExcelReport(records).IfSome(async f =>
             {
                 await Share.RequestAsync(new ShareFileRequest
                 {

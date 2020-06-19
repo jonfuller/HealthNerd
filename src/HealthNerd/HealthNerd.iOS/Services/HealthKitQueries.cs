@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HealthKit;
+using HealthKitData.Core;
 using HealthNerd.iOS.Utility;
 using LanguageExt;
 using LanguageExt.SomeHelp;
@@ -13,7 +14,7 @@ using Xamarin.Forms.Platform.iOS;
 
 using static LanguageExt.Prelude;
 
-namespace HealthNerd.iOS.Services
+namespace HealthKitData.iOS
 {
     public static class HealthKitQueries
     {
@@ -22,6 +23,19 @@ namespace HealthNerd.iOS.Services
             var workoutType = HKObjectType.GetWorkoutType();
 
             return RunQuery(store, workoutType, dates, sample => (HKWorkout)sample);
+        }
+
+        public static async Task<IEnumerable<Record>> GetHealthRecords(HKHealthStore store, DateInterval dates)
+        {
+            var steps = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), dates, RecordParser.ParseWithUnit(HKUnit.Count));
+            var weight = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates, RecordParser.ParseWithUnit(HKUnit.Pound));
+            var bodyFatPct = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyFatPercentage), dates, RecordParser.ParseWithUnit(HKUnit.Percent));
+
+            return (await Task.WhenAll(steps, weight, bodyFatPct))
+               .Select(x => x.Match(
+                    Some: s => s,
+                    None: Enumerable.Empty<Record>()))
+               .Flatten();
         }
 
         public static Task<Option<IEnumerable<Intervaled<int>>>> GetSteps(HKHealthStore store, DateInterval dates)
