@@ -17,22 +17,43 @@ namespace HealthNerd.iOS.Services
 {
     public static class HealthKitQueries
     {
+        public static Task<Option<IEnumerable<HKWorkout>>> GetWorkouts(HKHealthStore store, DateInterval dates)
+        {
+            var workoutType = HKObjectType.GetWorkoutType();
+
+            return RunQuery(store, workoutType, dates, sample => (HKWorkout)sample);
+        }
+
         public static Task<Option<IEnumerable<Intervaled<int>>>> GetSteps(HKHealthStore store, DateInterval dates)
         {
-            return RunQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), dates,
+            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), dates,
                 sample => Intervaled.Create((int)sample.Quantity.GetDoubleValue(HKUnit.Count), sample.GetInterval()));
         }
 
         public static Task<Option<IEnumerable<Intervaled<Mass>>>> GetWeight(HKHealthStore store, DateInterval dates)
         {
-            return RunQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates,
+            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates,
                 sample => Intervaled.Create(GetMass(sample), sample.GetInterval()));
 
             static Mass GetMass(HKQuantitySample sample) =>
                 Mass.FromPounds(sample.Quantity.GetDoubleValue(HKUnit.Pound));
         }
 
-        public static Task<Option<IEnumerable<TOut>>> RunQuery<TOut>(HKHealthStore store, HKQuantityType type, DateInterval dates, Func<HKQuantitySample, TOut> mapper)
+        public static Task<Option<IEnumerable<Intervaled<Ratio>>>> GetBodyFatPercentage(HKHealthStore store, DateInterval dates)
+        {
+            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyFatPercentage), dates,
+                sample => Intervaled.Create(GetBodyFatPercentage(sample), sample.GetInterval()));
+
+            static Ratio GetBodyFatPercentage(HKQuantitySample sample) =>
+                Ratio.FromPercent(sample.Quantity.GetDoubleValue(HKUnit.Percent));
+        }
+
+        private static Task<Option<IEnumerable<TOut>>> RunQuantitySampleQuery<TOut>(HKHealthStore store, HKQuantityType type, DateInterval dates, Func<HKQuantitySample, TOut> mapper)
+        {
+            return RunQuery(store, type, dates, sample => mapper((HKQuantitySample)sample));
+        }
+
+        private static Task<Option<IEnumerable<TOut>>> RunQuery<TOut>(HKHealthStore store, HKSampleType type, DateInterval dates, Func<HKSample, TOut> mapper)
         {
             var samplePredicate = HKQuery.GetPredicateForSamples(
                 dates.Start.ToDateTimeUnspecified().ToNSDate(),
@@ -49,7 +70,6 @@ namespace HealthNerd.iOS.Services
                     theResults = None;
                 else
                     theResults = results
-                       .Cast<HKQuantitySample>()
                        .Select(mapper)
                        .ToSome();
 

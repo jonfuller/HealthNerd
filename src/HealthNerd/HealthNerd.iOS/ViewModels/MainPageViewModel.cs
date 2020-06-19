@@ -48,6 +48,7 @@ namespace HealthNerd.iOS.ViewModels
         {
             App.Current.MainPage.DisplayAlert("You did it!", "You found the edge of the simulation. Check back later.", "Bye now!");
         });
+
         public Command AuthorizeHealthCommand => new Command(async () =>
         {
             (await _authorizer.RequestAuthorizeAppleHealth()).Match(
@@ -57,8 +58,6 @@ namespace HealthNerd.iOS.ViewModels
 
         public Command QueryHealthCommand => new Command(async () =>
         {
-            var workoutType = HKObjectType.GetWorkoutType();
-            
             var store = new HKHealthStore();
 
             var dateRange = new DateInterval(
@@ -67,12 +66,13 @@ namespace HealthNerd.iOS.ViewModels
 
             var steps = await HealthKitQueries.GetSteps(store, dateRange);
             var weight = await HealthKitQueries.GetWeight(store, dateRange);
+            var bodyFatPct = await HealthKitQueries.GetBodyFatPercentage(store, dateRange);
+            var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
 
             Output.Create(steps).IfSome(async f =>
             {
                 await Share.RequestAsync(new ShareFileRequest
                 {
-                    Title = "So close to nerdery!",
                     File = new ShareFile(f.filename.FullName, f.contentType.Name)
                 });
             });
