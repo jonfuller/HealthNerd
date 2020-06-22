@@ -27,15 +27,32 @@ namespace HealthKitData.iOS
 
         public static async Task<IEnumerable<Record>> GetHealthRecords(HKHealthStore store, DateInterval dates)
         {
-            var steps = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), dates, RecordParser.ParseWithUnit(HKUnit.Count));
-            var weight = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates, RecordParser.ParseWithUnit(HKUnit.Pound));
-            var bodyFatPct = RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyFatPercentage), dates, RecordParser.ParseWithUnit(HKUnit.Percent));
+            var query = Query(store, dates);
 
-            return (await Task.WhenAll(steps, weight, bodyFatPct))
+            var queries = new[]
+            {
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), HKUnit.Count),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), HKUnit.Pound),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.BodyFatPercentage), HKUnit.Percent),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.RestingHeartRate), HKUnit.HertzUnit),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.WalkingHeartRateAverage), HKUnit.HertzUnit),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.VO2Max), HKUnit.Percent),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.AppleStandTime), HKUnit.Count),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.FlightsClimbed), HKUnit.Count),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.AppleExerciseTime), HKUnit.Minute),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.BasalEnergyBurned), HKUnit.Calorie),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.ActiveEnergyBurned), HKUnit.Calorie),
+            }
+            .Select(r => query(r.Item1, r.Item2));
+
+            return (await Task.WhenAll(queries))
                .Select(x => x.Match(
                     Some: s => s,
                     None: Enumerable.Empty<Record>()))
                .Flatten();
+
+            Func<HKQuantityType, HKUnit, Task<Option<IEnumerable<Record>>>> Query(HKHealthStore store, DateInterval dates) =>
+                (type, unit) => RunQuantitySampleQuery(store, type, dates, s => RecordParser.ParseRecord(s, unit));
         }
 
         public static Task<Option<IEnumerable<Intervaled<int>>>> GetSteps(HKHealthStore store, DateInterval dates)
