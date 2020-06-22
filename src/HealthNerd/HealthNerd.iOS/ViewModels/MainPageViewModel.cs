@@ -61,13 +61,11 @@ namespace HealthNerd.iOS.ViewModels
         {
             var store = new HKHealthStore();
 
+            var jan1_2020 = new DateTime(2020, 01, 01, 0, 0, 0, DateTimeKind.Utc);
             var dateRange = new DateInterval(
-                start: LocalDate.FromDateTime(DateTime.Today).Minus(Period.FromDays(10)),
+                start: LocalDate.FromDateTime(jan1_2020),
                 end: LocalDate.FromDateTime(DateTime.Today));
 
-            var steps = await HealthKitQueries.GetSteps(store, dateRange);
-            var weight = await HealthKitQueries.GetWeight(store, dateRange);
-            var bodyFatPct = await HealthKitQueries.GetBodyFatPercentage(store, dateRange);
             var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
             var records = await HealthKitQueries.GetHealthRecords(store, dateRange);
 
