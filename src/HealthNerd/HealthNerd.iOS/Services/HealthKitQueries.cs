@@ -41,7 +41,7 @@ namespace HealthKitData.iOS
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.RestingHeartRate), HKUnit.HertzUnit),
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.WalkingHeartRateAverage), HKUnit.HertzUnit),
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.VO2Max), HKUnit.Percent),
-                (HKQuantityType.Create(HKQuantityTypeIdentifier.AppleStandTime), HKUnit.Count),
+                (HKQuantityType.Create(HKQuantityTypeIdentifier.AppleStandTime), HKUnit.Minute),
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.FlightsClimbed), HKUnit.Count),
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.AppleExerciseTime), HKUnit.Minute),
                 (HKQuantityType.Create(HKQuantityTypeIdentifier.BasalEnergyBurned), HKUnit.Calorie),
