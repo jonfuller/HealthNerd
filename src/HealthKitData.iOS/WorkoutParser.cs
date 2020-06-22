@@ -1,9 +1,7 @@
 ﻿using HealthKit;
 using HealthKitData.Core;
-using HealthNerd.iOS.Utility;
 using LanguageExt;
 using UnitsNet;
-
 using static LanguageExt.Prelude;
 
 namespace HealthKitData.iOS

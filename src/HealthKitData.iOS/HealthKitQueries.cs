@@ -5,11 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using HealthKit;
 using HealthKitData.Core;
-using HealthNerd.iOS.Utility;
 using LanguageExt;
 using LanguageExt.SomeHelp;
 using NodaTime;
-using UnitsNet;
 using Xamarin.Forms.Platform.iOS;
 
 using static LanguageExt.Prelude;

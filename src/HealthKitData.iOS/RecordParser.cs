@@ -2,7 +2,6 @@
 using System.Globalization;
 using HealthKit;
 using HealthKitData.Core;
-using HealthNerd.iOS.Utility;
 
 namespace HealthKitData.iOS
 {
