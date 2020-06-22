@@ -18,11 +18,15 @@ namespace HealthKitData.iOS
 {
     public static class HealthKitQueries
     {
-        public static Task<Option<IEnumerable<HKWorkout>>> GetWorkouts(HKHealthStore store, DateInterval dates)
+        public static async Task<IEnumerable<Workout>> GetWorkouts(HKHealthStore store, DateInterval dates)
         {
             var workoutType = HKObjectType.GetWorkoutType();
 
-            return RunQuery(store, workoutType, dates, sample => (HKWorkout)sample);
+            var workouts = await RunQuery(store, workoutType, dates, sample => WorkoutParser.ParseWorkout((HKWorkout)sample));
+
+            return workouts.Match(
+                Some: w => w,
+                None: Enumerable.Empty<Workout>());
         }
 
         public static async Task<IEnumerable<Record>> GetHealthRecords(HKHealthStore store, DateInterval dates)

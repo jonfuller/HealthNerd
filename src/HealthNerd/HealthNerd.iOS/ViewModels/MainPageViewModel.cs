@@ -71,7 +71,7 @@ namespace HealthNerd.iOS.ViewModels
             var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
             var records = await HealthKitQueries.GetHealthRecords(store, dateRange);
 
-            Output.CreateExcelReport(records).IfSome(async f =>
+            Output.CreateExcelReport(records, workouts).IfSome(async f =>
             {
                 await Share.RequestAsync(new ShareFileRequest
                 {

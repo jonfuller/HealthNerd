@@ -19,18 +19,17 @@ namespace HealthNerd.iOS.Services
 {
     public static class Output
     {
-        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records)
+        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts)
         {
-            return Some(WriteExcelReport(records));
+            return Some(WriteExcelReport(records, workouts));
 
-            static (FileInfo file, ContentType) WriteExcelReport(IEnumerable<Record> records)
+            static (FileInfo file, ContentType) WriteExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts)
             {
                 var file = new FileInfo(Path.Combine(FileSystem.CacheDirectory, $"HealthNerd.xlsx"));
 
                 using (var excelFile = new ExcelPackage())
                 {
-                    var workouts = Enumerable.Empty<Workout>().ToList();
-                    ExcelReport.BuildReport(records.ToList(), workouts, excelFile.Workbook, Settings.Default, Enumerable.Empty<ExcelWorksheet>());
+                    ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, Settings.Default, Enumerable.Empty<ExcelWorksheet>());
 
                     excelFile.SaveAs(file);
                 }
