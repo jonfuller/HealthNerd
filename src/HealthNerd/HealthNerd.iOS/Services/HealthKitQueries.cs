@@ -55,32 +55,8 @@ namespace HealthKitData.iOS
                     None: Enumerable.Empty<Record>()))
                .Flatten();
 
-            Func<HKQuantityType, HKUnit, Task<Option<IEnumerable<Record>>>> Query(HKHealthStore store, DateInterval dates) =>
+            static Func<HKQuantityType, HKUnit, Task<Option<IEnumerable<Record>>>> Query(HKHealthStore store, DateInterval dates) =>
                 (type, unit) => RunQuantitySampleQuery(store, type, dates, s => RecordParser.ParseRecord(s, unit));
-        }
-
-        public static Task<Option<IEnumerable<Intervaled<int>>>> GetSteps(HKHealthStore store, DateInterval dates)
-        {
-            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.StepCount), dates,
-                sample => Intervaled.Create((int)sample.Quantity.GetDoubleValue(HKUnit.Count), sample.GetInterval()));
-        }
-
-        public static Task<Option<IEnumerable<Intervaled<Mass>>>> GetWeight(HKHealthStore store, DateInterval dates)
-        {
-            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass), dates,
-                sample => Intervaled.Create(GetMass(sample), sample.GetInterval()));
-
-            static Mass GetMass(HKQuantitySample sample) =>
-                Mass.FromPounds(sample.Quantity.GetDoubleValue(HKUnit.Pound));
-        }
-
-        public static Task<Option<IEnumerable<Intervaled<Ratio>>>> GetBodyFatPercentage(HKHealthStore store, DateInterval dates)
-        {
-            return RunQuantitySampleQuery(store, HKQuantityType.Create(HKQuantityTypeIdentifier.BodyFatPercentage), dates,
-                sample => Intervaled.Create(GetBodyFatPercentage(sample), sample.GetInterval()));
-
-            static Ratio GetBodyFatPercentage(HKQuantitySample sample) =>
-                Ratio.FromPercent(sample.Quantity.GetDoubleValue(HKUnit.Percent));
         }
 
         private static Task<Option<IEnumerable<TOut>>> RunQuantitySampleQuery<TOut>(HKHealthStore store, HKQuantityType type, DateInterval dates, Func<HKQuantitySample, TOut> mapper)
