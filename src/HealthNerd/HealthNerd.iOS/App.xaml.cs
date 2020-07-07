@@ -1,25 +1,24 @@
-﻿using HealthNerd.iOS.Pages;
-using HealthNerd.iOS.Services;
+﻿using HealthNerd.iOS.Services;
+using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels;
 using NodaTime;
 using Xamarin.Forms;
 
 namespace HealthNerd.iOS
 {
-    public partial class App
+    public partial class App : IHaveMainPage
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage
-            {
-                BindingContext = new MainPageViewModel(
-                    DependencyService.Resolve<IAuthorizer>(),
-                    DependencyService.Resolve<IAlertPresenter>(),
-                    SystemClock.Instance,
-                    DependencyService.Resolve<ISettingsStore>())
-            });
+            var navigator = new NavigationService(this, new ViewLocator());
+
+            navigator.PresentAsNavigatableMainPage(new MainPageViewModel(
+                DependencyService.Resolve<IAuthorizer>(),
+                DependencyService.Resolve<IAlertPresenter>(),
+                SystemClock.Instance,
+                DependencyService.Resolve<ISettingsStore>()));
         }
 
         protected override void OnStart()

@@ -90,8 +90,16 @@
     <Compile Include="Utility\Intervaled.cs" />
     <Compile Include="Utility\LanguageExtExtensions.cs" />
     <Compile Include="Utility\NodaTimeExtensions.cs" />
+    <Compile Include="Utility\Mvvm\IHaveMainPage.cs" />
+    <Compile Include="Utility\Mvvm\INavigationService.cs" />
+    <Compile Include="Utility\Mvvm\IViewLocator.cs" />
+    <Compile Include="Utility\Mvvm\IViewModelLifecycle.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Services\Output.cs" />
+    <Compile Include="Utility\Mvvm\NavigationService.cs" />
+    <Compile Include="Utility\Mvvm\PropertyChangedBase.cs" />
+    <Compile Include="Utility\Mvvm\ViewLocator.cs" />
+    <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Pages\MainPage.xaml.cs">
