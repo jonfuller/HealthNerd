@@ -1,6 +1,6 @@
 ﻿using Foundation;
 using HealthNerd.iOS.Services;
-using HealthNerd.iOS.ViewModels;
+using NodaTime;
 using UIKit;
 using Xamarin.Forms;
 
@@ -24,7 +24,9 @@ namespace HealthNerd.iOS
             global::Xamarin.Forms.Forms.Init();
 
             DependencyService.Register<IAuthorizer, Authorizer>();
-            
+            DependencyService.Register<IAlertPresenter, AlertPresenter>();
+            DependencyService.Register<ISettingsStore, SettingsStore>();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

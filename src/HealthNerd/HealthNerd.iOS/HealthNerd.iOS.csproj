@@ -80,9 +80,16 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\AlertPresenter.cs" />
     <Compile Include="Services\Authorizer.cs" />
+    <Compile Include="Services\IAlertPresenter.cs" />
     <Compile Include="Services\IAuthorizer.cs" />
+    <Compile Include="Services\ISettingsStore.cs" />
+    <Compile Include="Services\PreferenceKeys.cs" />
+    <Compile Include="Services\SettingsStore.cs" />
     <Compile Include="Utility\Intervaled.cs" />
+    <Compile Include="Utility\LanguageExtExtensions.cs" />
+    <Compile Include="Utility\NodaTimeExtensions.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Services\Output.cs" />
     <None Include="Entitlements.plist" />
@@ -186,7 +193,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Resources\Resources.csproj">
+      <Project>{31de279d-4fcc-406d-8317-0463e359980a}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />

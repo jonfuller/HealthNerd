@@ -34,15 +34,15 @@
                 <Button Text="Grant HealthNerd Access" Command="{Binding AuthorizeHealthCommand}"/>
             </StackLayout>
         </yummy:PancakeView>
-        <yummy:PancakeView IsVisible="{Binding HasAuthorizedWithHealth}">
+        <yummy:PancakeView IsVisible="{Binding NeedsConfiguration}">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label HorizontalOptions="StartAndExpand" Text="First Time Here?" TextColor="Gray" FontSize="Header"/>
                     <Label HorizontalOptions="End">🤔</Label>
                 </StackLayout>
-                <Label Text="Let's see what kind of data you have, and decide what data you'd like to nerd out on." 
+                <Label Text="Let's make sure the data comes out looking the way you want." 
                        VerticalOptions="CenterAndExpand"  FontSize="Body"/>
-                <Button Text="Data Nerdery Setup 🗃️" Command="{Binding DoDataSelection}"/>
+                <Button Text="Data Nerdery Setup 🗃️" Command="{Binding GoToDataSettings}"/>
             </StackLayout>
         </yummy:PancakeView>
         <yummy:PancakeView IsVisible="{Binding HasAuthorizedWithHealth}">
