@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using HealthNerd.iOS.ViewModels;
 
 namespace HealthNerd.iOS.Utility.Mvvm
 {
@@ -16,9 +15,19 @@ namespace HealthNerd.iOS.Utility.Mvvm
         void PresentAsNavigatableMainPage(ViewModelBase viewModel);
 
         /// <summary>
+        /// Sets the viewmodel as the main page of the application, and wraps its page within a Navigation page
+        /// </summary>
+        void PresentAsNavigatableMainPage<TViewModel>() where TViewModel : ViewModelBase;
+
+        /// <summary>
         /// Navigate to the given page on top of the current navigation stack
         /// </summary>
         Task NavigateTo(ViewModelBase viewModel);
+
+        /// <summary>
+        /// Navigate to the given page on top of the current navigation stack
+        /// </summary>
+        Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
 
         /// <summary>
         /// Navigate to the previous item in the navigation stack

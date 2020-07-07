@@ -1,6 +1,5 @@
 ﻿using Foundation;
 using HealthNerd.iOS.Services;
-using NodaTime;
 using UIKit;
 using Xamarin.Forms;
 

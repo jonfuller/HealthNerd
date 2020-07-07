@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HealthNerd.iOS.ViewModels;
+using TinyIoC;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -11,12 +11,20 @@ namespace HealthNerd.iOS.Utility.Mvvm
     {
         private readonly IHaveMainPage _presentationRoot;
         private readonly IViewLocator _viewLocator;
+        private readonly TinyIoCContainer _container;
 
-        public NavigationService(IHaveMainPage presentationRoot, IViewLocator viewLocator)
+        public NavigationService(IHaveMainPage presentationRoot, IViewLocator viewLocator, TinyIoCContainer container)
         {
             _presentationRoot = presentationRoot;
             _viewLocator = viewLocator;
+            _container = container;
         }
+
+        public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
+        {
+            await NavigateTo(_container.Resolve<TViewModel>());
+        }
+
         public async Task NavigateTo(ViewModelBase viewModel)
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);
@@ -25,6 +33,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
 
             await Navigator.PushAsync(page);
         }
+
         public async Task NavigateBack()
         {
             var dismissing = Navigator.NavigationStack.Last().BindingContext as ViewModelBase;
@@ -70,6 +79,11 @@ namespace HealthNerd.iOS.Utility.Mvvm
             {
                 toDismiss.AfterDismissed();
             }
+        }
+
+        public void PresentAsNavigatableMainPage<TViewModel>() where TViewModel : ViewModelBase
+        {
+            PresentAsNavigatableMainPage(_container.Resolve<TViewModel>());
         }
 
         public void PresentAsNavigatableMainPage(ViewModelBase viewModel)

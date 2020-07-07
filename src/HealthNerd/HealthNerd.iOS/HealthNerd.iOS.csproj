@@ -78,6 +78,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TinyIoC.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\AlertPresenter.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="Utility\Mvvm\PropertyChangedBase.cs" />
     <Compile Include="Utility\Mvvm\ViewLocator.cs" />
     <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Pages\MainPage.xaml.cs">
@@ -206,6 +211,11 @@
       <Project>{31de279d-4fcc-406d-8317-0463e359980a}</Project>
       <Name>Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Settings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

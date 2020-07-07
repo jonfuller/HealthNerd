@@ -14,7 +14,7 @@ namespace HealthNerd.iOS.ViewModels
         private readonly IAuthorizer _authorizer;
         private readonly ISettingsStore _settings;
 
-        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings)
+        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav)
         {
             _authorizer = authorizer;
             _settings = settings;
@@ -46,7 +46,7 @@ namespace HealthNerd.iOS.ViewModels
 
             GoToDataSettings = new Command(() =>
             {
-                alertPresenter.DisplayAlert("You did it!", "You found the edge of the simulation. Check back later.", "Bye now!");
+                nav.NavigateTo<SettingsViewModel>();
             });
 
             QueryHealthCommand = new Command(async () =>
