@@ -1,10 +1,9 @@
-﻿using System.Linq;
+﻿using System;
 using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels;
 using NodaTime;
 using TinyIoC;
-using Xamarin.Forms;
 
 namespace HealthNerd.iOS
 {
@@ -21,20 +20,10 @@ namespace HealthNerd.iOS
 
             var navigator = new NavigationService(this, new ViewLocator(), container);
 
+            container.AutoRegister(type => type.Name.EndsWith("ViewModel", StringComparison.CurrentCultureIgnoreCase));
             container.Register<INavigationService>(navigator);
-            RegisterInNamespaceOfType<MainPageViewModel>(container);
 
             navigator.PresentAsNavigatableMainPage<MainPageViewModel>();
-        }
-
-        private void RegisterInNamespaceOfType<T>(TinyIoCContainer container)
-        {
-            typeof(T).Assembly
-               .GetTypes()
-               .Where(t => t.Namespace == typeof(T).Namespace)
-               .ToList()
-               .ForEach(t => container.Register(t));
-
         }
 
         protected override void OnStart()

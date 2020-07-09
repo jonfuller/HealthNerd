@@ -22,10 +22,6 @@ namespace HealthNerd.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            DependencyService.Register<IAuthorizer, Authorizer>();
-            DependencyService.Register<IAlertPresenter, AlertPresenter>();
-            DependencyService.Register<ISettingsStore, SettingsStore>();
-
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
