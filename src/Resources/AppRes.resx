@@ -127,19 +127,19 @@
     <value />
   </data>
   <data name="MainPage_HealtKitAuthorization_Success_Button" xml:space="preserve">
-    <value>thanks</value>
+    <value>OK</value>
   </data>
   <data name="MainPage_HealtKitAuthorization_Success_Message" xml:space="preserve">
-    <value>you did it!</value>
+    <value>Looks like you did it! 👏</value>
   </data>
   <data name="MainPage_HealtKitAuthorization_Success_Title" xml:space="preserve">
-    <value>yay</value>
+    <value>Connected</value>
   </data>
   <data name="Settings_IsAuthorizedButton_False" xml:space="preserve">
-    <value>Authorize Now</value>
+    <value>Connect Now</value>
   </data>
   <data name="Settings_IsAuthorizedButton_True" xml:space="preserve">
-    <value>Authorized</value>
+    <value>✔️ Connected</value>
   </data>
   <data name="Settings_LengthUnit_Meters" xml:space="preserve">
     <value>Meters</value>
@@ -160,18 +160,39 @@
     <value>Units of Measurement</value>
   </data>
   <data name="Settings_GettingStarted_AuthorizationStatusLabel" xml:space="preserve">
-    <value>Health Authorization Status</value>
+    <value>❤️ Apple Health</value>
   </data>
   <data name="Settings_GettingStarted_FetchSinceDateLabel" xml:space="preserve">
-    <value>Use Data Since</value>
+    <value>📅 Use Data Since</value>
   </data>
   <data name="Settings_UnitsOfMeasure_DistanceUnit" xml:space="preserve">
-    <value>Distance Unit</value>
+    <value>📏 Distance Unit</value>
   </data>
   <data name="Settings_UnitsOfMeasure_MassUnit" xml:space="preserve">
-    <value>Weight/Mass Unit</value>
+    <value>⚖️ Weight/Mass Unit</value>
   </data>
   <data name="Settings_UnitsOfMeasure_NotSet" xml:space="preserve">
     <value>not set</value>
+  </data>
+  <data name="Settings_EnergyUnit_Calories" xml:space="preserve">
+    <value>Calories</value>
+  </data>
+  <data name="Settings_EnergyUnit_Kilocalories" xml:space="preserve">
+    <value>Kilocalories</value>
+  </data>
+  <data name="Settings_Section_ExcelExportSettings" xml:space="preserve">
+    <value>Excel Export Settings</value>
+  </data>
+  <data name="Settings_UnitsOfMeasure_EnergyUnit" xml:space="preserve">
+    <value>🤤 Energy Unit</value>
+  </data>
+  <data name="Settings_DurationUnit_Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="Settings_DurationUnit_Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Settings_UnitsOfMeasure_DurationUnit" xml:space="preserve">
+    <value>⏱️ Duration Unit</value>
   </data>
 </root>

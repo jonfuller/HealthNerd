@@ -8,7 +8,6 @@ using HealthKitData.Core.Excel.Settings;
 using HealthNerd.iOS.Utility;
 using LanguageExt;
 using OfficeOpenXml;
-using UnitsNet.Units;
 using Xamarin.Essentials;
 using static LanguageExt.Prelude;
 
@@ -31,26 +30,27 @@ namespace HealthNerd.iOS.Services
                     excelFile.SaveAs(file);
                 }
                 return (file, new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
-
             }
 
             static Settings GetSettings(ISettingsStore settings)
             {
                 return new Settings
                 {
-                    CustomSheetsPlacement = CustomSheetsPlacement.AfterSummary,
                     DistanceUnit = settings.DistanceUnit.Match(
                         Some: s => s,
                         None: SettingsDefaults.DistanceUnit),
                     WeightUnit = settings.MassUnit.Match(
                         Some: s => s,
                         None: SettingsDefaults.MassUnit),
-
-                    // UOM Settings
-                    DurationUnit = DurationUnit.Minute,
-                    EnergyUnit = EnergyUnit.Calorie,
+                    EnergyUnit = settings.EnergyUnit.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.EnergyUnit),
+                    DurationUnit = settings.DurationUnit.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.DurationUnit),
 
                     // Excel Settings, TODO
+                    CustomSheetsPlacement = CustomSheetsPlacement.AfterSummary,
                     NumberOfMonthlySummaries = 3,
                     OmitEmptyColumnsOnMonthlySummary = true,
                     OmitEmptyColumnsOnOverallSummary = true,

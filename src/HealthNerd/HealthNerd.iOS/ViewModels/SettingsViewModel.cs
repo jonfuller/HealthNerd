@@ -29,6 +29,16 @@ namespace HealthNerd.iOS.ViewModels
                 new PickerOption<MassUnit> {DisplayValue = AppRes.Settings_MassUnit_Kilograms, Value = MassUnit.Kilogram},
                 new PickerOption<MassUnit> {DisplayValue = AppRes.Settings_MassUnit_Pounds, Value = MassUnit.Pound},
             };
+            EnergyUnits = new List<PickerOption<EnergyUnit>>
+            {
+                new PickerOption<EnergyUnit> {DisplayValue = AppRes.Settings_EnergyUnit_Kilocalories, Value = EnergyUnit.Kilocalorie},
+                new PickerOption<EnergyUnit> {DisplayValue = AppRes.Settings_EnergyUnit_Calories, Value = EnergyUnit.Calorie},
+            };
+            DurationUnits = new List<PickerOption<DurationUnit>>
+            {
+                new PickerOption<DurationUnit> {DisplayValue = AppRes.Settings_DurationUnit_Minutes, Value = DurationUnit.Minute},
+                new PickerOption<DurationUnit> {DisplayValue = AppRes.Settings_DurationUnit_Hours, Value = DurationUnit.Hour},
+            };
 
             AuthorizeHealthCommand = new Command(async () =>
             {
@@ -90,13 +100,46 @@ namespace HealthNerd.iOS.ViewModels
             }
         }
 
+        public EnergyUnit EnergyUnit
+        {
+            get
+            {
+                return _settings.EnergyUnit.Match(
+                    Some: unit => unit,
+                    None: () => SettingsDefaults.EnergyUnit);
+            }
+            set
+            {
+                _settings.SetEnergyUnit(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public DurationUnit DurationUnit
+        {
+            get
+            {
+                return _settings.DurationUnit.Match(
+                    Some: unit => unit,
+                    None: () => SettingsDefaults.DurationUnit);
+            }
+            set
+            {
+                _settings.SetDurationUnit(value);
+                OnPropertyChanged();
+            }
+        }
+
         public List<PickerOption<LengthUnit>> DistanceUnits { get; }
         public List<PickerOption<MassUnit>> MassUnits { get; }
+        public List<PickerOption<EnergyUnit>> EnergyUnits { get; }
+        public List<PickerOption<DurationUnit>> DurationUnits { get; }
 
         public string HealthAuthorizationStatusText => _settings.IsHealthKitAuthorized
             ? AppRes.Settings_IsAuthorizedButton_True
             : AppRes.Settings_IsAuthorizedButton_False;
 
         public Command AuthorizeHealthCommand { get; }
+
     }
 }

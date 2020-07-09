@@ -88,7 +88,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to thanks.
+        ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Success_Button {
             get {
@@ -97,7 +97,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to you did it!.
+        ///   Looks up a localized string similar to Looks like you did it! 👏.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Success_Message {
             get {
@@ -106,7 +106,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to yay.
+        ///   Looks up a localized string similar to Connected.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Success_Title {
             get {
@@ -115,7 +115,43 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Health Authorization Status.
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Settings_DurationUnit_Hours {
+            get {
+                return ResourceManager.GetString("Settings_DurationUnit_Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes.
+        /// </summary>
+        public static string Settings_DurationUnit_Minutes {
+            get {
+                return ResourceManager.GetString("Settings_DurationUnit_Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calories.
+        /// </summary>
+        public static string Settings_EnergyUnit_Calories {
+            get {
+                return ResourceManager.GetString("Settings_EnergyUnit_Calories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kilocalories.
+        /// </summary>
+        public static string Settings_EnergyUnit_Kilocalories {
+            get {
+                return ResourceManager.GetString("Settings_EnergyUnit_Kilocalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ❤️ Apple Health.
         /// </summary>
         public static string Settings_GettingStarted_AuthorizationStatusLabel {
             get {
@@ -124,7 +160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Data Since.
+        ///   Looks up a localized string similar to 📅 Use Data Since.
         /// </summary>
         public static string Settings_GettingStarted_FetchSinceDateLabel {
             get {
@@ -133,7 +169,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authorize Now.
+        ///   Looks up a localized string similar to Connect Now.
         /// </summary>
         public static string Settings_IsAuthorizedButton_False {
             get {
@@ -142,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authorized.
+        ///   Looks up a localized string similar to ✔️ Connected.
         /// </summary>
         public static string Settings_IsAuthorizedButton_True {
             get {
@@ -187,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excel Export Settings.
+        /// </summary>
+        public static string Settings_Section_ExcelExportSettings {
+            get {
+                return ResourceManager.GetString("Settings_Section_ExcelExportSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting Started.
         /// </summary>
         public static string Settings_Section_GettingStarted {
@@ -205,7 +250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Distance Unit.
+        ///   Looks up a localized string similar to 📏 Distance Unit.
         /// </summary>
         public static string Settings_UnitsOfMeasure_DistanceUnit {
             get {
@@ -214,7 +259,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weight/Mass Unit.
+        ///   Looks up a localized string similar to ⏱️ Duration Unit.
+        /// </summary>
+        public static string Settings_UnitsOfMeasure_DurationUnit {
+            get {
+                return ResourceManager.GetString("Settings_UnitsOfMeasure_DurationUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🤤 Energy Unit.
+        /// </summary>
+        public static string Settings_UnitsOfMeasure_EnergyUnit {
+            get {
+                return ResourceManager.GetString("Settings_UnitsOfMeasure_EnergyUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚖️ Weight/Mass Unit.
         /// </summary>
         public static string Settings_UnitsOfMeasure_MassUnit {
             get {

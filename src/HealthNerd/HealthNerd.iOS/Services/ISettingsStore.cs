@@ -10,10 +10,14 @@ namespace HealthNerd.iOS.Services
         bool IsHealthKitAuthorized { get; }
         Option<LengthUnit> DistanceUnit { get; }
         Option<MassUnit> MassUnit { get; }
+        Option<EnergyUnit> EnergyUnit { get; }
+        Option<DurationUnit> DurationUnit { get; }
 
         void SetSinceDate(LocalDate date);
         void SetDistanceUnit(LengthUnit unit);
         void SetMassUnit(MassUnit unit);
+        void SetEnergyUnit(EnergyUnit unit);
         void SetHealthKitAuthorized(Instant timestamp);
+        void SetDurationUnit(DurationUnit unit);
     }
 }
