@@ -30,6 +30,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);
 
+            await viewModel.BeforeAppearing();
             await viewModel.BeforeFirstShown();
 
             await Navigator.PushAsync(page, animated: true);
@@ -38,7 +39,9 @@ namespace HealthNerd.iOS.Utility.Mvvm
         public async Task NavigateBack()
         {
             var dismissing = Navigator.NavigationStack.Last().BindingContext as ViewModelBase;
+            var goingTo = Navigator.NavigationStack[Index.FromEnd(2)].BindingContext as ViewModelBase;
 
+            goingTo?.BeforeAppearing();
             await Navigator.PopAsync(animated: true);
 
             dismissing?.AfterDismissed();
@@ -52,6 +55,8 @@ namespace HealthNerd.iOS.Utility.Mvvm
                .OfType<ViewModelBase>()
                .ToArray();
 
+            var goingTo = Navigator.NavigationStack.First().BindingContext as ViewModelBase;
+            goingTo?.BeforeAppearing();
             await Navigator.PopToRootAsync(animated: true);
 
             foreach (var viewModel in toDismiss)
@@ -72,6 +77,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
                 navPage.PopRequested -= NavPagePopRequested;
             }
 
+            viewModel.BeforeAppearing();
             viewModel.BeforeFirstShown();
 
             _presentationRoot.MainPage = page;
@@ -100,6 +106,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
                 navPage.PopRequested -= NavPagePopRequested;
             }
 
+            viewModel.BeforeAppearing();
             viewModel.BeforeFirstShown();
 
             // Listen for back button presses on the new navigation bar
@@ -136,6 +143,9 @@ namespace HealthNerd.iOS.Utility.Mvvm
 
         private void NavPagePopRequested(object sender, NavigationRequestedEventArgs e)
         {
+            var goingTo = Navigator.NavigationStack[Index.FromEnd(2)].BindingContext as ViewModelBase;
+            goingTo?.BeforeAppearing();
+
             if (Navigator.NavigationStack.LastOrDefault()?.BindingContext is ViewModelBase poppingPage)
             {
                 poppingPage.AfterDismissed();

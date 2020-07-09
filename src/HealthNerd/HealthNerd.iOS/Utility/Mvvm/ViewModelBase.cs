@@ -13,5 +13,10 @@ namespace HealthNerd.iOS.Utility.Mvvm
         {
             return Task.CompletedTask;
         }
+
+        public virtual Task BeforeAppearing()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

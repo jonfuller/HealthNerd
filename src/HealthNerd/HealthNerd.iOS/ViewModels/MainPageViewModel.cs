@@ -79,6 +79,14 @@ namespace HealthNerd.iOS.ViewModels
             canExecute: () => _settings.IsHealthKitAuthorized);
         }
 
+        public override Task BeforeAppearing()
+        {
+            RaiseAllPropertiesChanged();
+            QueryHealthCommand.ChangeCanExecute();
+
+            return base.BeforeAppearing();
+        }
+
         public bool NeedsHealthAuthorization => !_settings.IsHealthKitAuthorized;
         public bool NeedsConfiguration => _settings.SinceDate.IsNone;
 

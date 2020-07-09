@@ -14,8 +14,10 @@ namespace HealthNerd.iOS.Utility.Mvvm
         /// </summary>
         Task AfterDismissed();
 
-        // You may also wish to implement any of the following...
-        //Task BeforeAppearing(); // Called before a viewmodel appears, when navigating either forwards or backwards
+        /// <summary>
+        /// Called before a viewmodel appears, when navigating either forwards or backwards
+        /// </summary>
+        Task BeforeAppearing();
         //Task AfterAppearing(); // Called after a viewmodel appears, when navigating either forwards or backwards
         //Task BeforeNavigateAway(); // Called before a viewmodel disappears, when navigating either forwards or backwards
         //Task AfterNavigateAway(); // Called after a viewmodel disappears, when navigating either forwards or backwards
