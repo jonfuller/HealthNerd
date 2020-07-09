@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using HealthKit;
 using HealthKitData.iOS;
 using HealthNerd.iOS.Services;
@@ -43,7 +44,10 @@ namespace HealthNerd.iOS.ViewModels
                             Resources.AppRes.MainPage_HealtKitAuthorization_Success_Button);
                     });
             });
-
+            SettingsCommand = new Command(() =>
+            {
+                nav.NavigateTo<SettingsViewModel>();
+            });
             GoToDataSettings = new Command(() =>
             {
                 nav.NavigateTo<SettingsViewModel>();
@@ -81,5 +85,6 @@ namespace HealthNerd.iOS.ViewModels
         public Command GoToDataSettings { get; }
         public Command AuthorizeHealthCommand { get; }
         public Command QueryHealthCommand { get; }
+        public Command SettingsCommand { get; }
     }
 }

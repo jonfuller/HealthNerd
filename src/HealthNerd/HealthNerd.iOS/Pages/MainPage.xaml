@@ -24,6 +24,9 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="⚙️" Command="{Binding SettingsCommand}"/>
+    </ContentPage.ToolbarItems>
     <StackLayout Margin="10">
         <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}">
             <StackLayout>
