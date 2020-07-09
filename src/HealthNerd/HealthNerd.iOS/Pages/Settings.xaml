@@ -7,31 +7,32 @@
              xmlns:controls="clr-namespace:HealthNerd.iOS.Controls;assembly=HealthNerd.iOS"
              xmlns:unitsNet="clr-namespace:UnitsNet.Units;assembly=UnitsNet"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:resources="clr-namespace:Resources;assembly=Resources"
              mc:Ignorable="d"
              x:DataType="viewModels:SettingsViewModel"
              x:Class="HealthNerd.iOS.Pages.Settings">
     <TableView Intent="Settings">
         <TableRoot>
-            <TableSection Title="Getting Started">
+            <TableSection Title="{x:Static resources:AppRes.Settings_Section_GettingStarted}">
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Health Authorization Status" />
-                        <Label Text="Enabled" HorizontalOptions="EndAndExpand" />
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_AuthorizationStatusLabel}" />
+                        <Button VerticalOptions="Center" Text="{Binding HealthAuthorizationStatusText}" HorizontalOptions="EndAndExpand" Command="{Binding AuthorizeHealthCommand}" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Earliest Data Date" />
-                        <DatePicker Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" />
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_FetchSinceDateLabel}" />
+                        <DatePicker VerticalOptions="Center" Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" ios:DatePicker.UpdateMode="WhenFinished" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>
-            <TableSection Title="Units of Measurement">
+            <TableSection Title="{x:Static resources:AppRes.Settings_Section_UnitsOfMeasure}">
                 <controls:PickerCell x:TypeArguments="unitsNet:LengthUnit"
-                    Label="Distance Unit" Title="not set"
+                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DistanceUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
                     ItemsSource="{Binding DistanceUnits}" SelectedValue="{Binding DistanceUnit}" />
                 <controls:PickerCell x:TypeArguments="unitsNet:MassUnit"
-                    Label="Weight/Mass Unit" Title="not set"
+                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DistanceUnit}" Title="not set"
                     ItemsSource="{Binding MassUnits}" SelectedValue="{Binding MassUnit}" />
             </TableSection>
         </TableRoot>

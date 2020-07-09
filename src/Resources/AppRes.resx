@@ -163,6 +163,15 @@
     <value>Health Authorization Status</value>
   </data>
   <data name="Settings_GettingStarted_FetchSinceDateLabel" xml:space="preserve">
-    <value />
+    <value>Use Data Since</value>
+  </data>
+  <data name="Settings_UnitsOfMeasure_DistanceUnit" xml:space="preserve">
+    <value>Distance Unit</value>
+  </data>
+  <data name="Settings_UnitsOfMeasure_MassUnit" xml:space="preserve">
+    <value>Weight/Mass Unit</value>
+  </data>
+  <data name="Settings_UnitsOfMeasure_NotSet" xml:space="preserve">
+    <value>not set</value>
   </data>
 </root>

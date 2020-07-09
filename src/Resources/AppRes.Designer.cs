@@ -124,7 +124,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Use Data Since.
         /// </summary>
         public static string Settings_GettingStarted_FetchSinceDateLabel {
             get {
@@ -201,6 +201,33 @@ namespace Resources {
         public static string Settings_Section_UnitsOfMeasure {
             get {
                 return ResourceManager.GetString("Settings_Section_UnitsOfMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance Unit.
+        /// </summary>
+        public static string Settings_UnitsOfMeasure_DistanceUnit {
+            get {
+                return ResourceManager.GetString("Settings_UnitsOfMeasure_DistanceUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight/Mass Unit.
+        /// </summary>
+        public static string Settings_UnitsOfMeasure_MassUnit {
+            get {
+                return ResourceManager.GetString("Settings_UnitsOfMeasure_MassUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to not set.
+        /// </summary>
+        public static string Settings_UnitsOfMeasure_NotSet {
+            get {
+                return ResourceManager.GetString("Settings_UnitsOfMeasure_NotSet", resourceCulture);
             }
         }
     }
