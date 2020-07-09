@@ -31,14 +31,14 @@ namespace HealthNerd.iOS.Utility.Mvvm
 
             await viewModel.BeforeFirstShown();
 
-            await Navigator.PushAsync(page);
+            await Navigator.PushAsync(page, animated: true);
         }
 
         public async Task NavigateBack()
         {
             var dismissing = Navigator.NavigationStack.Last().BindingContext as ViewModelBase;
 
-            await Navigator.PopAsync();
+            await Navigator.PopAsync(animated: true);
 
             dismissing?.AfterDismissed();
         }
@@ -51,7 +51,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
                .OfType<ViewModelBase>()
                .ToArray();
 
-            await Navigator.PopToRootAsync();
+            await Navigator.PopToRootAsync(animated: true);
 
             foreach (var viewModel in toDismiss)
             {
