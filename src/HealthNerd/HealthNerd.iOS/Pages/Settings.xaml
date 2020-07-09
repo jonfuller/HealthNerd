@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
              xmlns:controls="clr-namespace:HealthNerd.iOS.Controls;assembly=HealthNerd.iOS"
              xmlns:unitsNet="clr-namespace:UnitsNet.Units;assembly=UnitsNet"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              mc:Ignorable="d"
              x:DataType="viewModels:SettingsViewModel"
              x:Class="HealthNerd.iOS.Pages.Settings">

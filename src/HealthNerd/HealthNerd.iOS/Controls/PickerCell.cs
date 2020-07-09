@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Picker = Xamarin.Forms.Picker;
 
 namespace HealthNerd.iOS.Controls
 {
@@ -49,6 +51,8 @@ namespace HealthNerd.iOS.Controls
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
             };
+            
+            _picker.On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUpdateMode(UpdateMode.WhenFinished);
             _picker.ItemDisplayBinding = new Binding(nameof(PickerOption<T>.DisplayValue));
             _picker.SelectedIndexChanged += (sender, args) =>
             {
