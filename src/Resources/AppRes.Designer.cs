@@ -115,6 +115,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Health Authorization Status.
+        /// </summary>
+        public static string Settings_GettingStarted_AuthorizationStatusLabel {
+            get {
+                return ResourceManager.GetString("Settings_GettingStarted_AuthorizationStatusLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Settings_GettingStarted_FetchSinceDateLabel {
+            get {
+                return ResourceManager.GetString("Settings_GettingStarted_FetchSinceDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authorize Now.
+        /// </summary>
+        public static string Settings_IsAuthorizedButton_False {
+            get {
+                return ResourceManager.GetString("Settings_IsAuthorizedButton_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authorized.
+        /// </summary>
+        public static string Settings_IsAuthorizedButton_True {
+            get {
+                return ResourceManager.GetString("Settings_IsAuthorizedButton_True", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meters.
         /// </summary>
         public static string Settings_LengthUnit_Meters {
@@ -147,6 +183,24 @@ namespace Resources {
         public static string Settings_MassUnit_Pounds {
             get {
                 return ResourceManager.GetString("Settings_MassUnit_Pounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting Started.
+        /// </summary>
+        public static string Settings_Section_GettingStarted {
+            get {
+                return ResourceManager.GetString("Settings_Section_GettingStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units of Measurement.
+        /// </summary>
+        public static string Settings_Section_UnitsOfMeasure {
+            get {
+                return ResourceManager.GetString("Settings_Section_UnitsOfMeasure", resourceCulture);
             }
         }
     }

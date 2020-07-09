@@ -135,6 +135,12 @@
   <data name="MainPage_HealtKitAuthorization_Success_Title" xml:space="preserve">
     <value>yay</value>
   </data>
+  <data name="Settings_IsAuthorizedButton_False" xml:space="preserve">
+    <value>Authorize Now</value>
+  </data>
+  <data name="Settings_IsAuthorizedButton_True" xml:space="preserve">
+    <value>Authorized</value>
+  </data>
   <data name="Settings_LengthUnit_Meters" xml:space="preserve">
     <value>Meters</value>
   </data>
@@ -146,5 +152,17 @@
   </data>
   <data name="Settings_MassUnit_Pounds" xml:space="preserve">
     <value>Pounds</value>
+  </data>
+  <data name="Settings_Section_GettingStarted" xml:space="preserve">
+    <value>Getting Started</value>
+  </data>
+  <data name="Settings_Section_UnitsOfMeasure" xml:space="preserve">
+    <value>Units of Measurement</value>
+  </data>
+  <data name="Settings_GettingStarted_AuthorizationStatusLabel" xml:space="preserve">
+    <value>Health Authorization Status</value>
+  </data>
+  <data name="Settings_GettingStarted_FetchSinceDateLabel" xml:space="preserve">
+    <value />
   </data>
 </root>
