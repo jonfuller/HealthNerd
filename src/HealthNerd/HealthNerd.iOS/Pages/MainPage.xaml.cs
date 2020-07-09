@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using MainPageViewModel = HealthNerd.iOS.ViewModels.MainPageViewModel;
 
 namespace HealthNerd.iOS.Pages
 {
@@ -14,7 +12,5 @@ namespace HealthNerd.iOS.Pages
         {
             InitializeComponent();
         }
-
-        private MainPageViewModel ViewModel => (MainPageViewModel)BindingContext;
     }
 }

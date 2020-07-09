@@ -113,5 +113,41 @@ namespace Resources {
                 return ResourceManager.GetString("MainPage_HealtKitAuthorization_Success_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meters.
+        /// </summary>
+        public static string Settings_LengthUnit_Meters {
+            get {
+                return ResourceManager.GetString("Settings_LengthUnit_Meters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miles.
+        /// </summary>
+        public static string Settings_LengthUnit_Miles {
+            get {
+                return ResourceManager.GetString("Settings_LengthUnit_Miles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kilograms.
+        /// </summary>
+        public static string Settings_MassUnit_Kilograms {
+            get {
+                return ResourceManager.GetString("Settings_MassUnit_Kilograms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pounds.
+        /// </summary>
+        public static string Settings_MassUnit_Pounds {
+            get {
+                return ResourceManager.GetString("Settings_MassUnit_Pounds", resourceCulture);
+            }
+        }
     }
 }

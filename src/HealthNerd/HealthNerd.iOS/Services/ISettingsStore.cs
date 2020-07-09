@@ -1,5 +1,6 @@
 ﻿using LanguageExt;
 using NodaTime;
+using UnitsNet.Units;
 
 namespace HealthNerd.iOS.Services
 {
@@ -7,9 +8,12 @@ namespace HealthNerd.iOS.Services
     {
         Option<LocalDate> SinceDate { get; }
         bool IsHealthKitAuthorized { get; }
+        Option<LengthUnit> DistanceUnit { get; }
+        Option<MassUnit> MassUnit { get; }
 
         void SetSinceDate(LocalDate date);
+        void SetDistanceUnit(LengthUnit unit);
+        void SetMassUnit(MassUnit unit);
         void SetHealthKitAuthorized(Instant timestamp);
-
     }
 }

@@ -78,6 +78,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Controls\PickerCell.cs" />
+    <Compile Include="Controls\PickerOption.cs" />
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -98,6 +100,8 @@
     <Compile Include="Utility\Mvvm\INavigationService.cs" />
     <Compile Include="Utility\Mvvm\IViewLocator.cs" />
     <Compile Include="Utility\Mvvm\IViewModelLifecycle.cs" />
+    <Compile Include="Utility\PreferencesEx.cs" />
+    <Compile Include="Utility\SettingsDefaults.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Services\Output.cs" />
     <Compile Include="Utility\Mvvm\NavigationService.cs" />
@@ -217,6 +221,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />
