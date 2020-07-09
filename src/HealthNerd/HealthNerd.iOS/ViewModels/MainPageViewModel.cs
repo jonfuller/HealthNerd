@@ -12,17 +12,15 @@ namespace HealthNerd.iOS.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private readonly IAuthorizer _authorizer;
         private readonly ISettingsStore _settings;
 
         public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav)
         {
-            _authorizer = authorizer;
             _settings = settings;
 
             AuthorizeHealthCommand = new Command(async () =>
             {
-                (await _authorizer.RequestAuthorizeAppleHealth()).Match(
+                (await authorizer.RequestAuthorizeAppleHealth()).Match(
                     error =>
                     {
                         alertPresenter.DisplayAlert(
@@ -44,14 +42,10 @@ namespace HealthNerd.iOS.ViewModels
                             Resources.AppRes.MainPage_HealtKitAuthorization_Success_Button);
                     });
             });
-            SettingsCommand = new Command(() =>
-            {
-                nav.NavigateTo<SettingsViewModel>();
-            });
-            GoToDataSettings = new Command(() =>
-            {
-                nav.NavigateTo<SettingsViewModel>();
-            });
+
+            SettingsCommand = new Command(() => nav.NavigateTo<SettingsViewModel>());
+
+            GoToDataSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
 
             QueryHealthCommand = new Command(async () =>
             {
@@ -68,7 +62,7 @@ namespace HealthNerd.iOS.ViewModels
                 var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
                 var records = await HealthKitQueries.GetHealthRecords(store, dateRange);
 
-                Output.CreateExcelReport(records, workouts).IfSome(async f =>
+                Output.CreateExcelReport(records, workouts, _settings).IfSome(async f =>
                 {
                     await Share.RequestAsync(new ShareFileRequest
                     {
