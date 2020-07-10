@@ -57,6 +57,7 @@
                     <Label HorizontalOptions="End">🤓</Label>
                 </StackLayout>
                 <Button Text="Nerd My Data" Command="{Binding QueryHealthCommand}"/>
+                <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
             </StackLayout>
         </yummy:PancakeView>
     </StackLayout>

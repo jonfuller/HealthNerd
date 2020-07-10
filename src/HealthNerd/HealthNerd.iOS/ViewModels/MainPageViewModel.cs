@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthKit;
+using HealthKitData.Core;
 using HealthKitData.iOS;
 using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
@@ -13,6 +15,7 @@ namespace HealthNerd.iOS.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly ISettingsStore _settings;
+        private bool _isQueryingHealth;
 
         public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav)
         {
@@ -46,31 +49,52 @@ namespace HealthNerd.iOS.ViewModels
             GoToSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
 
             QueryHealthCommand = new Command(async () =>
-            {
-                var store = new HKHealthStore();
-
-                var fetchDate = _settings.SinceDate.Match(
-                    Some: s => s,
-                    None: LocalDate.FromDateTime(new DateTime(2020, 01, 01)));
-
-                var dateRange = new DateInterval(
-                    start: fetchDate,
-                    end: LocalDate.FromDateTime(DateTime.Today));
-
-                var workouts = await HealthKitQueries.GetWorkouts(store, dateRange);
-                var records = await HealthKitQueries.GetHealthRecords(store, dateRange);
-
-                Output.CreateExcelReport(records, workouts, _settings).IfSome(async f =>
                 {
-                    await Share.RequestAsync(new ShareFileRequest
+                    IsQueryingHealth = true;
+                    var (workouts, records) = await QueryHealth(_settings);
+                    IsQueryingHealth = false;
+
+                    Output.CreateExcelReport(records, workouts, _settings).IfSome(async f =>
                     {
-                        File = new ShareFile(f.filename.FullName, f.contentType.Name)
+                        await Share.RequestAsync(new ShareFileRequest
+                        {
+                            File = new ShareFile(f.filename.FullName, f.contentType.Name)
+                        });
                     });
-                });
-            },
-            canExecute: () => _settings.IsHealthKitAuthorized);
+
+                    static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(ISettingsStore settings)
+                    {
+                        var store = new HKHealthStore();
+
+                        var fetchDate = settings.SinceDate.Match(
+                            Some: s => s,
+                            None: LocalDate.FromDateTime(new DateTime(2020, 01, 01)));
+
+                        var dateRange = new DateInterval(
+                            start: fetchDate,
+                            end: LocalDate.FromDateTime(DateTime.Today));
+
+                        return (
+                            await HealthKitQueries.GetWorkouts(store, dateRange),
+                            await HealthKitQueries.GetHealthRecords(store, dateRange));
+                    }
+                },
+            canExecute: CanExecuteHealthQuery);
         }
 
+        private Func<bool> CanExecuteHealthQuery => () => _settings.IsHealthKitAuthorized && !IsQueryingHealth;
+
+        public bool IsQueryingHealth
+        {
+            get => _isQueryingHealth;
+            set
+            {
+                _isQueryingHealth = value;
+                OnPropertyChanged();
+                QueryHealthCommand.ChangeCanExecute();
+            }
+
+        }
         public override Task BeforeAppearing()
         {
             RaiseAllPropertiesChanged();
@@ -85,6 +109,5 @@ namespace HealthNerd.iOS.ViewModels
         public Command GoToSettings { get; }
         public Command AuthorizeHealthCommand { get; }
         public Command QueryHealthCommand { get; }
-        public Command SettingsCommand { get; }
     }
 }
