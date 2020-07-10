@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
@@ -7,6 +8,7 @@ using HealthKitData.Core.Excel;
 using HealthKitData.Core.Excel.Settings;
 using HealthNerd.iOS.Utility;
 using LanguageExt;
+using NodaTime;
 using OfficeOpenXml;
 using Xamarin.Essentials;
 using static LanguageExt.Prelude;
@@ -15,22 +17,29 @@ namespace HealthNerd.iOS.Services
 {
     public static class Output
     {
-        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings)
+        private static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, LocalDate dateStamp)
         {
-            return Some(WriteExcelReport(records, workouts, GetSettings(settings)));
+            var file = GetFileName(dateStamp);
 
-            static (FileInfo file, ContentType) WriteExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings)
+            WriteExcelReport(file, records, workouts, GetSettings(settings));
+
+            return Some((file, XlsxContentType));
+
+            static void WriteExcelReport(FileInfo file, IEnumerable< Record> records, IEnumerable<Workout> workouts, Settings settings)
             {
-                var file = new FileInfo(Path.Combine(FileSystem.CacheDirectory, $"HealthNerd.xlsx"));
+                using var excelFile = new ExcelPackage();
 
-                using (var excelFile = new ExcelPackage())
-                {
-                    ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, Enumerable.Empty<ExcelWorksheet>());
+                ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, Enumerable.Empty<ExcelWorksheet>());
 
-                    excelFile.SaveAs(file);
-                }
-                return (file, new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+                excelFile.SaveAs(file);
             }
+
+            static FileInfo GetFileName(LocalDate dateStamp) =>
+                new FileInfo(Path.Combine(
+                    FileSystem.CacheDirectory,
+                    $"HealthNerd-{dateStamp.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}.xlsx"));
 
             static Settings GetSettings(ISettingsStore settings)
             {

@@ -209,4 +209,46 @@ We'll try to take a look at it.</value>
   <data name="Settings_UnitsOfMeasure_DurationUnit" xml:space="preserve">
     <value>⏱️ Duration Unit</value>
   </data>
+  <data name="MainPage_AuthorizeHealth_Button" xml:space="preserve">
+    <value>Grant HealthNerd Access</value>
+  </data>
+  <data name="MainPage_AuthorizeHealth_Icon" xml:space="preserve">
+    <value>👋</value>
+  </data>
+  <data name="MainPage_AuthorizeHealth_Text" xml:space="preserve">
+    <value>First, we'll need to get access to your Health data.</value>
+  </data>
+  <data name="MainPage_AuthorizeHealth_Title" xml:space="preserve">
+    <value>Let's Get Started.</value>
+  </data>
+  <data name="MainPage_FirstTimeSetup_Button" xml:space="preserve">
+    <value>Data Nerdery Setup 🗃️</value>
+  </data>
+  <data name="MainPage_FirstTimeSetup_Icon" xml:space="preserve">
+    <value>🤔</value>
+  </data>
+  <data name="MainPage_FirstTimeSetup_Text" xml:space="preserve">
+    <value>Let's make sure the data comes out looking the way you want.</value>
+  </data>
+  <data name="MainPage_FirstTimeSetup_Title" xml:space="preserve">
+    <value>First Time Here?</value>
+  </data>
+  <data name="MainPage_NerdOut_Button" xml:space="preserve">
+    <value>Nerd My Data</value>
+  </data>
+  <data name="MainPage_NerdOut_Icon" xml:space="preserve">
+    <value>🤓</value>
+  </data>
+  <data name="MainPage_NerdOut_Title" xml:space="preserve">
+    <value>Time to Nerd Out!</value>
+  </data>
+  <data name="MainPage_Title" xml:space="preserve">
+    <value>Health Nerd ❤️🤓</value>
+  </data>
+  <data name="MainPage_ToolbarItem_Settings" xml:space="preserve">
+    <value>⚙️</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

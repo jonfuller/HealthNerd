@@ -9,6 +9,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
              mc:Ignorable="d"
+             Title="{x:Static resources:AppRes.Settings_Title}"
              x:DataType="viewModels:SettingsViewModel"
              x:Class="HealthNerd.iOS.Pages.Settings">
     <TableView Intent="Settings">

@@ -7,6 +7,7 @@ using HealthKitData.iOS;
 using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using NodaTime;
+using NodaTime.Extensions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -50,11 +51,18 @@ namespace HealthNerd.iOS.ViewModels
 
             QueryHealthCommand = new Command(async () =>
                 {
+                    var today = clock.InTzdbSystemDefaultZone().GetCurrentDate();
+                    var queryRange = new DateInterval(
+                        start: settings.SinceDate.Match(
+                            Some: s => s,
+                            None: LocalDate.FromDateTime(new DateTime(2020, 01, 01))),
+                        end: today);
+
                     IsQueryingHealth = true;
-                    var (workouts, records) = await QueryHealth(_settings);
+                    var (workouts, records) = await QueryHealth(queryRange);
                     IsQueryingHealth = false;
 
-                    Output.CreateExcelReport(records, workouts, _settings).IfSome(async f =>
+                    Output.CreateExcelReport(records, workouts, _settings, today).IfSome(async f =>
                     {
                         await Share.RequestAsync(new ShareFileRequest
                         {
@@ -62,17 +70,9 @@ namespace HealthNerd.iOS.ViewModels
                         });
                     });
 
-                    static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(ISettingsStore settings)
+                    static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(DateInterval dateRange)
                     {
                         var store = new HKHealthStore();
-
-                        var fetchDate = settings.SinceDate.Match(
-                            Some: s => s,
-                            None: LocalDate.FromDateTime(new DateTime(2020, 01, 01)));
-
-                        var dateRange = new DateInterval(
-                            start: fetchDate,
-                            end: LocalDate.FromDateTime(DateTime.Today));
 
                         return (
                             await HealthKitQueries.GetWorkouts(store, dateRange),

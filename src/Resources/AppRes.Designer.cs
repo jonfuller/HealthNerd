@@ -61,6 +61,78 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grant HealthNerd Access.
+        /// </summary>
+        public static string MainPage_AuthorizeHealth_Button {
+            get {
+                return ResourceManager.GetString("MainPage_AuthorizeHealth_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👋.
+        /// </summary>
+        public static string MainPage_AuthorizeHealth_Icon {
+            get {
+                return ResourceManager.GetString("MainPage_AuthorizeHealth_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First, we&apos;ll need to get access to your Health data..
+        /// </summary>
+        public static string MainPage_AuthorizeHealth_Text {
+            get {
+                return ResourceManager.GetString("MainPage_AuthorizeHealth_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Let&apos;s Get Started..
+        /// </summary>
+        public static string MainPage_AuthorizeHealth_Title {
+            get {
+                return ResourceManager.GetString("MainPage_AuthorizeHealth_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Nerdery Setup 🗃️.
+        /// </summary>
+        public static string MainPage_FirstTimeSetup_Button {
+            get {
+                return ResourceManager.GetString("MainPage_FirstTimeSetup_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🤔.
+        /// </summary>
+        public static string MainPage_FirstTimeSetup_Icon {
+            get {
+                return ResourceManager.GetString("MainPage_FirstTimeSetup_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Let&apos;s make sure the data comes out looking the way you want..
+        /// </summary>
+        public static string MainPage_FirstTimeSetup_Text {
+            get {
+                return ResourceManager.GetString("MainPage_FirstTimeSetup_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Time Here?.
+        /// </summary>
+        public static string MainPage_FirstTimeSetup_Title {
+            get {
+                return ResourceManager.GetString("MainPage_FirstTimeSetup_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Error_Button {
@@ -113,6 +185,51 @@ namespace Resources {
         public static string MainPage_HealtKitAuthorization_Success_Title {
             get {
                 return ResourceManager.GetString("MainPage_HealtKitAuthorization_Success_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nerd My Data.
+        /// </summary>
+        public static string MainPage_NerdOut_Button {
+            get {
+                return ResourceManager.GetString("MainPage_NerdOut_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🤓.
+        /// </summary>
+        public static string MainPage_NerdOut_Icon {
+            get {
+                return ResourceManager.GetString("MainPage_NerdOut_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time to Nerd Out!.
+        /// </summary>
+        public static string MainPage_NerdOut_Title {
+            get {
+                return ResourceManager.GetString("MainPage_NerdOut_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Nerd ❤️🤓.
+        /// </summary>
+        public static string MainPage_Title {
+            get {
+                return ResourceManager.GetString("MainPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚙️.
+        /// </summary>
+        public static string MainPage_ToolbarItem_Settings {
+            get {
+                return ResourceManager.GetString("MainPage_ToolbarItem_Settings", resourceCulture);
             }
         }
         
@@ -284,6 +401,15 @@ namespace Resources {
         public static string Settings_Section_UnitsOfMeasure {
             get {
                 return ResourceManager.GetString("Settings_Section_UnitsOfMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings_Title {
+            get {
+                return ResourceManager.GetString("Settings_Title", resourceCulture);
             }
         }
         
