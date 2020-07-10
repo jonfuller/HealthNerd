@@ -9,6 +9,7 @@ using HealthKitData.Core.Excel.Settings;
 using HealthNerd.iOS.Utility;
 using LanguageExt;
 using NodaTime;
+using NodaTime.Extensions;
 using OfficeOpenXml;
 using Xamarin.Essentials;
 using static LanguageExt.Prelude;
@@ -19,15 +20,15 @@ namespace HealthNerd.iOS.Services
     {
         private static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, LocalDate dateStamp)
+        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IClock clock)
         {
-            var file = GetFileName(dateStamp);
+            var file = GetFileName(clock);
 
             WriteExcelReport(file, records, workouts, GetSettings(settings));
 
             return Some((file, XlsxContentType));
 
-            static void WriteExcelReport(FileInfo file, IEnumerable< Record> records, IEnumerable<Workout> workouts, Settings settings)
+            static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings)
             {
                 using var excelFile = new ExcelPackage();
 
@@ -36,10 +37,10 @@ namespace HealthNerd.iOS.Services
                 excelFile.SaveAs(file);
             }
 
-            static FileInfo GetFileName(LocalDate dateStamp) =>
+            static FileInfo GetFileName(IClock clock) =>
                 new FileInfo(Path.Combine(
                     FileSystem.CacheDirectory,
-                    $"HealthNerd-{dateStamp.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}.xlsx"));
+                    $"HealthNerd-{clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture)}.xlsx"));
 
             static Settings GetSettings(ISettingsStore settings)
             {
@@ -47,16 +48,16 @@ namespace HealthNerd.iOS.Services
                 {
                     DistanceUnit = settings.DistanceUnit.Match(
                         Some: s => s,
-                        None: SettingsDefaults.DistanceUnit),
+                        None: () => SettingsDefaults.DistanceUnit),
                     WeightUnit = settings.MassUnit.Match(
                         Some: s => s,
-                        None: SettingsDefaults.MassUnit),
+                        None: () => SettingsDefaults.MassUnit),
                     EnergyUnit = settings.EnergyUnit.Match(
                         Some: s => s,
                         None: SettingsDefaults.EnergyUnit),
                     DurationUnit = settings.DurationUnit.Match(
                         Some: s => s,
-                        None: SettingsDefaults.DurationUnit),
+                        None: () => SettingsDefaults.DurationUnit),
 
                     NumberOfMonthlySummaries = settings.NumberOfMonthlySummaries.Match(
                         Some: s => s,

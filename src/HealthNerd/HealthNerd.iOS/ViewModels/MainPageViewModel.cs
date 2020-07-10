@@ -51,18 +51,17 @@ namespace HealthNerd.iOS.ViewModels
 
             QueryHealthCommand = new Command(async () =>
                 {
-                    var today = clock.InTzdbSystemDefaultZone().GetCurrentDate();
                     var queryRange = new DateInterval(
                         start: settings.SinceDate.Match(
                             Some: s => s,
                             None: LocalDate.FromDateTime(new DateTime(2020, 01, 01))),
-                        end: today);
+                        end: clock.InTzdbSystemDefaultZone().GetCurrentDate());
 
                     IsQueryingHealth = true;
                     var (workouts, records) = await QueryHealth(queryRange);
                     IsQueryingHealth = false;
 
-                    Output.CreateExcelReport(records, workouts, _settings, today).IfSome(async f =>
+                    Output.CreateExcelReport(records, workouts, _settings, clock).IfSome(async f =>
                     {
                         await Share.RequestAsync(new ShareFileRequest
                         {
@@ -93,7 +92,6 @@ namespace HealthNerd.iOS.ViewModels
                 OnPropertyChanged();
                 QueryHealthCommand.ChangeCanExecute();
             }
-
         }
         public override Task BeforeAppearing()
         {
