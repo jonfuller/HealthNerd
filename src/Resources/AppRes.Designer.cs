@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Sorry.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Error_Button {
             get {
@@ -70,7 +70,9 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Something went wrong. 😢
+        ///
+        ///We&apos;ll try to take a look at it..
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Error_Message {
             get {
@@ -79,7 +81,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string MainPage_HealtKitAuthorization_Error_Title {
             get {
@@ -147,6 +149,42 @@ namespace Resources {
         public static string Settings_EnergyUnit_Kilocalories {
             get {
                 return ResourceManager.GetString("Settings_EnergyUnit_Kilocalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # Monthly Summaries.
+        /// </summary>
+        public static string Settings_ExcelExport_NumMonthlySummaries {
+            get {
+                return ResourceManager.GetString("Settings_ExcelExport_NumMonthlySummaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Omit Empty Cols On Monthly Summary.
+        /// </summary>
+        public static string Settings_ExcelExport_OmitEmptyColumnsOnMonthly {
+            get {
+                return ResourceManager.GetString("Settings_ExcelExport_OmitEmptyColumnsOnMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Omit Empty Cols On Overall Summary.
+        /// </summary>
+        public static string Settings_ExcelExport_OmitEmptyColumnsOnOverall {
+            get {
+                return ResourceManager.GetString("Settings_ExcelExport_OmitEmptyColumnsOnOverall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Omit Empty Sheets.
+        /// </summary>
+        public static string Settings_ExcelExport_OmitEmptySheets {
+            get {
+                return ResourceManager.GetString("Settings_ExcelExport_OmitEmptySheets", resourceCulture);
             }
         }
         

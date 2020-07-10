@@ -118,13 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MainPage_HealtKitAuthorization_Error_Button" xml:space="preserve">
-    <value />
+    <value>Sorry</value>
   </data>
   <data name="MainPage_HealtKitAuthorization_Error_Message" xml:space="preserve">
-    <value />
+    <value>Something went wrong. 😢
+
+We'll try to take a look at it.</value>
   </data>
   <data name="MainPage_HealtKitAuthorization_Error_Title" xml:space="preserve">
-    <value />
+    <value>Error</value>
   </data>
   <data name="MainPage_HealtKitAuthorization_Success_Button" xml:space="preserve">
     <value>OK</value>
@@ -191,6 +193,18 @@
   </data>
   <data name="Settings_DurationUnit_Minutes" xml:space="preserve">
     <value>Minutes</value>
+  </data>
+  <data name="Settings_ExcelExport_NumMonthlySummaries" xml:space="preserve">
+    <value># Monthly Summaries</value>
+  </data>
+  <data name="Settings_ExcelExport_OmitEmptyColumnsOnMonthly" xml:space="preserve">
+    <value>Omit Empty Cols On Monthly Summary</value>
+  </data>
+  <data name="Settings_ExcelExport_OmitEmptyColumnsOnOverall" xml:space="preserve">
+    <value>Omit Empty Cols On Overall Summary</value>
+  </data>
+  <data name="Settings_ExcelExport_OmitEmptySheets" xml:space="preserve">
+    <value>Omit Empty Sheets</value>
   </data>
   <data name="Settings_UnitsOfMeasure_DurationUnit" xml:space="preserve">
     <value>⏱️ Duration Unit</value>

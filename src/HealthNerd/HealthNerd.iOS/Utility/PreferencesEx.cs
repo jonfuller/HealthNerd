@@ -2,11 +2,26 @@
 using NodaTime;
 using NodaTime.Text;
 using Xamarin.Essentials;
+using static LanguageExt.Prelude;
 
 namespace HealthNerd.iOS.Utility
 {
     public static class PreferencesEx
     {
+        public static Option<int> GetInt(string key)
+        {
+            return Preferences.ContainsKey(key)
+                ? Some(Preferences.Get(key, 0))
+                : None;
+        }
+
+        public static Option<bool> GetBool(string key)
+        {
+            return Preferences.ContainsKey(key)
+                ? Some(Preferences.Get(key, false))
+                : None;
+        }
+
         public static Option<string> GetString(string key)
         {
             return ToOpt(Preferences.Get(key, (string) null));
@@ -25,7 +40,9 @@ namespace HealthNerd.iOS.Utility
 
         static Option<T> ToOpt<T>(T target)
         {
-            return target == null ? Prelude.None : Prelude.Some(target);
+            return target == null
+                ? None
+                : Some(target);
         }
     }
 }

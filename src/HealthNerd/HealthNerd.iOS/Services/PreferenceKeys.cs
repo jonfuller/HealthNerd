@@ -8,5 +8,9 @@
         public const string MassUnit = nameof(MassUnit);
         public const string EnergyUnit = nameof(EnergyUnit);
         public static string DurationUnit = nameof(DurationUnit);
+        public static string NumberOfMonthlySummaries = nameof(NumberOfMonthlySummaries);
+        public static string OmitEmptyColumnsOnMonthlySummary = nameof(OmitEmptyColumnsOnMonthlySummary);
+        public static string OmitEmptyColumnsOnOverallSummary = nameof(OmitEmptyColumnsOnOverallSummary);
+        public static string OmitEmptySheets = nameof(OmitEmptySheets);
     }
 }

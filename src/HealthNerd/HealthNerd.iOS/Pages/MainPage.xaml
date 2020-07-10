@@ -25,7 +25,7 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="⚙️" Command="{Binding SettingsCommand}"/>
+        <ToolbarItem Text="⚙️" Command="{Binding GoToSettings}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10">
         <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}">
@@ -47,7 +47,7 @@
                 </StackLayout>
                 <Label Text="Let's make sure the data comes out looking the way you want." 
                        VerticalOptions="CenterAndExpand"  FontSize="Body"/>
-                <Button Text="Data Nerdery Setup 🗃️" Command="{Binding GoToDataSettings}"/>
+                <Button Text="Data Nerdery Setup 🗃️" Command="{Binding GoToSettings}"/>
             </StackLayout>
         </yummy:PancakeView>
         <yummy:PancakeView>

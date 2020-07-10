@@ -43,9 +43,7 @@ namespace HealthNerd.iOS.ViewModels
                     });
             });
 
-            SettingsCommand = new Command(() => nav.NavigateTo<SettingsViewModel>());
-
-            GoToDataSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
+            GoToSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
 
             QueryHealthCommand = new Command(async () =>
             {
@@ -84,7 +82,7 @@ namespace HealthNerd.iOS.ViewModels
         public bool NeedsHealthAuthorization => !_settings.IsHealthKitAuthorized;
         public bool NeedsConfiguration => _settings.SinceDate.IsNone;
 
-        public Command GoToDataSettings { get; }
+        public Command GoToSettings { get; }
         public Command AuthorizeHealthCommand { get; }
         public Command QueryHealthCommand { get; }
         public Command SettingsCommand { get; }

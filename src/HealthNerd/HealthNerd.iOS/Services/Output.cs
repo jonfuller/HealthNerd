@@ -49,14 +49,24 @@ namespace HealthNerd.iOS.Services
                         Some: s => s,
                         None: SettingsDefaults.DurationUnit),
 
-                    // Excel Settings, TODO
-                    CustomSheetsPlacement = CustomSheetsPlacement.AfterSummary,
-                    NumberOfMonthlySummaries = 3,
-                    OmitEmptyColumnsOnMonthlySummary = true,
-                    OmitEmptyColumnsOnOverallSummary = true,
-                    OmitEmptySheets = true,
-                    UseConstantNameForMostRecentMonthlySummarySheet = true,
-                    UseConstantNameForPreviousMonthlySummarySheet = true
+                    NumberOfMonthlySummaries = settings.NumberOfMonthlySummaries.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.NumberOfMonthlySummaries),
+
+                    OmitEmptyColumnsOnMonthlySummary = settings.OmitEmptyColumnsOnMonthlySummary.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.OmitEmptyColumnsOnMonthlySummary),
+                    OmitEmptyColumnsOnOverallSummary = settings.OmitEmptyColumnsOnOverallSummary.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.OmitEmptyColumnsOnOverallSummary),
+                    OmitEmptySheets = settings.OmitEmptySheets.Match(
+                        Some: s => s,
+                        None: SettingsDefaults.OmitEmptySheets),
+
+                    // Other Excel Settings, not hooked up to settings store
+                    CustomSheetsPlacement = SettingsDefaults.CustomSheetsPlacement,
+                    UseConstantNameForMostRecentMonthlySummarySheet = SettingsDefaults.UseConstantNameForMostRecentMonthlySummarySheet,
+                    UseConstantNameForPreviousMonthlySummarySheet = SettingsDefaults.UseConstantNameForPreviousMonthlySummarySheet
                 };
             }
         }

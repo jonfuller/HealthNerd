@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using HealthNerd.iOS.Controls;
 using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility;
@@ -54,6 +55,17 @@ namespace HealthNerd.iOS.ViewModels
                     });
             });
         }
+
+        public List<PickerOption<LengthUnit>> DistanceUnits { get; }
+        public List<PickerOption<MassUnit>> MassUnits { get; }
+        public List<PickerOption<EnergyUnit>> EnergyUnits { get; }
+        public List<PickerOption<DurationUnit>> DurationUnits { get; }
+
+        public string HealthAuthorizationStatusText => _settings.IsHealthKitAuthorized
+            ? AppRes.Settings_IsAuthorizedButton_True
+            : AppRes.Settings_IsAuthorizedButton_False;
+
+        public Command AuthorizeHealthCommand { get; }
 
         public DateTime EarliestFetchDate
         {
@@ -130,16 +142,67 @@ namespace HealthNerd.iOS.ViewModels
             }
         }
 
-        public List<PickerOption<LengthUnit>> DistanceUnits { get; }
-        public List<PickerOption<MassUnit>> MassUnits { get; }
-        public List<PickerOption<EnergyUnit>> EnergyUnits { get; }
-        public List<PickerOption<DurationUnit>> DurationUnits { get; }
+        public string NumberMonthlySummaries
+        {
+            get
+            {
+                return _settings.NumberOfMonthlySummaries.Match(
+                    Some: s => s,
+                    None: () => SettingsDefaults.NumberOfMonthlySummaries).ToString(CultureInfo.CurrentUICulture);
+            }
+            set
+            {
+                if (int.TryParse(value, out var parsed))
+                {
+                    _settings.SetNumberOfMonthlySummaries(parsed);
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public string HealthAuthorizationStatusText => _settings.IsHealthKitAuthorized
-            ? AppRes.Settings_IsAuthorizedButton_True
-            : AppRes.Settings_IsAuthorizedButton_False;
+        public bool OmitEmptySheets
+        {
+            get
+            {
+                return _settings.OmitEmptySheets.Match(
+                    Some: s => s,
+                    None: () => SettingsDefaults.OmitEmptySheets);
+            }
+            set
+            {
+                _settings.SetOmitEmptySheets(value);
+                OnPropertyChanged();
+            }
+        }
 
-        public Command AuthorizeHealthCommand { get; }
+        public bool OmitEmptyColumnsOnOverallSummary
+        {
+            get
+            {
+                return _settings.OmitEmptyColumnsOnOverallSummary.Match(
+                    Some: s => s,
+                    None: () => SettingsDefaults.OmitEmptyColumnsOnOverallSummary);
+            }
+            set
+            {
+                _settings.SetOmitEmptyColumnsOnOverallSummary(value);
+                OnPropertyChanged();
+            }
+        }
 
+        public bool OmitEmptyColumnsOnMonthlySummary
+        {
+            get
+            {
+                return _settings.OmitEmptyColumnsOnMonthlySummary.Match(
+                    Some: s => s,
+                    None: () => SettingsDefaults.OmitEmptyColumnsOnMonthlySummary);
+            }
+            set
+            {
+                _settings.SetOmitEmptyColumnsOnMonthlySummary(value);
+                OnPropertyChanged();
+            }
+        }
     }
 }

@@ -42,6 +42,10 @@
                     ItemsSource="{Binding DurationUnits}" SelectedValue="{Binding DurationUnit}" />
             </TableSection>
             <TableSection Title="{x:Static resources:AppRes.Settings_Section_ExcelExportSettings}">
+                <EntryCell Label="{x:Static resources:AppRes.Settings_ExcelExport_NumMonthlySummaries}" Text="{Binding NumberMonthlySummaries}" Keyboard="Numeric" />
+                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptySheets}" On="{Binding OmitEmptySheets}" />
+                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnOverall}" On="{Binding OmitEmptyColumnsOnOverallSummary}" />
+                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" />
             </TableSection>
         </TableRoot>
     </TableView>
