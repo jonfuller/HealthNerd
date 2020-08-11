@@ -17,6 +17,7 @@ namespace HealthNerd.iOS.ViewModels
     {
         private readonly ISettingsStore _settings;
         private bool _isQueryingHealth;
+        private string _queryingStatus;
 
         public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav)
         {
@@ -58,15 +59,20 @@ namespace HealthNerd.iOS.ViewModels
                         end: clock.InTzdbSystemDefaultZone().GetCurrentDate());
 
                     IsQueryingHealth = true;
+                    QueryingStatus = "querying health";
                     var (workouts, records) = await QueryHealth(queryRange);
-                    IsQueryingHealth = false;
-
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    QueryingStatus = "writing file";
                     Output.CreateExcelReport(records, workouts, _settings, clock).IfSome(async f =>
                     {
+                        await Task.Delay(TimeSpan.FromSeconds(2));
+                        QueryingStatus = "sharing file";
                         await Share.RequestAsync(new ShareFileRequest
                         {
                             File = new ShareFile(f.filename.FullName, f.contentType.Name)
                         });
+                        IsQueryingHealth = false;
+                        QueryingStatus = "complete";
                     });
 
                     static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(DateInterval dateRange)
@@ -83,6 +89,15 @@ namespace HealthNerd.iOS.ViewModels
 
         private Func<bool> CanExecuteHealthQuery => () => _settings.IsHealthKitAuthorized && !IsQueryingHealth;
 
+        public string QueryingStatus
+        {
+            get => _queryingStatus;
+            set
+            {
+                _queryingStatus = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsQueryingHealth
         {
             get => _isQueryingHealth;

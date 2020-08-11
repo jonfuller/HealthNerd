@@ -59,6 +59,7 @@
                 </StackLayout>
                 <Button Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}"/>
                 <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
+                <Label HorizontalOptions="Center" Text="{Binding QueryingStatus}" TextColor="Gray" FontSize="Caption"/>
             </StackLayout>
         </yummy:PancakeView>
     </StackLayout>
