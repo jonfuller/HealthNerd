@@ -54,24 +54,24 @@ namespace HealthNerd.iOS.Services
                         None: () => SettingsDefaults.MassUnit),
                     EnergyUnit = settings.EnergyUnit.Match(
                         Some: s => s,
-                        None: SettingsDefaults.EnergyUnit),
+                        None: () => SettingsDefaults.EnergyUnit),
                     DurationUnit = settings.DurationUnit.Match(
                         Some: s => s,
                         None: () => SettingsDefaults.DurationUnit),
 
                     NumberOfMonthlySummaries = settings.NumberOfMonthlySummaries.Match(
                         Some: s => s,
-                        None: SettingsDefaults.NumberOfMonthlySummaries),
+                        None: () => SettingsDefaults.NumberOfMonthlySummaries),
 
                     OmitEmptyColumnsOnMonthlySummary = settings.OmitEmptyColumnsOnMonthlySummary.Match(
                         Some: s => s,
-                        None: SettingsDefaults.OmitEmptyColumnsOnMonthlySummary),
+                        None: () => SettingsDefaults.OmitEmptyColumnsOnMonthlySummary),
                     OmitEmptyColumnsOnOverallSummary = settings.OmitEmptyColumnsOnOverallSummary.Match(
                         Some: s => s,
-                        None: SettingsDefaults.OmitEmptyColumnsOnOverallSummary),
+                        None: () => SettingsDefaults.OmitEmptyColumnsOnOverallSummary),
                     OmitEmptySheets = settings.OmitEmptySheets.Match(
                         Some: s => s,
-                        None: SettingsDefaults.OmitEmptySheets),
+                        None: () => SettingsDefaults.OmitEmptySheets),
 
                     // Other Excel Settings, not hooked up to settings store
                     CustomSheetsPlacement = SettingsDefaults.CustomSheetsPlacement,

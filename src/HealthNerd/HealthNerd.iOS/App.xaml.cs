@@ -20,7 +20,9 @@ namespace HealthNerd.iOS
 
             var navigator = new NavigationService(this, new ViewLocator(), container);
 
-            container.AutoRegister(type => type.Name.EndsWith("ViewModel", StringComparison.CurrentCultureIgnoreCase));
+            container.Register<MainPageViewModel>();
+            container.Register<SettingsViewModel>();
+
             container.Register<INavigationService>(navigator);
 
             navigator.PresentAsNavigatableMainPage<MainPageViewModel>();

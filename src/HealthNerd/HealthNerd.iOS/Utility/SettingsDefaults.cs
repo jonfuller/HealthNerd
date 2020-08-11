@@ -7,19 +7,19 @@ namespace HealthNerd.iOS.Utility
     public static class SettingsDefaults
     {
         public static LocalDate EarliestFetchDate => new LocalDate(2020, 1, 1);
-        public static LengthUnit DistanceUnit => Settings.Default.DistanceUnit;
-        public static MassUnit MassUnit => Settings.Default.WeightUnit;
-        public static EnergyUnit EnergyUnit => Settings.Default.EnergyUnit;
-        public static DurationUnit DurationUnit => Settings.Default.DurationUnit;
+        public static LengthUnit DistanceUnit => LengthUnit.Mile;
+        public static MassUnit MassUnit => MassUnit.Pound;
+        public static EnergyUnit EnergyUnit => EnergyUnit.Calorie;
+        public static DurationUnit DurationUnit => DurationUnit.Minute;
 
-        public static int NumberOfMonthlySummaries => Settings.Default.NumberOfMonthlySummaries;
+        public static int NumberOfMonthlySummaries => 3;
 
-        public static bool OmitEmptyColumnsOnMonthlySummary => Settings.Default.OmitEmptyColumnsOnMonthlySummary;
-        public static bool OmitEmptyColumnsOnOverallSummary => Settings.Default.OmitEmptyColumnsOnOverallSummary;
-        public static bool OmitEmptySheets => Settings.Default.OmitEmptySheets;
+        public static bool OmitEmptyColumnsOnMonthlySummary => false;
+        public static bool OmitEmptyColumnsOnOverallSummary => false;
+        public static bool OmitEmptySheets => false;
 
-        public static CustomSheetsPlacement CustomSheetsPlacement => Settings.Default.CustomSheetsPlacement;
-        public static bool UseConstantNameForMostRecentMonthlySummarySheet => Settings.Default.UseConstantNameForMostRecentMonthlySummarySheet;
-        public static bool UseConstantNameForPreviousMonthlySummarySheet => Settings.Default.UseConstantNameForPreviousMonthlySummarySheet;
+        public static CustomSheetsPlacement CustomSheetsPlacement => CustomSheetsPlacement.AfterSummary;
+        public static bool UseConstantNameForMostRecentMonthlySummarySheet => true;
+        public static bool UseConstantNameForPreviousMonthlySummarySheet => true;
     }
 }
