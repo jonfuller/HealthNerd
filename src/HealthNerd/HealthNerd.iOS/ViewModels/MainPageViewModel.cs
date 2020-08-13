@@ -8,6 +8,8 @@ using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using NodaTime;
 using NodaTime.Extensions;
+using Resources;
+using Serilog;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -17,9 +19,9 @@ namespace HealthNerd.iOS.ViewModels
     {
         private readonly ISettingsStore _settings;
         private bool _isQueryingHealth;
-        private string _queryingStatus;
+        private string _operationStatus;
 
-        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav)
+        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger)
         {
             _settings = settings;
 
@@ -29,11 +31,11 @@ namespace HealthNerd.iOS.ViewModels
                     error =>
                     {
                         alertPresenter.DisplayAlert(
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Error_Title,
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Error_Message,
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Error_Button);
+                            AppRes.MainPage_HealtKitAuthorization_Error_Title,
+                            AppRes.MainPage_HealtKitAuthorization_Error_Message,
+                            AppRes.MainPage_HealtKitAuthorization_Error_Button);
                         // TODO: log to analytics
-                        Console.WriteLine(error.Message);
+                        logger.Error("Error authorizing with Health: {@Error}", error);
                     },
                     () =>
                     {
@@ -42,9 +44,10 @@ namespace HealthNerd.iOS.ViewModels
                         QueryHealthCommand.ChangeCanExecute();
 
                         alertPresenter.DisplayAlert(
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Success_Title,
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Success_Message,
-                            Resources.AppRes.MainPage_HealtKitAuthorization_Success_Button);
+                            AppRes.MainPage_HealtKitAuthorization_Success_Title,
+                            AppRes.MainPage_HealtKitAuthorization_Success_Message,
+                            AppRes.MainPage_HealtKitAuthorization_Success_Button);
+                        logger.Information("Authorized with Health.");
                     });
             });
 
@@ -52,28 +55,42 @@ namespace HealthNerd.iOS.ViewModels
 
             QueryHealthCommand = new Command(async () =>
                 {
-                    var queryRange = new DateInterval(
-                        start: settings.SinceDate.Match(
-                            Some: s => s,
-                            None: LocalDate.FromDateTime(new DateTime(2020, 01, 01))),
-                        end: clock.InTzdbSystemDefaultZone().GetCurrentDate());
-
-                    IsQueryingHealth = true;
-                    QueryingStatus = "querying health";
-                    var (workouts, records) = await QueryHealth(queryRange);
-                    await Task.Delay(TimeSpan.FromSeconds(2));
-                    QueryingStatus = "writing file";
-                    Output.CreateExcelReport(records, workouts, _settings, clock).IfSome(async f =>
+                    var logOperation = logger.ForContext("NerdOperation", Guid.NewGuid());
+                    try
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(2));
-                        QueryingStatus = "sharing file";
+                        var queryRange = new DateInterval(
+                            start: settings.SinceDate.Match(
+                                Some: s => s,
+                                None: LocalDate.FromDateTime(new DateTime(2020, 01, 01))),
+                            end: clock.InTzdbSystemDefaultZone().GetCurrentDate());
+
+                        logOperation.Verbose("Starting nerd operation for {QueryRange}", queryRange);
+                        IsQueryingHealth = true;
+
+                        OperationStatus = AppRes.MainPage_Status_Gathering;
+                        var (workouts, records) = await QueryHealth(queryRange);
+
+                        OperationStatus = AppRes.MainPage_Status_SavingFile;
+                        logOperation.Verbose("Creating output report");
+                        var excelReport = Output.CreateExcelReport(records, workouts, _settings, clock);
+
+                        OperationStatus = AppRes.MainPage_Status_SharingFile;
+                        logOperation.Verbose("Sharing file {File}", excelReport);
                         await Share.RequestAsync(new ShareFileRequest
                         {
-                            File = new ShareFile(f.filename.FullName, f.contentType.Name)
+                            File = new ShareFile(excelReport.filename.FullName, excelReport.contentType.Name)
                         });
+                        OperationStatus = string.Format(AppRes.MainPage_Status_Complete, excelReport.filename.Name);
+                    }
+                    catch (Exception ex)
+                    {
+                        OperationStatus = AppRes.MainPage_Status_Error;
+                        logOperation.Error(ex, "An error occurred");
+                    }
+                    finally
+                    {
                         IsQueryingHealth = false;
-                        QueryingStatus = "complete";
-                    });
+                    }
 
                     static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(DateInterval dateRange)
                     {
@@ -89,12 +106,12 @@ namespace HealthNerd.iOS.ViewModels
 
         private Func<bool> CanExecuteHealthQuery => () => _settings.IsHealthKitAuthorized && !IsQueryingHealth;
 
-        public string QueryingStatus
+        public string OperationStatus
         {
-            get => _queryingStatus;
+            get => _operationStatus;
             set
             {
-                _queryingStatus = value;
+                _operationStatus = value;
                 OnPropertyChanged();
             }
         }

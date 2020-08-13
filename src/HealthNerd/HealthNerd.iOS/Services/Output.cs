@@ -7,12 +7,10 @@ using HealthKitData.Core;
 using HealthKitData.Core.Excel;
 using HealthKitData.Core.Excel.Settings;
 using HealthNerd.iOS.Utility;
-using LanguageExt;
 using NodaTime;
 using NodaTime.Extensions;
 using OfficeOpenXml;
 using Xamarin.Essentials;
-using static LanguageExt.Prelude;
 
 namespace HealthNerd.iOS.Services
 {
@@ -20,13 +18,13 @@ namespace HealthNerd.iOS.Services
     {
         private static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        public static Option<(FileInfo filename, ContentType contentType)> CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IClock clock)
+        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IClock clock)
         {
             var file = GetFileName(clock);
 
             WriteExcelReport(file, records, workouts, GetSettings(settings));
 
-            return Some((file, XlsxContentType));
+            return (file, XlsxContentType);
 
             static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings)
             {

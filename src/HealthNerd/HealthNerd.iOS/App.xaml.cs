@@ -1,8 +1,9 @@
-﻿using System;
-using HealthNerd.iOS.Services;
+﻿using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels;
 using NodaTime;
+using Serilog;
+using Serilog.Events;
 using TinyIoC;
 
 namespace HealthNerd.iOS
@@ -12,7 +13,15 @@ namespace HealthNerd.iOS
         public App()
         {
             InitializeComponent();
+
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Debug()
+               .WriteTo.NSLog()
+               .WriteTo.Debug(restrictedToMinimumLevel: LogEventLevel.Information)
+               .CreateLogger();
+
             var container = TinyIoCContainer.Current;
+            container.Register(Log.Logger);
             container.Register<IAuthorizer, Authorizer>();
             container.Register<IAlertPresenter, AlertPresenter>();
             container.Register<IClock>(SystemClock.Instance);

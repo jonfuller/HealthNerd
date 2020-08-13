@@ -216,6 +216,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to shared file {0}.
+        /// </summary>
+        public static string MainPage_Status_Complete {
+            get {
+                return ResourceManager.GetString("MainPage_Status_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an error occurred.
+        /// </summary>
+        public static string MainPage_Status_Error {
+            get {
+                return ResourceManager.GetString("MainPage_Status_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gathering data.
+        /// </summary>
+        public static string MainPage_Status_Gathering {
+            get {
+                return ResourceManager.GetString("MainPage_Status_Gathering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to writing file.
+        /// </summary>
+        public static string MainPage_Status_SavingFile {
+            get {
+                return ResourceManager.GetString("MainPage_Status_SavingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sharing file.
+        /// </summary>
+        public static string MainPage_Status_SharingFile {
+            get {
+                return ResourceManager.GetString("MainPage_Status_SharingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Health Nerd ❤️🤓.
         /// </summary>
         public static string MainPage_Title {

@@ -251,4 +251,20 @@ We'll try to take a look at it.</value>
   <data name="Settings_Title" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="MainPage_Status_Complete" xml:space="preserve">
+    <value>shared file {0}</value>
+    <comment>{0} - filename</comment>
+  </data>
+  <data name="MainPage_Status_Error" xml:space="preserve">
+    <value>an error occurred</value>
+  </data>
+  <data name="MainPage_Status_Gathering" xml:space="preserve">
+    <value>gathering data</value>
+  </data>
+  <data name="MainPage_Status_SavingFile" xml:space="preserve">
+    <value>writing file</value>
+  </data>
+  <data name="MainPage_Status_SharingFile" xml:space="preserve">
+    <value>sharing file</value>
+  </data>
 </root>
