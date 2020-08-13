@@ -205,6 +205,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\healthnerd_transparent.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />
