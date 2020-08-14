@@ -13,21 +13,22 @@
     <ContentPage.Resources>
         <Style TargetType="{x:Type yummy:PancakeView}">
             <Setter Property="CornerRadius"
-                    Value="3" />
+                    Value="5" />
             <Setter Property="BackgroundColor"
-                    Value="WhiteSmoke" />
+                    Value="{StaticResource HealthNerdLogo_Heart}" />
             <Setter Property="Padding"
                     Value="10" />
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <yummy:DropShadow Color="#000000" Offset="2,2" Opacity="0.2" />
-                </Setter.Value>
-            </Setter>
         </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resources:AppRes.MainPage_ToolbarItem_Settings}" Command="{Binding GoToSettings}"/>
     </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" HorizontalOptions="Center">
+            <Image Source="healthnerd_transparent.png" Margin="5"/>
+            <Label FontSize="24" FontAttributes="Bold" TextColor="{x:StaticResource HealthNerdLogo_Yellow}" VerticalTextAlignment="Center" Text="{x:Static resources:AppRes.MainPage_Title}"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
     <StackLayout Margin="10">
         <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}">
             <StackLayout>
@@ -43,7 +44,7 @@
         <yummy:PancakeView IsVisible="{Binding NeedsConfiguration}">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Title}" TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
                     <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Icon}"/>
                 </StackLayout>
                 <Label Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Text}" 
@@ -54,12 +55,12 @@
         <yummy:PancakeView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_NerdOut_Title}" TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_NerdOut_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
                     <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_NerdOut_Icon}" />
                 </StackLayout>
                 <Button Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}"/>
                 <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
-                <Label HorizontalOptions="Center" Text="{Binding OperationStatus}" TextColor="Gray" FontSize="Caption"/>
+                <Label HorizontalOptions="Center" Text="{Binding OperationStatus}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Caption"/>
             </StackLayout>
         </yummy:PancakeView>
     </StackLayout>

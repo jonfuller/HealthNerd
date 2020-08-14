@@ -261,7 +261,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Health Nerd ❤️🤓.
+        ///   Looks up a localized string similar to Health Nerd.
         /// </summary>
         public static string MainPage_Title {
             get {
