@@ -35,6 +35,8 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>We&apos;ll access (read-only!) your data so you can nerd out.  🤓</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We&apos;ll access (read-only!) your data so you can nerd out.  🤓</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 </dict>
