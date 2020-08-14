@@ -24,6 +24,11 @@
                     Value="{StaticResource HealthNerdLogo_Blue}" />
         </Style>
 
+        <Style TargetType="{x:Type ActivityIndicator}">
+            <Setter Property="Color"
+                    Value="{StaticResource HealthNerdLogo_Yellow}" />
+        </Style>
+
         <Style TargetType="{x:Type NavigationPage}">
             <Setter Property="BarBackgroundColor"
                     Value="{StaticResource HealthNerdLogo_Blue}" />
