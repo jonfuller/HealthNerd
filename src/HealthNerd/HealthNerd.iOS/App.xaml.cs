@@ -17,6 +17,10 @@ namespace HealthNerd.iOS
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Debug()
                .WriteTo.NSLog()
+               .WriteTo.ApplicationInsights(
+                    instrumentationKey: "97e6fd64-c506-4830-9530-fbe9a7274326",
+                    TelemetryConverter.Traces,
+                    restrictedToMinimumLevel: LogEventLevel.Information)
                .WriteTo.Debug(restrictedToMinimumLevel: LogEventLevel.Information)
                .CreateLogger();
 
