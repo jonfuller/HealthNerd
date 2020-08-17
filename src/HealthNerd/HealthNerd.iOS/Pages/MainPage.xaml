@@ -33,7 +33,7 @@
         <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Title}" TextColor="Gray" FontSize="Header"/>
+                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
                     <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Icon}" />
                 </StackLayout>
                 <Label Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Text}" 
