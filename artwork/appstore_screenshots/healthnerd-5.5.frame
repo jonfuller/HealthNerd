@@ -7941,5 +7941,251 @@
       "toImageNumber" : 3
     },
     "title" : "Updating Export Output"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Tahoma",
+        "fontSize" : 128,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating File"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Tahoma",
+        "fontSize" : 128,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating File"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 128,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Font"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 100,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Font Size"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 100,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Export From Image Number"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2208}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 96,
+        "frame" : "{{0, 1800}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone 8 Plus Gold.png",
+        "frame" : "{{71, -300}, {1100, 2015}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      },
+      {
+        "file" : "$language\/5.5\/$image.png",
+        "frame" : "{{205, -33}, {832, 1480}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/5.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Font Size"
   }
 ]

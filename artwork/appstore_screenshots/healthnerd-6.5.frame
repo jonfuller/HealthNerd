@@ -13491,5 +13491,169 @@
       "toImageNumber" : 3
     },
     "title" : "Updating Export Output"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.jpg",
+        "frame" : "{{0, 0}, {1242, 2688}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 128,
+        "frame" : "{{0, 2250}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "$language\/6.5\/$image.png",
+        "frame" : "{{175, 148}, {892, 1946}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone XS Gold.png",
+        "frame" : "{{71, 50}, {1100, 2140}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/6.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Font"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.jpg",
+        "frame" : "{{0, 0}, {1242, 2688}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 96,
+        "frame" : "{{0, 2250}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "$language\/6.5\/$image.png",
+        "frame" : "{{175, 148}, {892, 1946}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone XS Gold.png",
+        "frame" : "{{71, 50}, {1100, 2140}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/6.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Font Size"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.jpg",
+        "frame" : "{{0, 0}, {1242, 2688}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 96,
+        "frame" : "{{0, 2250}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "$language\/6.5\/$image.png",
+        "frame" : "{{175, 148}, {892, 1946}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone XS Gold.png",
+        "frame" : "{{71, 50}, {1100, 2140}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/6.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating Export From Image Number"
+  },
+  {
+    "layers" : [
+      {
+        "file" : "backgrounds\/$image.png",
+        "frame" : "{{0, 0}, {1242, 2688}}",
+        "rotation" : 0,
+        "title" : "background",
+        "type" : "background"
+      },
+      {
+        "color" : "#FFC600FF",
+        "file" : "$language\/screenshots.strings",
+        "font" : "Futura",
+        "fontSize" : 96,
+        "frame" : "{{0, 2250}, {1242, 300}}",
+        "rotation" : 0,
+        "title" : "text",
+        "type" : "text"
+      },
+      {
+        "file" : "$language\/6.5\/$image.png",
+        "frame" : "{{175, 148}, {892, 1946}}",
+        "rotation" : 0,
+        "title" : "content",
+        "type" : "content"
+      },
+      {
+        "file" : "device_frames\/Apple iPhone XS Gold.png",
+        "frame" : "{{71, 50}, {1100, 2140}}",
+        "rotation" : 0,
+        "title" : "device",
+        "type" : "device"
+      }
+    ],
+    "outputConfig" : {
+      "fromImageNumber" : 1,
+      "output" : "outputs\/$language\/6.5\/$image.png",
+      "toImageNumber" : 3
+    },
+    "title" : "Updating File"
   }
 ]
