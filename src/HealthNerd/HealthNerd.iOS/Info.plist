@@ -25,7 +25,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.sep.HealthNerd</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -38,5 +38,7 @@
 	<string>We&apos;ll access (read-only!) your data so you can nerd out.  🤓</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 </dict>
 </plist>
