@@ -1,5 +1,4 @@
-﻿using HealthNerd.iOS.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace HealthNerd.iOS.Utility.Mvvm
 {

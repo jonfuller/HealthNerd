@@ -30,6 +30,7 @@ namespace HealthNerd.iOS
             container.Register<IAlertPresenter, AlertPresenter>();
             container.Register<IClock>(SystemClock.Instance);
             container.Register<ISettingsStore, SettingsStore>();
+            container.Register<IFirebaseAnalyticsService, FirebaseAnalyticsService>();
 
             var navigator = new NavigationService(this, new ViewLocator(), container);
 

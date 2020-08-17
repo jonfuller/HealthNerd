@@ -22,7 +22,8 @@ namespace HealthNerd.iOS.Utility.Mvvm
             var pageTypeName = viewModelType.Name.Replace("ViewModel", string.Empty);
             var pageType = viewModelType.Assembly
                .GetTypes()
-               .FirstOrDefault(t => t.Name.Equals(pageTypeName, StringComparison.InvariantCultureIgnoreCase));
+               .Where(t => t.Name.Equals(pageTypeName, StringComparison.InvariantCultureIgnoreCase))
+               .FirstOrDefault(t => t.IsSubclassOf(typeof(Page)));
 
             if (pageType == null)
                 throw new ArgumentException(pageTypeName + " type does not exist");

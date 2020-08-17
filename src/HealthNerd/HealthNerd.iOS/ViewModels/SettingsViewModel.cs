@@ -7,6 +7,7 @@ using HealthNerd.iOS.Utility;
 using HealthNerd.iOS.Utility.Mvvm;
 using NodaTime;
 using Resources;
+using Serilog;
 using UnitsNet.Units;
 using Xamarin.Forms;
 
@@ -15,10 +16,12 @@ namespace HealthNerd.iOS.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private readonly ISettingsStore _settings;
+        private readonly IFirebaseAnalyticsService _analytics;
 
-        public SettingsViewModel(ISettingsStore settings, IAuthorizer authorizer, IClock clock)
+        public SettingsViewModel(ISettingsStore settings, IAuthorizer authorizer, IClock clock, ILogger logger, IFirebaseAnalyticsService analytics)
         {
             _settings = settings;
+            _analytics = analytics;
 
             DistanceUnits = new List<PickerOption<LengthUnit>>
             {
@@ -46,7 +49,8 @@ namespace HealthNerd.iOS.ViewModels
                 (await authorizer.RequestAuthorizeAppleHealth()).Match(
                     error =>
                     {
-                        // TODO: log to analytics
+                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Failure, nameof(error), $"{error.Message} - {error.Code}");
+                        logger.Error("Error authorizing with Health: {@Error}", error);
                     },
                     () =>
                     {
@@ -78,6 +82,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetSinceDate(LocalDate.FromDateTime(value));
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(EarliestFetchDate)), AnalyticsEvents.Settings.ParamValue, value.ToString(CultureInfo.InvariantCulture));
                 OnPropertyChanged();
             }
         }
@@ -93,6 +98,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetDistanceUnit(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(DistanceUnit)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -108,6 +114,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetMassUnit(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(MassUnit)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -123,6 +130,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetEnergyUnit(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(EnergyUnit)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -138,6 +146,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetDurationUnit(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(DurationUnit)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -155,6 +164,7 @@ namespace HealthNerd.iOS.ViewModels
                 if (int.TryParse(value, out var parsed))
                 {
                     _settings.SetNumberOfMonthlySummaries(parsed);
+                    _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(NumberMonthlySummaries)), AnalyticsEvents.Settings.ParamValue, value);
                     OnPropertyChanged();
                 }
             }
@@ -171,6 +181,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetOmitEmptySheets(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(OmitEmptySheets)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -186,6 +197,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetOmitEmptyColumnsOnOverallSummary(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(OmitEmptyColumnsOnOverallSummary)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }
@@ -201,6 +213,7 @@ namespace HealthNerd.iOS.ViewModels
             set
             {
                 _settings.SetOmitEmptyColumnsOnMonthlySummary(value);
+                _analytics.LogEvent(AnalyticsEvents.Settings.For(nameof(OmitEmptyColumnsOnMonthlySummary)), AnalyticsEvents.Settings.ParamValue, value.ToString());
                 OnPropertyChanged();
             }
         }

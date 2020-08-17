@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HealthKit;
 using HealthKitData.Core;
 using HealthKitData.iOS;
 using HealthNerd.iOS.Services;
+using HealthNerd.iOS.Utility;
 using HealthNerd.iOS.Utility.Mvvm;
 using NodaTime;
 using NodaTime.Extensions;
@@ -18,10 +20,11 @@ namespace HealthNerd.iOS.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly ISettingsStore _settings;
+
         private bool _isQueryingHealth;
         private string _operationStatus;
 
-        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger)
+        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics)
         {
             _settings = settings;
 
@@ -34,7 +37,7 @@ namespace HealthNerd.iOS.ViewModels
                             AppRes.MainPage_HealtKitAuthorization_Error_Title,
                             AppRes.MainPage_HealtKitAuthorization_Error_Message,
                             AppRes.MainPage_HealtKitAuthorization_Error_Button);
-                        // TODO: log to analytics
+                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Failure, nameof(error), $"{error.Message} - {error.Code}");
                         logger.Error("Error authorizing with Health: {@Error}", error);
                     },
                     () =>
@@ -47,6 +50,7 @@ namespace HealthNerd.iOS.ViewModels
                             AppRes.MainPage_HealtKitAuthorization_Success_Title,
                             AppRes.MainPage_HealtKitAuthorization_Success_Message,
                             AppRes.MainPage_HealtKitAuthorization_Success_Button);
+                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Success);
                         logger.Information("Authorized with Health.");
                     });
             });
@@ -81,10 +85,16 @@ namespace HealthNerd.iOS.ViewModels
                             File = new ShareFile(excelReport.filename.FullName, excelReport.contentType.Name)
                         });
                         OperationStatus = string.Format(AppRes.MainPage_Status_Complete, excelReport.filename.Name);
+                        analytics.LogEvent(AnalyticsEvents.FileExport.Success, new Dictionary<string, string>
+                        {
+                            {AnalyticsEvents.FileExport.Success_WorkoutCount, workouts.Length.ToString()},
+                            {AnalyticsEvents.FileExport.Success_RecordCount, records.Length.ToString()},
+                        });
                     }
                     catch (Exception ex)
                     {
                         OperationStatus = AppRes.MainPage_Status_Error;
+                        analytics.LogEvent(AnalyticsEvents.FileExport.Failure, "exception", ex.ToString());
                         logOperation.Error(ex, "An error occurred");
                     }
                     finally
@@ -92,13 +102,13 @@ namespace HealthNerd.iOS.ViewModels
                         IsQueryingHealth = false;
                     }
 
-                    static async Task<(IEnumerable<Workout> workouts, IEnumerable<Record> records)> QueryHealth(DateInterval dateRange)
+                    static async Task<(Workout[] workouts, Record[] records)> QueryHealth(DateInterval dateRange)
                     {
                         var store = new HKHealthStore();
 
                         return (
-                            await HealthKitQueries.GetWorkouts(store, dateRange),
-                            await HealthKitQueries.GetHealthRecords(store, dateRange));
+                            (await HealthKitQueries.GetWorkouts(store, dateRange)).ToArray(),
+                            (await HealthKitQueries.GetHealthRecords(store, dateRange)).ToArray());
                     }
                 },
             canExecute: CanExecuteHealthQuery);
