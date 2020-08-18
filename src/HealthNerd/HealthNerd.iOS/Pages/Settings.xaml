@@ -27,26 +27,20 @@
                         <DatePicker VerticalOptions="Center" Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" ios:DatePicker.UpdateMode="WhenFinished" />
                     </StackLayout>
                 </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding GoToExportSettings}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.ExportSettings_Title}" />
+                        <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                </ViewCell>
             </TableSection>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_UnitsOfMeasure}">
-                <controls:PickerCell x:TypeArguments="unitsNet:LengthUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DistanceUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding DistanceUnits}" SelectedValue="{Binding DistanceUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:MassUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_MassUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding MassUnits}" SelectedValue="{Binding MassUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:EnergyUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_EnergyUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding EnergyUnits}" SelectedValue="{Binding EnergyUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:DurationUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DurationUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding DurationUnits}" SelectedValue="{Binding DurationUnit}" />
-            </TableSection>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_ExcelExportSettings}">
-                <EntryCell Label="{x:Static resources:AppRes.Settings_ExcelExport_NumMonthlySummaries}" Text="{Binding NumberMonthlySummaries}" Keyboard="Numeric" />
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptySheets}" On="{Binding OmitEmptySheets}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnOverall}" On="{Binding OmitEmptyColumnsOnOverallSummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}" />
+            <TableSection Title="About">
+                <TextCell Command="{Binding GoToSEP}" Text="{x:Static resources:AppRes.Settings_About_MadeBy}"/>
+                <TextCell Command="{Binding GoToJmDesignz}" Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}"/>
             </TableSection>
         </TableRoot>
     </TableView>

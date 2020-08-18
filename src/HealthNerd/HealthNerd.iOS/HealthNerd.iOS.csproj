@@ -86,6 +86,9 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Controls\PickerCell.cs" />
     <Compile Include="Controls\PickerOption.cs" />
+    <Compile Include="Pages\ExportSettings.xaml.cs">
+      <DependentUpon>ExportSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,7 @@
     <Compile Include="Utility\Mvvm\IViewModelLifecycle.cs" />
     <Compile Include="Utility\PreferencesEx.cs" />
     <Compile Include="Utility\SettingsDefaults.cs" />
+    <Compile Include="ViewModels\ExportSettingsViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Services\Output.cs" />
     <Compile Include="Utility\Mvvm\NavigationService.cs" />
@@ -278,7 +282,11 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ExportSettings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\healthnerd_transparent.png" />
   </ItemGroup>

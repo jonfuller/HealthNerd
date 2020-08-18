@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Settings.
+        /// </summary>
+        public static string ExportSettings_Title {
+            get {
+                return ResourceManager.GetString("ExportSettings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grant HealthNerd Access.
         /// </summary>
         public static string MainPage_AuthorizeHealth_Button {
@@ -275,6 +284,24 @@ namespace Resources {
         public static string MainPage_ToolbarItem_Settings {
             get {
                 return ResourceManager.GetString("MainPage_ToolbarItem_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artwork by Justin Muse (@JM_Designz).
+        /// </summary>
+        public static string Settings_About_ArtworkBy {
+            get {
+                return ResourceManager.GetString("Settings_About_ArtworkBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Made at SEP in Indiana.
+        /// </summary>
+        public static string Settings_About_MadeBy {
+            get {
+                return ResourceManager.GetString("Settings_About_MadeBy", resourceCulture);
             }
         }
         
