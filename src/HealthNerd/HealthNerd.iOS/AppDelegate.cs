@@ -1,7 +1,6 @@
-﻿using Foundation;
-using HealthNerd.iOS.Services;
+﻿using Firebase.Crashlytics;
+using Foundation;
 using UIKit;
-using Xamarin.Forms;
 
 namespace HealthNerd.iOS
 {
@@ -24,6 +23,7 @@ namespace HealthNerd.iOS
 
             LoadApplication(new App());
             Firebase.Core.App.Configure();
+            Crashlytics.Configure();
 
             return base.FinishedLaunching(app, options);
         }
