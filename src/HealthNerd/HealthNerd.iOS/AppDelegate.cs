@@ -1,6 +1,8 @@
 ﻿using Firebase.Crashlytics;
 using Foundation;
 using UIKit;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace HealthNerd.iOS
 {
@@ -19,8 +21,9 @@ namespace HealthNerd.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Forms.SetFlags("CarouselView_Experimental", "IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.Init();
-
+            VersionTracking.Track();
             LoadApplication(new App());
             Firebase.Core.App.Configure();
             Crashlytics.Configure();

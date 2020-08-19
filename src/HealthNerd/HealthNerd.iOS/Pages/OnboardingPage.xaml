@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
+             xmlns:controls="clr-namespace:HealthNerd.iOS.Controls;assembly=HealthNerd.iOS"
+             xmlns:onboardingPages="clr-namespace:HealthNerd.iOS.ViewModels.OnboardingPages;assembly=HealthNerd.iOS"
+             xmlns:utility="clr-namespace:HealthNerd.iOS.Utility;assembly=HealthNerd.iOS"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="DeepSkyBlue"
+             x:DataType="viewModels:OnboardingPageViewModel"
+             x:Class="HealthNerd.iOS.Pages.OnboardingPage">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="WelcomeTemplate">
+            <controls:OnboardingWelcome BindingContext="{Binding Welcome}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="FinishTemplate">
+            <controls:OnboardingFinish BindingContext="{Binding Finish}" />
+        </DataTemplate>
+
+        <utility:OnboardingTemplateSelector x:Key="OnboardingSelector"
+                                             WelcomeTemplate="{StaticResource WelcomeTemplate}"
+                                             FinishTemplate="{StaticResource FinishTemplate}" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <CarouselView IndicatorView="indicatorView"
+                          ItemsSource="{Binding ViewModels}"
+                          ItemTemplate="{StaticResource OnboardingSelector}" />
+            <IndicatorView x:Name="indicatorView"
+                           IndicatorColor="{StaticResource HealthNerdLogo_White}"
+                           SelectedIndicatorColor="{StaticResource HealthNerdLogo_Yellow}"
+                           HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

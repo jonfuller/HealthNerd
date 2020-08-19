@@ -21,9 +21,9 @@ namespace HealthNerd.iOS.Utility.Mvvm
             _container = container;
         }
 
-        public async Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase
+        public async Task NavigateTo<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase
         {
-            await NavigateTo(_container.Resolve<TViewModel>());
+            await NavigateTo(_container.Resolve<TViewModel>(GetOverloads(resolveOverrides)));
         }
 
         public async Task NavigateTo(ViewModelBase viewModel)
@@ -64,7 +64,13 @@ namespace HealthNerd.iOS.Utility.Mvvm
                 viewModel.AfterDismissed().Start(TaskScheduler.Default);
             }
         }
-        private Xamarin.Forms.INavigation Navigator => _presentationRoot.MainPage.Navigation;
+
+        private INavigation Navigator => _presentationRoot.MainPage.Navigation;
+
+        public void PresentAsMainPage<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase
+        {
+            PresentAsMainPage(_container.Resolve<TViewModel>(GetOverloads(resolveOverrides)));
+        }
         public void PresentAsMainPage(ViewModelBase viewModel)
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);
@@ -88,9 +94,9 @@ namespace HealthNerd.iOS.Utility.Mvvm
             }
         }
 
-        public void PresentAsNavigatableMainPage<TViewModel>() where TViewModel : ViewModelBase
+        public void PresentAsNavigatableMainPage<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase
         {
-            PresentAsNavigatableMainPage(_container.Resolve<TViewModel>());
+            PresentAsNavigatableMainPage(_container.Resolve<TViewModel>(GetOverloads(resolveOverrides)));
         }
 
         public void PresentAsNavigatableMainPage(ViewModelBase viewModel)
@@ -150,6 +156,12 @@ namespace HealthNerd.iOS.Utility.Mvvm
             {
                 poppingPage.AfterDismissed();
             }
+        }
+
+        private NamedParameterOverloads GetOverloads((string name, object arg)[] args)
+        {
+            return new NamedParameterOverloads((args ?? new (string name, object arg)[0])
+               .ToDictionary(x => x.name, x => x.arg));
         }
     }
 }

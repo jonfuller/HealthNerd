@@ -38,6 +38,7 @@ namespace HealthNerd.iOS.ViewModels
             });
 
             GoToExportSettings = new Command(() => nav.NavigateTo<ExportSettingsViewModel>());
+            GoToOnboarding = new Command(() => nav.PresentAsMainPage<OnboardingPageViewModel>());
             GoToSEP = new Command(async () => await Browser.OpenAsync("https://www.sep.com", BrowserLaunchMode.SystemPreferred));
             GoToJmDesignz = new Command(async () => await Browser.OpenAsync("https://twitter.com/jm_designz", BrowserLaunchMode.SystemPreferred));
         }
@@ -48,6 +49,7 @@ namespace HealthNerd.iOS.ViewModels
 
         public Command AuthorizeHealthCommand { get; }
         public Command GoToExportSettings { get; }
+        public Command GoToOnboarding { get; }
         public Command GoToSEP { get; }
         public Command GoToJmDesignz { get; }
 

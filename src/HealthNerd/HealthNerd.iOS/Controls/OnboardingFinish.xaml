@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
+             xmlns:onboardingPages="clr-namespace:HealthNerd.iOS.ViewModels.OnboardingPages;assembly=HealthNerd.iOS"
+             x:DataType="onboardingPages:OnboardingFinishViewModel"
+             x:Class="HealthNerd.iOS.Controls.OnboardingFinish">
+  <ContentView.Content>
+      <StackLayout>
+          <Label Text="Goodbye Xamarin.Forms!" />
+          <Button Text="Finish" TextColor="AliceBlue" Command="{Binding Complete}" />
+      </StackLayout>
+  </ContentView.Content>
+</ContentView>

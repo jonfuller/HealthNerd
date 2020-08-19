@@ -39,6 +39,7 @@
                 </ViewCell>
             </TableSection>
             <TableSection Title="About">
+                <TextCell Command="{Binding GoToOnboarding}" Text="re-take onboarding"/>
                 <TextCell Command="{Binding GoToSEP}" Text="{x:Static resources:AppRes.Settings_About_MadeBy}"/>
                 <TextCell Command="{Binding GoToJmDesignz}" Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}"/>
             </TableSection>

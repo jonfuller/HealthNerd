@@ -1,10 +1,14 @@
-﻿using HealthNerd.iOS.Services;
+﻿using System.Collections.Generic;
+using HealthNerd.iOS.Pages;
+using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels;
+using HealthNerd.iOS.ViewModels.OnboardingPages;
 using NodaTime;
 using Serilog;
 using Serilog.Events;
 using TinyIoC;
+using Xamarin.Essentials;
 
 namespace HealthNerd.iOS
 {
@@ -37,10 +41,20 @@ namespace HealthNerd.iOS
             container.Register<MainPageViewModel>();
             container.Register<SettingsViewModel>();
             container.Register<ExportSettingsViewModel>();
+            container.Register<OnboardingPageViewModel>();
+            container.Register<OnboardingFinishViewModel>();
+            container.Register<OnboardingWelcomeViewModel>();
 
             container.Register<INavigationService>(navigator);
-
-            navigator.PresentAsNavigatableMainPage<MainPageViewModel>();
+            //if (VersionTracking.IsFirstLaunchEver)
+            if (true)
+            {
+                navigator.PresentAsMainPage<OnboardingPageViewModel>();
+            }
+            else
+            {
+                navigator.PresentAsNavigatableMainPage<MainPageViewModel>();
+            }
         }
 
         protected override void OnStart()

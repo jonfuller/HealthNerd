@@ -10,6 +10,11 @@ namespace HealthNerd.iOS.Utility.Mvvm
         void PresentAsMainPage(ViewModelBase viewModel);
 
         /// <summary>
+        /// Sets the viewmodel to be the main page of the application
+        /// </summary>
+        void PresentAsMainPage<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase;
+
+        /// <summary>
         /// Sets the viewmodel as the main page of the application, and wraps its page within a Navigation page
         /// </summary>
         void PresentAsNavigatableMainPage(ViewModelBase viewModel);
@@ -17,7 +22,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
         /// <summary>
         /// Sets the viewmodel as the main page of the application, and wraps its page within a Navigation page
         /// </summary>
-        void PresentAsNavigatableMainPage<TViewModel>() where TViewModel : ViewModelBase;
+        void PresentAsNavigatableMainPage<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase;
 
         /// <summary>
         /// Navigate to the given page on top of the current navigation stack
@@ -27,7 +32,7 @@ namespace HealthNerd.iOS.Utility.Mvvm
         /// <summary>
         /// Navigate to the given page on top of the current navigation stack
         /// </summary>
-        Task NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
+        Task NavigateTo<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase;
 
         /// <summary>
         /// Navigate to the previous item in the navigation stack

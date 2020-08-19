@@ -84,10 +84,19 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Controls\OnboardingFinish.xaml.cs">
+      <DependentUpon>OnboardingFinish.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OnboardingWelcome.xaml.cs">
+      <DependentUpon>OnboardingWelcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PickerCell.cs" />
     <Compile Include="Controls\PickerOption.cs" />
     <Compile Include="Pages\ExportSettings.xaml.cs">
       <DependentUpon>ExportSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OnboardingPage.xaml.cs">
+      <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -112,6 +121,7 @@
     <Compile Include="Utility\Mvvm\INavigationService.cs" />
     <Compile Include="Utility\Mvvm\IViewLocator.cs" />
     <Compile Include="Utility\Mvvm\IViewModelLifecycle.cs" />
+    <Compile Include="Utility\OnboardingTemplateSelector.cs" />
     <Compile Include="Utility\PreferencesEx.cs" />
     <Compile Include="Utility\SettingsDefaults.cs" />
     <Compile Include="ViewModels\ExportSettingsViewModel.cs" />
@@ -121,6 +131,10 @@
     <Compile Include="Utility\Mvvm\PropertyChangedBase.cs" />
     <Compile Include="Utility\Mvvm\ViewLocator.cs" />
     <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
+    <Compile Include="ViewModels\OnboardingPages\OnboardingFinishViewModel.cs" />
+    <Compile Include="ViewModels\OnboardingPages\OnboardingViewModelBase.cs" />
+    <Compile Include="ViewModels\OnboardingPages\OnboardingWelcomeViewModel.cs" />
+    <Compile Include="ViewModels\OnboardingPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <None Include="Entitlements.plist" />
     <BundleResource Include="GoogleService-Info.plist" />
@@ -290,6 +304,22 @@
   <ItemGroup>
     <BundleResource Include="Resources\healthnerd_transparent.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\OnboardingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\OnboardingWelcome.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\OnboardingFinish.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />
