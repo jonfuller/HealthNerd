@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNerd.iOS", "HealthNerd\HealthNerd.iOS\HealthNerd.iOS.csproj", "{90F754AA-B8A5-49E8-9DB7-201E715264E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNerd.iOS", "HealthNerd.iOS\HealthNerd.iOS.csproj", "{90F754AA-B8A5-49E8-9DB7-201E715264E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{31DE279D-4FCC-406D-8317-0463E359980A}"
 EndProject
