@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNerd.iOS", "HealthNerd.iOS\HealthNerd.iOS.csproj", "{90F754AA-B8A5-49E8-9DB7-201E715264E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{31DE279D-4FCC-406D-8317-0463E359980A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Resources.csproj", "{31DE279D-4FCC-406D-8317-0463E359980A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthNerd", "HealthNerd\HealthNerd.csproj", "{18C8DDD1-8628-47D0-8087-7CF28D111D47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,18 @@ Global
 		{31DE279D-4FCC-406D-8317-0463E359980A}.Release|iPhone.Build.0 = Release|Any CPU
 		{31DE279D-4FCC-406D-8317-0463E359980A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{31DE279D-4FCC-406D-8317-0463E359980A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|iPhone.Build.0 = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{18C8DDD1-8628-47D0-8087-7CF28D111D47}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

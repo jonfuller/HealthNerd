@@ -295,7 +295,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Resources\Resources.csproj">
+    <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{31de279d-4fcc-406d-8317-0463e359980a}</Project>
       <Name>Resources</Name>
     </ProjectReference>
