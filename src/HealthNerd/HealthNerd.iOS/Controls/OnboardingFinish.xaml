@@ -23,7 +23,7 @@
                  Text="{x:Static resources:AppRes.Onboarding_Finish_Body}" />
           <Button Grid.Row="4" TextColor="{StaticResource HealthNerdLogo_Yellow}" FontSize="Large"
                   Text="{x:Static resources:AppRes.Onboarding_Finish_Button}"
-                  Command="{Binding AuthorizeHealthCommand}"/>
+                  Command="{Binding Close}"/>
       </Grid>
   </ContentView.Content>
 </ContentView>
