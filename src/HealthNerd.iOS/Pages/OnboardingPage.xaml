@@ -34,8 +34,13 @@
             FinishTemplate="{StaticResource FinishTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
                 <Button Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
                         Text="{x:Static resources:AppRes.Onboarding_Previous}"
                         IsVisible="{Binding IsNotFirst}"
@@ -49,16 +54,16 @@
                         IsVisible="{Binding IsNotLast}"
                         Command="{Binding Next}" />
             </StackLayout>
-            <CarouselView IndicatorView="indicatorView"
+            <CarouselView Grid.Row="1" IndicatorView="indicatorView"
                           Position="{Binding CarouselPosition}"
                           ItemsSource="{Binding ViewModels}"
                           ItemTemplate="{StaticResource OnboardingSelector}" />
-            <IndicatorView x:Name="indicatorView"
+            <IndicatorView Grid.Row="2" x:Name="indicatorView"
                            IndicatorColor="{StaticResource HealthNerdLogo_White}"
                            SelectedIndicatorColor="{StaticResource HealthNerdLogo_Yellow}"
                            HorizontalOptions="Center"
                            IndicatorSize="8"
                            Padding="15"/>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
