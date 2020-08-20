@@ -19,6 +19,10 @@
             <controls:OnboardingAuth BindingContext="{Binding Auth}" />
         </DataTemplate>
 
+        <DataTemplate x:Key="SettingsTemplate">
+            <controls:OnboardingSettings BindingContext="{Binding Settings}" />
+        </DataTemplate>
+
         <DataTemplate x:Key="FinishTemplate">
             <controls:OnboardingFinish BindingContext="{Binding Finish}" />
         </DataTemplate>
@@ -26,6 +30,7 @@
         <utility:OnboardingTemplateSelector x:Key="OnboardingSelector"
             WelcomeTemplate="{StaticResource WelcomeTemplate}"
             AuthTemplate="{StaticResource AuthTemplate}"
+            SettingsTemplate="{StaticResource SettingsTemplate}"
             FinishTemplate="{StaticResource FinishTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>

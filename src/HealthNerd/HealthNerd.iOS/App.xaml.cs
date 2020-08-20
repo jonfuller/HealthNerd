@@ -42,6 +42,7 @@ namespace HealthNerd.iOS
             container.Register<ExportSettingsViewModel>();
             container.Register<OnboardingPageViewModel>();
             container.Register<OnboardingFinishViewModel>();
+            container.Register<OnboardingSettingsViewModel>();
             container.Register<OnboardingWelcomeViewModel>();
 
             container.Register<INavigationService>(navigator);

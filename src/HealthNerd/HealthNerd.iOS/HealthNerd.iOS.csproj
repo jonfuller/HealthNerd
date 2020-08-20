@@ -90,6 +90,9 @@
     <Compile Include="Controls\OnboardingFinish.xaml.cs">
       <DependentUpon>OnboardingFinish.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OnboardingSettings.xaml.cs">
+      <DependentUpon>OnboardingSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OnboardingWelcome.xaml.cs">
       <DependentUpon>OnboardingWelcome.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,7 @@
     <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingAuthViewModel.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingFinishViewModel.cs" />
+    <Compile Include="ViewModels\OnboardingPages\OnboardingSettingsViewModel.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingViewModelBase.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingWelcomeViewModel.cs" />
     <Compile Include="ViewModels\OnboardingPageViewModel.cs" />
@@ -331,6 +335,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\connect_to_health.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\OnboardingSettings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

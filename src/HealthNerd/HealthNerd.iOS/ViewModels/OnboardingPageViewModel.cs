@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels.OnboardingPages;
-using Resources;
 using Xamarin.Forms;
 
 namespace HealthNerd.iOS.ViewModels
@@ -12,6 +11,7 @@ namespace HealthNerd.iOS.ViewModels
 
         public OnboardingWelcomeViewModel Welcome { get; }
         public OnboardingAuthViewModel Auth { get; }
+        public OnboardingSettingsViewModel Settings { get; }
         public OnboardingFinishViewModel Finish { get; }
 
         public Command Close { get; }
@@ -39,12 +39,14 @@ namespace HealthNerd.iOS.ViewModels
         public OnboardingPageViewModel(INavigationService nav,
             OnboardingWelcomeViewModel welcomeVm,
             OnboardingAuthViewModel authVm,
+            OnboardingSettingsViewModel settingsVm,
             OnboardingFinishViewModel finish)
         {
             ViewModels = new List<OnboardingViewModelBase>
             {
                 (Welcome = welcomeVm),
                 (Auth = authVm),
+                (Settings = settingsVm),
                 (Finish = finish),
             };
 

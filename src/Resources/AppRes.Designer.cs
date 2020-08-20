@@ -342,6 +342,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Onboarding_Settings_Title {
+            get {
+                return ResourceManager.GetString("Onboarding_Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;re the type of person that likes data. Let&apos;s get you all set up..
         /// </summary>
         public static string Onboarding_Welcome_Body {

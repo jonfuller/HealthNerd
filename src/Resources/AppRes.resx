@@ -309,4 +309,7 @@ We'll try to take a look at it.</value>
   <data name="Settings_Section_About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Onboarding_Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>
