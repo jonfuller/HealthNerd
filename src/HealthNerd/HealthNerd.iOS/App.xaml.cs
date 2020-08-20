@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using HealthNerd.iOS.Pages;
-using HealthNerd.iOS.Services;
+﻿using HealthNerd.iOS.Services;
 using HealthNerd.iOS.Utility.Mvvm;
 using HealthNerd.iOS.ViewModels;
 using HealthNerd.iOS.ViewModels.OnboardingPages;
@@ -35,6 +33,7 @@ namespace HealthNerd.iOS
             container.Register<IClock>(SystemClock.Instance);
             container.Register<ISettingsStore, SettingsStore>();
             container.Register<IFirebaseAnalyticsService, FirebaseAnalyticsService>();
+            container.Register<AuthorizeHealthCommand>();
 
             var navigator = new NavigationService(this, new ViewLocator(), container);
 
@@ -46,8 +45,8 @@ namespace HealthNerd.iOS
             container.Register<OnboardingWelcomeViewModel>();
 
             container.Register<INavigationService>(navigator);
-            //if (VersionTracking.IsFirstLaunchEver)
-            if (true)
+
+            if (VersionTracking.IsFirstLaunchEver)
             {
                 navigator.PresentAsMainPage<OnboardingPageViewModel>();
             }

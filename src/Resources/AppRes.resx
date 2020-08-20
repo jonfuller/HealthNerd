@@ -117,24 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainPage_HealtKitAuthorization_Error_Button" xml:space="preserve">
+  <data name="HealtKitAuthorization_Error_Button" xml:space="preserve">
     <value>Sorry</value>
   </data>
-  <data name="MainPage_HealtKitAuthorization_Error_Message" xml:space="preserve">
+  <data name="HealtKitAuthorization_Error_Message" xml:space="preserve">
     <value>Something went wrong. 😢
 
 We'll try to take a look at it.</value>
   </data>
-  <data name="MainPage_HealtKitAuthorization_Error_Title" xml:space="preserve">
+  <data name="HealtKitAuthorization_Error_Title" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="MainPage_HealtKitAuthorization_Success_Button" xml:space="preserve">
+  <data name="HealtKitAuthorization_Success_Button" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="MainPage_HealtKitAuthorization_Success_Message" xml:space="preserve">
+  <data name="HealtKitAuthorization_Success_Message" xml:space="preserve">
     <value>Looks like you did it! 👏</value>
   </data>
-  <data name="MainPage_HealtKitAuthorization_Success_Title" xml:space="preserve">
+  <data name="HealtKitAuthorization_Success_Title" xml:space="preserve">
     <value>Connected</value>
   </data>
   <data name="Settings_IsAuthorizedButton_False" xml:space="preserve">
@@ -224,15 +224,6 @@ We'll try to take a look at it.</value>
   <data name="MainPage_FirstTimeSetup_Button" xml:space="preserve">
     <value>Data Nerdery Setup 🗃️</value>
   </data>
-  <data name="MainPage_FirstTimeSetup_Icon" xml:space="preserve">
-    <value>🤔</value>
-  </data>
-  <data name="MainPage_FirstTimeSetup_Text" xml:space="preserve">
-    <value>Let's make sure the data comes out looking the way you want.</value>
-  </data>
-  <data name="MainPage_FirstTimeSetup_Title" xml:space="preserve">
-    <value>First Time Here?</value>
-  </data>
   <data name="MainPage_NerdOut_Button" xml:space="preserve">
     <value>Nerd My Data</value>
   </data>
@@ -271,9 +262,51 @@ We'll try to take a look at it.</value>
     <value>Export Settings</value>
   </data>
   <data name="Settings_About_ArtworkBy" xml:space="preserve">
-    <value>Artwork by Justin Muse (@JM_Designz)</value>
+    <value>Artwork by Justin Muse</value>
   </data>
   <data name="Settings_About_MadeBy" xml:space="preserve">
     <value>Made at SEP in Indiana</value>
+  </data>
+  <data name="Onboarding_Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="Onboarding_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Onboarding_Auth_Body" xml:space="preserve">
+    <value>You need to let HealthNerd read data out of Apple Health. HealthNerd will only be able to read the data you approve.</value>
+  </data>
+  <data name="Onboarding_Auth_Button" xml:space="preserve">
+    <value>Connect Now</value>
+  </data>
+  <data name="Onboarding_Auth_Title" xml:space="preserve">
+    <value>Connect with Apple Health</value>
+  </data>
+  <data name="Onboarding_Finish_Body" xml:space="preserve">
+    <value>You're all set! Go ahead and continue being the nerd we both know you are.</value>
+  </data>
+  <data name="Onboarding_Finish_Button" xml:space="preserve">
+    <value>Finish Setup</value>
+  </data>
+  <data name="Onboarding_Finish_Title" xml:space="preserve">
+    <value>Get Nerdy With It!</value>
+  </data>
+  <data name="Onboarding_Previous" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Onboarding_Welcome_Body" xml:space="preserve">
+    <value>You're the type of person that likes data. Let's get you all set up.</value>
+  </data>
+  <data name="Onboarding_Welcome_Title" xml:space="preserve">
+    <value>Welcome to HealthNerd!</value>
+  </data>
+  <data name="Settings_About_ArtworkBy_Detail" xml:space="preserve">
+    <value>@JM_Designz</value>
+  </data>
+  <data name="Settings_FirstTimeSetup" xml:space="preserve">
+    <value>First Time Setup</value>
+  </data>
+  <data name="Settings_Section_About" xml:space="preserve">
+    <value>About</value>
   </data>
 </root>

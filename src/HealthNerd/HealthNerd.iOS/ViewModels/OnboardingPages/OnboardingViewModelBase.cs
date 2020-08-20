@@ -7,9 +7,9 @@ namespace HealthNerd.iOS.ViewModels.OnboardingPages
     {
         public OnboardingViewModelBase(INavigationService nav)
         {
-            Complete = new Command(() => nav.PresentAsNavigatableMainPage<MainPageViewModel>());
+            Close = new Command(() => nav.PresentAsNavigatableMainPage<MainPageViewModel>());
         }
 
-        public Command Complete { get; }
+        public Command Close { get; }
     }
 }

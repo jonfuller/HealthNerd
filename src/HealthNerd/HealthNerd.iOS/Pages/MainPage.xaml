@@ -41,17 +41,6 @@
                 <Button Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Button}" Command="{Binding AuthorizeHealthCommand}"/>
             </StackLayout>
         </yummy:PancakeView>
-        <yummy:PancakeView IsVisible="{Binding NeedsConfiguration}">
-            <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
-                    <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Icon}"/>
-                </StackLayout>
-                <Label Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Text}" 
-                       VerticalOptions="CenterAndExpand"  FontSize="Body"/>
-                <Button Text="{x:Static resources:AppRes.MainPage_FirstTimeSetup_Button}" Command="{Binding GoToSettings}"/>
-            </StackLayout>
-        </yummy:PancakeView>
         <yummy:PancakeView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal">

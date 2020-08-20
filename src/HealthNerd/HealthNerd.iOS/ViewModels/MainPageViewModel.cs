@@ -24,35 +24,14 @@ namespace HealthNerd.iOS.ViewModels
         private bool _isQueryingHealth;
         private string _operationStatus;
 
-        public MainPageViewModel(IAuthorizer authorizer, IAlertPresenter alertPresenter, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics)
+        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics)
         {
             _settings = settings;
 
-            AuthorizeHealthCommand = new Command(async () =>
+            AuthorizeHealthCommand = authorizer.GetCommand(() =>
             {
-                (await authorizer.RequestAuthorizeAppleHealth()).Match(
-                    error =>
-                    {
-                        alertPresenter.DisplayAlert(
-                            AppRes.MainPage_HealtKitAuthorization_Error_Title,
-                            AppRes.MainPage_HealtKitAuthorization_Error_Message,
-                            AppRes.MainPage_HealtKitAuthorization_Error_Button);
-                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Failure, nameof(error), $"{error.Message} - {error.Code}");
-                        logger.Error("Error authorizing with Health: {@Error}", error);
-                    },
-                    () =>
-                    {
-                        _settings.SetHealthKitAuthorized(clock.GetCurrentInstant());
-                        OnPropertyChanged(nameof(NeedsHealthAuthorization));
-                        QueryHealthCommand.ChangeCanExecute();
-
-                        alertPresenter.DisplayAlert(
-                            AppRes.MainPage_HealtKitAuthorization_Success_Title,
-                            AppRes.MainPage_HealtKitAuthorization_Success_Message,
-                            AppRes.MainPage_HealtKitAuthorization_Success_Button);
-                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Success);
-                        logger.Information("Authorized with Health.");
-                    });
+                OnPropertyChanged(nameof(NeedsHealthAuthorization));
+                QueryHealthCommand.ChangeCanExecute();
             });
 
             GoToSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
@@ -144,7 +123,6 @@ namespace HealthNerd.iOS.ViewModels
         }
 
         public bool NeedsHealthAuthorization => !_settings.IsHealthKitAuthorized;
-        public bool NeedsConfiguration => _settings.SinceDate.IsNone;
 
         public Command GoToSettings { get; }
         public Command AuthorizeHealthCommand { get; }

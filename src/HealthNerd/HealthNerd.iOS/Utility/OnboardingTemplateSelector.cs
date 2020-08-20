@@ -7,6 +7,7 @@ namespace HealthNerd.iOS.Utility
     public class OnboardingTemplateSelector : DataTemplateSelector
     {
         public DataTemplate WelcomeTemplate { get; set; }
+        public DataTemplate AuthTemplate { get; set; }
         public DataTemplate FinishTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -14,6 +15,7 @@ namespace HealthNerd.iOS.Utility
             return item switch
             {
                 OnboardingWelcomeViewModel v => WelcomeTemplate,
+                OnboardingAuthViewModel v => AuthTemplate,
                 OnboardingFinishViewModel v => FinishTemplate,
                 _ =>
                     throw new ArgumentException(

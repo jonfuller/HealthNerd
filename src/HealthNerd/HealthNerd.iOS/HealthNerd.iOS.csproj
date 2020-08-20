@@ -84,6 +84,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Controls\OnboardingAuth.xaml.cs">
+      <DependentUpon>OnboardingAuth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OnboardingFinish.xaml.cs">
       <DependentUpon>OnboardingFinish.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,7 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\AuthorizeHealthCommand.cs" />
     <Compile Include="Services\FirebaseAnalyticsService.cs" />
     <Compile Include="Services\IFirebaseAnalyticsService.cs" />
     <Compile Include="TinyIoC.cs" />
@@ -131,6 +135,7 @@
     <Compile Include="Utility\Mvvm\PropertyChangedBase.cs" />
     <Compile Include="Utility\Mvvm\ViewLocator.cs" />
     <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
+    <Compile Include="ViewModels\OnboardingPages\OnboardingAuthViewModel.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingFinishViewModel.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingViewModelBase.cs" />
     <Compile Include="ViewModels\OnboardingPages\OnboardingWelcomeViewModel.cs" />
@@ -319,7 +324,14 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\OnboardingAuth.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\connect_to_health.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />

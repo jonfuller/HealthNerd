@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
              xmlns:controls="clr-namespace:HealthNerd.iOS.Controls;assembly=HealthNerd.iOS"
-             xmlns:onboardingPages="clr-namespace:HealthNerd.iOS.ViewModels.OnboardingPages;assembly=HealthNerd.iOS"
              xmlns:utility="clr-namespace:HealthNerd.iOS.Utility;assembly=HealthNerd.iOS"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:resources="clr-namespace:Resources;assembly=Resources"
              ios:Page.UseSafeArea="true"
-             BackgroundColor="DeepSkyBlue"
+             BackgroundColor="{StaticResource HealthNerdLogo_Blue}"
              x:DataType="viewModels:OnboardingPageViewModel"
              x:Class="HealthNerd.iOS.Pages.OnboardingPage">
     <ContentPage.Resources>
@@ -15,23 +15,45 @@
             <controls:OnboardingWelcome BindingContext="{Binding Welcome}" />
         </DataTemplate>
 
+        <DataTemplate x:Key="AuthTemplate">
+            <controls:OnboardingAuth BindingContext="{Binding Auth}" />
+        </DataTemplate>
+
         <DataTemplate x:Key="FinishTemplate">
             <controls:OnboardingFinish BindingContext="{Binding Finish}" />
         </DataTemplate>
 
         <utility:OnboardingTemplateSelector x:Key="OnboardingSelector"
-                                             WelcomeTemplate="{StaticResource WelcomeTemplate}"
-                                             FinishTemplate="{StaticResource FinishTemplate}" />
+            WelcomeTemplate="{StaticResource WelcomeTemplate}"
+            AuthTemplate="{StaticResource AuthTemplate}"
+            FinishTemplate="{StaticResource FinishTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Previous}"
+                        IsVisible="{Binding IsNotFirst}"
+                        Command="{Binding Previous}" />
+                <Button HorizontalOptions="EndAndExpand" Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Finish}"
+                        IsVisible="{Binding IsLast}"
+                        Command="{Binding Close}" />
+                <Button HorizontalOptions="EndAndExpand" Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Next}"
+                        IsVisible="{Binding IsNotLast}"
+                        Command="{Binding Next}" />
+            </StackLayout>
             <CarouselView IndicatorView="indicatorView"
+                          Position="{Binding CarouselPosition}"
                           ItemsSource="{Binding ViewModels}"
                           ItemTemplate="{StaticResource OnboardingSelector}" />
             <IndicatorView x:Name="indicatorView"
                            IndicatorColor="{StaticResource HealthNerdLogo_White}"
                            SelectedIndicatorColor="{StaticResource HealthNerdLogo_Yellow}"
-                           HorizontalOptions="Center" />
+                           HorizontalOptions="Center"
+                           IndicatorSize="8"
+                           Padding="15"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

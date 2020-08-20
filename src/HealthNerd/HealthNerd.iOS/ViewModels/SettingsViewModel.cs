@@ -5,7 +5,6 @@ using HealthNerd.iOS.Utility;
 using HealthNerd.iOS.Utility.Mvvm;
 using NodaTime;
 using Resources;
-using Serilog;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,26 +15,13 @@ namespace HealthNerd.iOS.ViewModels
         private readonly ISettingsStore _settings;
         private readonly IFirebaseAnalyticsService _analytics;
 
-        public SettingsViewModel(ISettingsStore settings, IAuthorizer authorizer, INavigationService nav, IClock clock, ILogger logger, IFirebaseAnalyticsService analytics)
+        public SettingsViewModel(AuthorizeHealthCommand commander, ISettingsStore settings, INavigationService nav, IFirebaseAnalyticsService analytics)
         {
             _settings = settings;
             _analytics = analytics;
 
-
-            AuthorizeHealthCommand = new Command(async () =>
-            {
-                (await authorizer.RequestAuthorizeAppleHealth()).Match(
-                    error =>
-                    {
-                        analytics.LogEvent(AnalyticsEvents.AuthorizeHealth.Failure, nameof(error), $"{error.Message} - {error.Code}");
-                        logger.Error("Error authorizing with Health: {@Error}", error);
-                    },
-                    () =>
-                    {
-                        _settings.SetHealthKitAuthorized(clock.GetCurrentInstant());
-                        OnPropertyChanged(nameof(HealthAuthorizationStatusText));
-                    });
-            });
+            AuthorizeHealthCommand = commander.GetCommand(() =>
+                OnPropertyChanged(nameof(HealthAuthorizationStatusText)));
 
             GoToExportSettings = new Command(() => nav.NavigateTo<ExportSettingsViewModel>());
             GoToOnboarding = new Command(() => nav.PresentAsMainPage<OnboardingPageViewModel>());

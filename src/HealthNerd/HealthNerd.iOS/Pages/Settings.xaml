@@ -4,8 +4,6 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
-             xmlns:controls="clr-namespace:HealthNerd.iOS.Controls;assembly=HealthNerd.iOS"
-             xmlns:unitsNet="clr-namespace:UnitsNet.Units;assembly=UnitsNet"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
              mc:Ignorable="d"
@@ -38,10 +36,19 @@
                     </StackLayout>
                 </ViewCell>
             </TableSection>
-            <TableSection Title="About">
-                <TextCell Command="{Binding GoToOnboarding}" Text="re-take onboarding"/>
-                <TextCell Command="{Binding GoToSEP}" Text="{x:Static resources:AppRes.Settings_About_MadeBy}"/>
-                <TextCell Command="{Binding GoToJmDesignz}" Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}"/>
+            <TableSection Title="{x:Static resources:AppRes.Settings_Section_About}">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding GoToOnboarding}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_FirstTimeSetup}" />
+                        <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                </ViewCell>
+                <TextCell Command="{Binding GoToSEP}" Text="{x:Static resources:AppRes.Settings_About_MadeBy}" />
+                <TextCell Command="{Binding GoToJmDesignz}" Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}" Detail="{x:Static resources:AppRes.Settings_About_ArtworkBy_Detail}"/>
             </TableSection>
         </TableRoot>
     </TableView>

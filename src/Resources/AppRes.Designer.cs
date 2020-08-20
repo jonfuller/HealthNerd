@@ -70,6 +70,62 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry.
+        /// </summary>
+        public static string HealtKitAuthorization_Error_Button {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Error_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong. 😢
+        ///
+        ///We&apos;ll try to take a look at it..
+        /// </summary>
+        public static string HealtKitAuthorization_Error_Message {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Error_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string HealtKitAuthorization_Error_Title {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Error_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string HealtKitAuthorization_Success_Button {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Success_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looks like you did it! 👏.
+        /// </summary>
+        public static string HealtKitAuthorization_Success_Message {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Success_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected.
+        /// </summary>
+        public static string HealtKitAuthorization_Success_Title {
+            get {
+                return ResourceManager.GetString("HealtKitAuthorization_Success_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grant HealthNerd Access.
         /// </summary>
         public static string MainPage_AuthorizeHealth_Button {
@@ -111,89 +167,6 @@ namespace Resources {
         public static string MainPage_FirstTimeSetup_Button {
             get {
                 return ResourceManager.GetString("MainPage_FirstTimeSetup_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 🤔.
-        /// </summary>
-        public static string MainPage_FirstTimeSetup_Icon {
-            get {
-                return ResourceManager.GetString("MainPage_FirstTimeSetup_Icon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Let&apos;s make sure the data comes out looking the way you want..
-        /// </summary>
-        public static string MainPage_FirstTimeSetup_Text {
-            get {
-                return ResourceManager.GetString("MainPage_FirstTimeSetup_Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to First Time Here?.
-        /// </summary>
-        public static string MainPage_FirstTimeSetup_Title {
-            get {
-                return ResourceManager.GetString("MainPage_FirstTimeSetup_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sorry.
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Error_Button {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Error_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Something went wrong. 😢
-        ///
-        ///We&apos;ll try to take a look at it..
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Error_Message {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Error_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Error_Title {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Error_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK.
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Success_Button {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Success_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Looks like you did it! 👏.
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Success_Message {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Success_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connected.
-        /// </summary>
-        public static string MainPage_HealtKitAuthorization_Success_Title {
-            get {
-                return ResourceManager.GetString("MainPage_HealtKitAuthorization_Success_Title", resourceCulture);
             }
         }
         
@@ -288,11 +261,119 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Artwork by Justin Muse (@JM_Designz).
+        ///   Looks up a localized string similar to You need to let HealthNerd read data out of Apple Health. HealthNerd will only be able to read the data you approve..
+        /// </summary>
+        public static string Onboarding_Auth_Body {
+            get {
+                return ResourceManager.GetString("Onboarding_Auth_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect Now.
+        /// </summary>
+        public static string Onboarding_Auth_Button {
+            get {
+                return ResourceManager.GetString("Onboarding_Auth_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect with Apple Health.
+        /// </summary>
+        public static string Onboarding_Auth_Title {
+            get {
+                return ResourceManager.GetString("Onboarding_Auth_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string Onboarding_Finish {
+            get {
+                return ResourceManager.GetString("Onboarding_Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re all set! Go ahead and continue being the nerd we both know you are..
+        /// </summary>
+        public static string Onboarding_Finish_Body {
+            get {
+                return ResourceManager.GetString("Onboarding_Finish_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish Setup.
+        /// </summary>
+        public static string Onboarding_Finish_Button {
+            get {
+                return ResourceManager.GetString("Onboarding_Finish_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Nerdy With It!.
+        /// </summary>
+        public static string Onboarding_Finish_Title {
+            get {
+                return ResourceManager.GetString("Onboarding_Finish_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Onboarding_Next {
+            get {
+                return ResourceManager.GetString("Onboarding_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Onboarding_Previous {
+            get {
+                return ResourceManager.GetString("Onboarding_Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re the type of person that likes data. Let&apos;s get you all set up..
+        /// </summary>
+        public static string Onboarding_Welcome_Body {
+            get {
+                return ResourceManager.GetString("Onboarding_Welcome_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to HealthNerd!.
+        /// </summary>
+        public static string Onboarding_Welcome_Title {
+            get {
+                return ResourceManager.GetString("Onboarding_Welcome_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artwork by Justin Muse.
         /// </summary>
         public static string Settings_About_ArtworkBy {
             get {
                 return ResourceManager.GetString("Settings_About_ArtworkBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @JM_Designz.
+        /// </summary>
+        public static string Settings_About_ArtworkBy_Detail {
+            get {
+                return ResourceManager.GetString("Settings_About_ArtworkBy_Detail", resourceCulture);
             }
         }
         
@@ -378,6 +459,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First Time Setup.
+        /// </summary>
+        public static string Settings_FirstTimeSetup {
+            get {
+                return ResourceManager.GetString("Settings_FirstTimeSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ❤️ Apple Health.
         /// </summary>
         public static string Settings_GettingStarted_AuthorizationStatusLabel {
@@ -446,6 +536,15 @@ namespace Resources {
         public static string Settings_MassUnit_Pounds {
             get {
                 return ResourceManager.GetString("Settings_MassUnit_Pounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string Settings_Section_About {
+            get {
+                return ResourceManager.GetString("Settings_Section_About", resourceCulture);
             }
         }
         
