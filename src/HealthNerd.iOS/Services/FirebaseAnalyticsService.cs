@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Firebase.Analytics;
 using Foundation;
+using HealthNerd.Services;
 
 namespace HealthNerd.iOS.Services
 {

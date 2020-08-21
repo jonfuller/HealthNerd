@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:HealthNerd.Controls;assembly=HealthNerd"
+             xmlns:utility="clr-namespace:HealthNerd.Utility;assembly=HealthNerd"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:resources="clr-namespace:Resources;assembly=Resources"
+             xmlns:viewModels="clr-namespace:HealthNerd.ViewModels;assembly=HealthNerd"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{StaticResource HealthNerdLogo_Blue}"
+             x:DataType="viewModels:OnboardingPageViewModel"
+             x:Class="HealthNerd.Pages.OnboardingPage">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="WelcomeTemplate">
+            <controls:OnboardingWelcome BindingContext="{Binding Welcome}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="AuthTemplate">
+            <controls:OnboardingAuth BindingContext="{Binding Auth}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SettingsTemplate">
+            <controls:OnboardingSettings BindingContext="{Binding Settings}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="FinishTemplate">
+            <controls:OnboardingFinish BindingContext="{Binding Finish}" />
+        </DataTemplate>
+
+        <utility:OnboardingTemplateSelector x:Key="OnboardingSelector"
+            WelcomeTemplate="{StaticResource WelcomeTemplate}"
+            AuthTemplate="{StaticResource AuthTemplate}"
+            SettingsTemplate="{StaticResource SettingsTemplate}"
+            FinishTemplate="{StaticResource FinishTemplate}" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
+                <Button Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Previous}"
+                        IsVisible="{Binding IsNotFirst}"
+                        Command="{Binding Previous}" />
+                <Button HorizontalOptions="EndAndExpand" Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Finish}"
+                        IsVisible="{Binding IsLast}"
+                        Command="{Binding Close}" />
+                <Button HorizontalOptions="EndAndExpand" Padding="15" TextColor="{StaticResource HealthNerdLogo_Yellow}"
+                        Text="{x:Static resources:AppRes.Onboarding_Next}"
+                        IsVisible="{Binding IsNotLast}"
+                        Command="{Binding Next}" />
+            </StackLayout>
+            <CarouselView Grid.Row="1" IndicatorView="indicatorView"
+                          Position="{Binding CarouselPosition}"
+                          ItemsSource="{Binding ViewModels}"
+                          ItemTemplate="{StaticResource OnboardingSelector}" />
+            <IndicatorView Grid.Row="2" x:Name="indicatorView"
+                           IndicatorColor="{StaticResource HealthNerdLogo_White}"
+                           SelectedIndicatorColor="{StaticResource HealthNerdLogo_Yellow}"
+                           HorizontalOptions="Center"
+                           IndicatorSize="8"
+                           Padding="15"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

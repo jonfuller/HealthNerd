@@ -141,7 +141,7 @@ We'll try to take a look at it.</value>
     <value>Connect Now</value>
   </data>
   <data name="Settings_IsAuthorizedButton_True" xml:space="preserve">
-    <value>✔️ Connected</value>
+    <value>✓ Connected</value>
   </data>
   <data name="Settings_LengthUnit_Meters" xml:space="preserve">
     <value>Meters</value>
@@ -311,5 +311,8 @@ We'll try to take a look at it.</value>
   </data>
   <data name="Onboarding_Settings_Title" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Settings_GettingStarted_ExportSettingsLabel" xml:space="preserve">
+    <value>🤓 Data Output Settings</value>
   </data>
 </root>

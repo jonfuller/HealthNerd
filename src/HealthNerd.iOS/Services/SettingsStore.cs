@@ -1,5 +1,6 @@
 ﻿using System;
-using HealthNerd.iOS.Utility;
+using HealthNerd.Services;
+using HealthNerd.Utility;
 using LanguageExt;
 using NodaTime;
 using NodaTime.Text;

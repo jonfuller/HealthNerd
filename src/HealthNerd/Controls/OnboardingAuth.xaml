@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:Resources;assembly=Resources"
+             xmlns:onboardingPages="clr-namespace:HealthNerd.ViewModels.OnboardingPages;assembly=HealthNerd"
+             x:DataType="onboardingPages:OnboardingAuthViewModel"
+             x:Class="HealthNerd.Controls.OnboardingAuth">
+  <ContentView.Content>
+      <Grid Margin="15">
+          <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="50*"></RowDefinition>
+              <RowDefinition Height="10*"></RowDefinition>
+              <RowDefinition Height="10*"></RowDefinition>
+              <RowDefinition Height="10*"></RowDefinition>
+          </Grid.RowDefinitions>
+          <Image Grid.Row="1" Source="connect_to_health.png" />
+          <Label Grid.Row="2" HorizontalOptions="CenterAndExpand"
+                 FontSize="Title" TextColor="{StaticResource HealthNerdLogo_White}"
+                 Text="{x:Static resources:AppRes.Onboarding_Auth_Title}" />
+          <Label Grid.Row="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                 TextColor="{StaticResource HealthNerdLogo_White}"
+                 Text="{x:Static resources:AppRes.Onboarding_Auth_Body}" />
+          <Button Grid.Row="4" TextColor="{StaticResource HealthNerdLogo_Yellow}" FontSize="Large"
+                 Text="{x:Static resources:AppRes.Onboarding_Auth_Button}"
+                 Command="{Binding AuthorizeHealthCommand}"/>
+      </Grid>
+  </ContentView.Content>
+</ContentView>

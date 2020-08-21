@@ -1,4 +1,6 @@
-﻿namespace HealthNerd.iOS.Services
+﻿using HealthNerd.Services;
+
+namespace HealthNerd.iOS.Services
 {
     public class AlertPresenter : IAlertPresenter
     {

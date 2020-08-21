@@ -80,83 +80,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Annotations.cs" />
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Controls\OnboardingAuth.xaml.cs">
-      <DependentUpon>OnboardingAuth.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OnboardingFinish.xaml.cs">
-      <DependentUpon>OnboardingFinish.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OnboardingSettings.xaml.cs">
-      <DependentUpon>OnboardingSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OnboardingWelcome.xaml.cs">
-      <DependentUpon>OnboardingWelcome.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PickerCell.cs" />
-    <Compile Include="Controls\PickerOption.cs" />
-    <Compile Include="Pages\ExportSettings.xaml.cs">
-      <DependentUpon>ExportSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OnboardingPage.xaml.cs">
-      <DependentUpon>OnboardingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\AuthorizeHealthCommand.cs" />
     <Compile Include="Services\FirebaseAnalyticsService.cs" />
-    <Compile Include="Services\IFirebaseAnalyticsService.cs" />
-    <Compile Include="TinyIoC.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\AlertPresenter.cs" />
     <Compile Include="Services\Authorizer.cs" />
-    <Compile Include="Services\IAlertPresenter.cs" />
-    <Compile Include="Services\IAuthorizer.cs" />
-    <Compile Include="Services\ISettingsStore.cs" />
+    <Compile Include="Services\HealthStore.cs" />
     <Compile Include="Services\PreferenceKeys.cs" />
     <Compile Include="Services\SettingsStore.cs" />
-    <Compile Include="Utility\AnalyticsEvents.cs" />
-    <Compile Include="Utility\Intervaled.cs" />
-    <Compile Include="Utility\LanguageExtExtensions.cs" />
-    <Compile Include="Utility\NodaTimeExtensions.cs" />
-    <Compile Include="Utility\Mvvm\IHaveMainPage.cs" />
-    <Compile Include="Utility\Mvvm\INavigationService.cs" />
-    <Compile Include="Utility\Mvvm\IViewLocator.cs" />
-    <Compile Include="Utility\Mvvm\IViewModelLifecycle.cs" />
-    <Compile Include="Utility\OnboardingTemplateSelector.cs" />
-    <Compile Include="Utility\PreferencesEx.cs" />
-    <Compile Include="Utility\SettingsDefaults.cs" />
-    <Compile Include="ViewModels\ExportSettingsViewModel.cs" />
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="Services\Output.cs" />
-    <Compile Include="Utility\Mvvm\NavigationService.cs" />
-    <Compile Include="Utility\Mvvm\PropertyChangedBase.cs" />
-    <Compile Include="Utility\Mvvm\ViewLocator.cs" />
-    <Compile Include="Utility\Mvvm\ViewModelBase.cs" />
-    <Compile Include="ViewModels\OnboardingPages\OnboardingAuthViewModel.cs" />
-    <Compile Include="ViewModels\OnboardingPages\OnboardingFinishViewModel.cs" />
-    <Compile Include="ViewModels\OnboardingPages\OnboardingSettingsViewModel.cs" />
-    <Compile Include="ViewModels\OnboardingPages\OnboardingViewModelBase.cs" />
-    <Compile Include="ViewModels\OnboardingPages\OnboardingWelcomeViewModel.cs" />
-    <Compile Include="ViewModels\OnboardingPageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <None Include="Entitlements.plist" />
     <BundleResource Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -240,7 +180,7 @@
       <Version>4.5.3.2</Version>
     </PackageReference>
     <PackageReference Include="HealthKitData.Core">
-      <Version>0.1.0</Version>
+      <Version>0.1.1</Version>
     </PackageReference>
     <PackageReference Include="HealthKitData.iOS">
       <Version>0.1.1</Version>
@@ -273,7 +213,7 @@
       <Version>3.14.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0">
       <ExcludeAssets>all</ExcludeAssets>
     </PackageReference>
@@ -283,64 +223,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\HealthNerd\HealthNerd.csproj">
+      <Project>{18C8DDD1-8628-47D0-8087-7CF28D111D47}</Project>
+      <Name>HealthNerd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{31de279d-4fcc-406d-8317-0463e359980a}</Project>
       <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\Settings.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\ExportSettings.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\healthnerd_transparent.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\OnboardingPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\OnboardingWelcome.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\OnboardingFinish.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\OnboardingAuth.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\connect_to_health.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\OnboardingSettings.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthNerdiOSHideInfoBar="True" />

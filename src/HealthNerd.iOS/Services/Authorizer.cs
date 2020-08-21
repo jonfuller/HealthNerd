@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Foundation;
 using HealthKit;
+using HealthNerd.Services;
 using LanguageExt;
 using LanguageExt.Common;
 

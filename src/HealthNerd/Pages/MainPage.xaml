@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:viewModels="clr-namespace:HealthNerd.iOS.ViewModels;assembly=HealthNerd.iOS"
+             xmlns:resources="clr-namespace:Resources;assembly=Resources"
+             mc:Ignorable="d"
+             Title="{x:Static resources:AppRes.MainPage_Title}"
+             x:DataType="viewModels:MainPageViewModel"
+             x:Class="HealthNerd.Pages.MainPage">
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type yummy:PancakeView}">
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource HealthNerdLogo_Heart}" />
+            <Setter Property="Padding"
+                    Value="10" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{x:Static resources:AppRes.MainPage_ToolbarItem_Settings}" Command="{Binding GoToSettings}"/>
+    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" HorizontalOptions="Center">
+            <Image Source="healthnerd_transparent.png" Margin="5"/>
+            <Label FontSize="24" FontAttributes="Bold" TextColor="{x:StaticResource HealthNerdLogo_Yellow}" VerticalTextAlignment="Center" Text="{x:Static resources:AppRes.MainPage_Title}"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Margin="10">
+        <yummy:PancakeView IsVisible="{Binding NeedsHealthAuthorization}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
+                    <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Icon}" />
+                </StackLayout>
+                <Label Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Text}" 
+                       VerticalOptions="CenterAndExpand"  FontSize="Body"/>
+                <Button Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Button}" Command="{Binding AuthorizeHealthCommand}"/>
+            </StackLayout>
+        </yummy:PancakeView>
+        <yummy:PancakeView>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_NerdOut_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
+                    <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_NerdOut_Icon}" />
+                </StackLayout>
+                <Button Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}" />
+                <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
+                <Label HorizontalOptions="Center" Text="{Binding OperationStatus}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Caption"/>
+            </StackLayout>
+        </yummy:PancakeView>
+    </StackLayout>
+</ContentPage>

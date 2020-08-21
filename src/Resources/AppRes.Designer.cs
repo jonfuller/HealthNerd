@@ -486,6 +486,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🤓 Data Output Settings.
+        /// </summary>
+        public static string Settings_GettingStarted_ExportSettingsLabel {
+            get {
+                return ResourceManager.GetString("Settings_GettingStarted_ExportSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 📅 Use Data Since.
         /// </summary>
         public static string Settings_GettingStarted_FetchSinceDateLabel {
@@ -504,7 +513,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ✔️ Connected.
+        ///   Looks up a localized string similar to ✓ Connected.
         /// </summary>
         public static string Settings_IsAuthorizedButton_True {
             get {
