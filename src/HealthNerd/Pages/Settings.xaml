@@ -14,19 +14,19 @@
         <TableRoot>
             <TableSection Title="{x:Static resources:AppRes.Settings_Section_GettingStarted}">
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20,0">
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
                         <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_AuthorizationStatusLabel}" />
                         <Button VerticalOptions="Center" Text="{Binding HealthAuthorizationStatusText}" HorizontalOptions="EndAndExpand" Command="{Binding AuthorizeHealthCommand}" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20,0">
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
                         <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_FetchSinceDateLabel}" />
                         <DatePicker VerticalOptions="Center" Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" ios:DatePicker.UpdateMode="WhenFinished" />
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20,0">
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding GoToExportSettings}" />
@@ -38,7 +38,7 @@
             </TableSection>
             <TableSection Title="{x:Static resources:AppRes.Settings_Section_About}">
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="20,0">
+                    <StackLayout Orientation="Horizontal" Padding="16,0">
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding GoToOnboarding}" />

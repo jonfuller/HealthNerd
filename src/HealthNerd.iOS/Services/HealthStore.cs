@@ -4,7 +4,6 @@ using HealthKit;
 using HealthKitData.Core;
 using HealthKitData.iOS;
 using HealthNerd.Services;
-using HealthNerd.ViewModels;
 using NodaTime;
 
 namespace HealthNerd.iOS.Services
