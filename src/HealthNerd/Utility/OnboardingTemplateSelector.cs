@@ -8,6 +8,7 @@ namespace HealthNerd.Utility
     {
         public DataTemplate WelcomeTemplate { get; set; }
         public DataTemplate AuthTemplate { get; set; }
+        public DataTemplate WhatTemplate { get; set; }
         public DataTemplate SettingsTemplate { get; set; }
         public DataTemplate FinishTemplate { get; set; }
 
@@ -17,6 +18,7 @@ namespace HealthNerd.Utility
             {
                 OnboardingWelcomeViewModel v => WelcomeTemplate,
                 OnboardingAuthViewModel v => AuthTemplate,
+                OnboardingWhatViewModel v => WhatTemplate,
                 OnboardingSettingsViewModel v => SettingsTemplate,
                 OnboardingFinishViewModel v => FinishTemplate,
                 _ =>

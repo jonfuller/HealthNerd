@@ -369,6 +369,26 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze your Health data your way.
+        ///
+        ///Convert your workout data, body measurements and more into a spreadsheet so you can nerd out to your ❤️&apos;s content..
+        /// </summary>
+        public static string Onboarding_What_Body {
+            get {
+                return ResourceManager.GetString("Onboarding_What_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Health-y Spreadsheet.
+        /// </summary>
+        public static string Onboarding_What_Title {
+            get {
+                return ResourceManager.GetString("Onboarding_What_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artwork by Justin Muse.
         /// </summary>
         public static string Settings_About_ArtworkBy {

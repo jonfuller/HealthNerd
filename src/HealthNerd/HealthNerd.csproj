@@ -24,4 +24,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\OnboardingWhat.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

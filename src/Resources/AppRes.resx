@@ -315,4 +315,12 @@ We'll try to take a look at it.</value>
   <data name="Settings_GettingStarted_ExportSettingsLabel" xml:space="preserve">
     <value>🤓 Data Output Settings</value>
   </data>
+  <data name="Onboarding_What_Body" xml:space="preserve">
+    <value>Analyze your Health data your way.
+
+Convert your workout data, body measurements and more into a spreadsheet so you can nerd out to your ❤️'s content.</value>
+  </data>
+  <data name="Onboarding_What_Title" xml:space="preserve">
+    <value>A Health-y Spreadsheet</value>
+  </data>
 </root>

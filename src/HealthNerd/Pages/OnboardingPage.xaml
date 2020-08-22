@@ -15,6 +15,10 @@
             <controls:OnboardingWelcome BindingContext="{Binding Welcome}" />
         </DataTemplate>
 
+        <DataTemplate x:Key="WhatTemplate">
+            <controls:OnboardingWhat BindingContext="{Binding WhatIsIt}" />
+        </DataTemplate>
+
         <DataTemplate x:Key="AuthTemplate">
             <controls:OnboardingAuth BindingContext="{Binding Auth}" />
         </DataTemplate>
@@ -30,6 +34,7 @@
         <utility:OnboardingTemplateSelector x:Key="OnboardingSelector"
             WelcomeTemplate="{StaticResource WelcomeTemplate}"
             AuthTemplate="{StaticResource AuthTemplate}"
+            WhatTemplate="{StaticResource WhatTemplate}"
             SettingsTemplate="{StaticResource SettingsTemplate}"
             FinishTemplate="{StaticResource FinishTemplate}" />
     </ContentPage.Resources>

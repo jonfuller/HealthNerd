@@ -11,6 +11,7 @@ namespace HealthNerd.ViewModels
 
         public OnboardingWelcomeViewModel Welcome { get; }
         public OnboardingAuthViewModel Auth { get; }
+        public OnboardingWhatViewModel WhatIsIt { get; }
         public OnboardingSettingsViewModel Settings { get; }
         public OnboardingFinishViewModel Finish { get; }
 
@@ -32,6 +33,7 @@ namespace HealthNerd.ViewModels
                 OnPropertyChanged(nameof(IsNotLast));
             }
         }
+
         public bool IsLast => CarouselPosition + 1 == ViewModels.Count;
         public bool IsNotLast => !IsLast;
         public bool IsNotFirst => CarouselPosition != 0;
@@ -39,14 +41,16 @@ namespace HealthNerd.ViewModels
         public OnboardingPageViewModel(INavigationService nav,
             OnboardingWelcomeViewModel welcomeVm,
             OnboardingAuthViewModel authVm,
+            OnboardingWhatViewModel whatVm,
             OnboardingSettingsViewModel settingsVm,
             OnboardingFinishViewModel finish)
         {
             ViewModels = new List<OnboardingViewModelBase>
             {
                 (Welcome = welcomeVm),
+                (WhatIsIt = whatVm),
                 (Auth = authVm),
-                (Settings = settingsVm),
+                //(Settings = settingsVm),
                 (Finish = finish),
             };
 
