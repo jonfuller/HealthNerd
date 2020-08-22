@@ -73,7 +73,7 @@
     <CodesignProvision>HealthNerd Distribution</CodesignProvision>
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchLink>Full</MtouchLink>
-    <MtouchExtraArgs>--linkskip=Microsoft.ApplicationInsights --linkskip=HealthNerd.iOS</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.ApplicationInsights --linkskip=HealthNerd.iOS --linkskip=HealthNerd</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
