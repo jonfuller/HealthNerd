@@ -54,7 +54,7 @@ namespace HealthNerd.ViewModels
                 (Finish = finish),
             };
 
-            Close = new Command(() => nav.PresentAsNavigatableMainPage<MainPageViewModel>());
+            Close = new Command(() => nav.PresentAsMainPage<MainPageViewModel>());
             Next = new Command(() => CarouselPosition++);
             Previous = new Command(() => CarouselPosition--);
         }

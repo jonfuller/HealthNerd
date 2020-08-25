@@ -225,7 +225,7 @@ We'll try to take a look at it.</value>
     <value>Data Nerdery Setup 🗃️</value>
   </data>
   <data name="MainPage_NerdOut_Button" xml:space="preserve">
-    <value>Nerd My Data</value>
+    <value>Export to Spreadsheet</value>
   </data>
   <data name="MainPage_NerdOut_Icon" xml:space="preserve">
     <value>🤓</value>

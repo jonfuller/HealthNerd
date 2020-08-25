@@ -22,7 +22,7 @@ namespace HealthNerd
             }
             else
             {
-                navService.PresentAsNavigatableMainPage<MainPageViewModel>();
+                navService.PresentAsMainPage<MainPageViewModel>();
             }
         }
 

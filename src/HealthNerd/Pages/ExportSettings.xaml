@@ -3,33 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
              xmlns:controls="clr-namespace:HealthNerd.Controls;assembly=HealthNerd"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:unitsNet="clr-namespace:UnitsNet.Units;assembly=UnitsNet"
              xmlns:viewModels="clr-namespace:HealthNerd.ViewModels;assembly=HealthNerd"
-             Title="{x:Static resources:AppRes.ExportSettings_Title}"
+             ios:Page.ModalPresentationStyle="PageSheet"
              x:DataType="viewModels:ExportSettingsViewModel"
              x:Class="HealthNerd.Pages.ExportSettings">
-    <TableView Intent="Settings">
-        <TableRoot>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_UnitsOfMeasure}">
-                <controls:PickerCell x:TypeArguments="unitsNet:LengthUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DistanceUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding DistanceUnits}" SelectedValue="{Binding DistanceUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:MassUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_MassUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding MassUnits}" SelectedValue="{Binding MassUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:EnergyUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_EnergyUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding EnergyUnits}" SelectedValue="{Binding EnergyUnit}" />
-                <controls:PickerCell x:TypeArguments="unitsNet:DurationUnit"
-                    Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DurationUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
-                    ItemsSource="{Binding DurationUnits}" SelectedValue="{Binding DurationUnit}" />
-            </TableSection>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_ExcelExportSettings}">
-                <EntryCell Label="{x:Static resources:AppRes.Settings_ExcelExport_NumMonthlySummaries}" Text="{Binding NumberMonthlySummaries}" Keyboard="Numeric" />
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptySheets}" On="{Binding OmitEmptySheets}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnOverall}" On="{Binding OmitEmptyColumnsOnOverallSummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
-                <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}" />
-            </TableSection>
-        </TableRoot>
-    </TableView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource HealthNerdLogo_Blue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="25" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0"
+                    Text="✖️" 
+                    Command="{Binding Dismiss}" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   VerticalOptions="Center"
+                   Padding="0"
+                   Margin="0"
+                   HorizontalOptions="Center"
+                   FontSize="Title"  TextColor="{StaticResource HealthNerdLogo_White}" 
+                   Text="{x:Static resources:AppRes.ExportSettings_Title}" />
+        </Grid>
+        <TableView Margin="0,-7,0,0" Intent="Settings" Grid.Row="1" Grid.Column="0">
+            <TableRoot>
+                <TableSection Title="{x:Static resources:AppRes.Settings_Section_UnitsOfMeasure}">
+                    <controls:PickerCell x:TypeArguments="unitsNet:LengthUnit"
+                        Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DistanceUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
+                        ItemsSource="{Binding DistanceUnits}" SelectedValue="{Binding DistanceUnit}" />
+                    <controls:PickerCell x:TypeArguments="unitsNet:MassUnit"
+                        Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_MassUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
+                        ItemsSource="{Binding MassUnits}" SelectedValue="{Binding MassUnit}" />
+                    <controls:PickerCell x:TypeArguments="unitsNet:EnergyUnit"
+                        Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_EnergyUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
+                        ItemsSource="{Binding EnergyUnits}" SelectedValue="{Binding EnergyUnit}" />
+                    <controls:PickerCell x:TypeArguments="unitsNet:DurationUnit"
+                        Label="{x:Static resources:AppRes.Settings_UnitsOfMeasure_DurationUnit}" Title="{x:Static resources:AppRes.Settings_UnitsOfMeasure_NotSet}"
+                        ItemsSource="{Binding DurationUnits}" SelectedValue="{Binding DurationUnit}" />
+                </TableSection>
+                <TableSection Title="{x:Static resources:AppRes.Settings_Section_ExcelExportSettings}">
+                    <EntryCell Label="{x:Static resources:AppRes.Settings_ExcelExport_NumMonthlySummaries}" Text="{Binding NumberMonthlySummaries}" Keyboard="Numeric" />
+                    <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptySheets}" On="{Binding OmitEmptySheets}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
+                    <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnOverall}" On="{Binding OmitEmptyColumnsOnOverallSummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
+                    <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </Grid>
 </ContentPage>

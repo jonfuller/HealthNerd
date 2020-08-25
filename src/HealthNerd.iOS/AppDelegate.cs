@@ -34,10 +34,10 @@ namespace HealthNerd.iOS
             Forms.SetFlags("CarouselView_Experimental", "IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             VersionTracking.Track();
-
-            LoadApplication(new App(TinyIoCContainer.Current, ConfigureContainer));
             Firebase.Core.App.Configure();
             Crashlytics.Configure();
+
+            LoadApplication(new App(TinyIoCContainer.Current, ConfigureContainer));
 
             return base.FinishedLaunching(app, options);
         }

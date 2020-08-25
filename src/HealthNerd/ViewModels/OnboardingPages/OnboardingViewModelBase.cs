@@ -7,7 +7,7 @@ namespace HealthNerd.ViewModels.OnboardingPages
     {
         public OnboardingViewModelBase(INavigationService nav)
         {
-            Close = new Command(() => nav.PresentAsNavigatableMainPage<MainPageViewModel>());
+            Close = new Command(() => nav.PresentAsMainPage<MainPageViewModel>());
         }
 
         public Command Close { get; }

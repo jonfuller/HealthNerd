@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:HealthNerd.ViewModels;assembly=HealthNerd"
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
              mc:Ignorable="d"
+             BackgroundColor="{StaticResource HealthNerdLogo_Heart}"
              Title="{x:Static resources:AppRes.MainPage_Title}"
              x:DataType="viewModels:MainPageViewModel"
              x:Class="HealthNerd.Pages.MainPage">
@@ -21,36 +23,25 @@
                     Value="false" />
         </Style>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resources:AppRes.MainPage_ToolbarItem_Settings}" Command="{Binding GoToSettings}"/>
-    </ContentPage.ToolbarItems>
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" HorizontalOptions="Center">
-            <Image Source="healthnerd_transparent.png" Margin="5"/>
-            <Label FontSize="24" FontAttributes="Bold" TextColor="{x:StaticResource HealthNerdLogo_Yellow}" VerticalTextAlignment="Center" Text="{x:Static resources:AppRes.MainPage_Title}"></Label>
-        </StackLayout>
-    </NavigationPage.TitleView>
-    <StackLayout Margin="10">
-        <Frame IsVisible="{Binding NeedsHealthAuthorization}">
+    <StackLayout Margin="10,25,10,5">
+        <Frame BackgroundColor="{StaticResource HealthNerdLogo_Blue}" IsVisible="{Binding NeedsHealthAuthorization}">
             <StackLayout >
-                <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
-                    <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Icon}" />
-                </StackLayout>
                 <Label Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Text}" 
-                       VerticalOptions="CenterAndExpand"  FontSize="Body"/>
+                       VerticalOptions="CenterAndExpand"  FontSize="Body" TextColor="{StaticResource HealthNerdLogo_White}"/>
                 <Button Text="{x:Static resources:AppRes.MainPage_AuthorizeHealth_Button}" Command="{Binding AuthorizeHealthCommand}"/>
             </StackLayout>
         </Frame>
-        <Frame>
+        <Frame VerticalOptions="CenterAndExpand">
             <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="{x:Static resources:AppRes.MainPage_NerdOut_Title}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Header"/>
-                    <Label HorizontalOptions="End" Text="{x:Static resources:AppRes.MainPage_NerdOut_Icon}" />
-                </StackLayout>
-                <Button Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}" />
+                <Image Source="convert.png" Scale="0.7" />
+                <Button FontSize="Title" Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}" />
                 <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
                 <Label HorizontalOptions="Center" Text="{Binding OperationStatus}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Caption"/>
+            </StackLayout>
+        </Frame>
+        <Frame VerticalOptions="EndAndExpand" Padding="0">
+            <StackLayout Orientation="Horizontal">
+                <Button Text="{x:Static resources:AppRes.MainPage_ToolbarItem_Settings}" Command="{Binding GoToSettings}" />
             </StackLayout>
         </Frame>
     </StackLayout>

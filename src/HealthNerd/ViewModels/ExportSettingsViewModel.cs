@@ -5,6 +5,7 @@ using HealthNerd.Utility;
 using HealthNerd.Utility.Mvvm;
 using Resources;
 using UnitsNet.Units;
+using Xamarin.Forms;
 
 namespace HealthNerd.ViewModels
 {
@@ -13,11 +14,12 @@ namespace HealthNerd.ViewModels
         private readonly ISettingsStore _settings;
         private readonly IFirebaseAnalyticsService _analytics;
 
-        public ExportSettingsViewModel(ISettingsStore settings, IFirebaseAnalyticsService analytics)
+        public ExportSettingsViewModel(ISettingsStore settings, IFirebaseAnalyticsService analytics, INavigationService nav)
         {
             _settings = settings;
             _analytics = analytics;
 
+            Dismiss = new Command(() => nav.DismissModal());
             DistanceUnits = new List<PickerOption<LengthUnit>>
             {
                 new PickerOption<LengthUnit> {DisplayValue = AppRes.Settings_LengthUnit_Meters, Value = LengthUnit.Meter},
@@ -39,6 +41,8 @@ namespace HealthNerd.ViewModels
                 new PickerOption<DurationUnit> {DisplayValue = AppRes.Settings_DurationUnit_Hours, Value = DurationUnit.Hour},
             };
         }
+
+        public Command Dismiss { get; }
 
         public List<PickerOption<LengthUnit>> DistanceUnits { get; }
         public List<PickerOption<MassUnit>> MassUnits { get; }

@@ -23,7 +23,8 @@ namespace HealthNerd.ViewModels
             AuthorizeHealthCommand = commander.GetCommand(() =>
                 OnPropertyChanged(nameof(HealthAuthorizationStatusText)));
 
-            GoToExportSettings = new Command(() => nav.NavigateTo<ExportSettingsViewModel>());
+            Dismiss = new Command(() => nav.DismissModal());
+            GoToExportSettings = new Command(() => nav.Modal<ExportSettingsViewModel>());
             GoToOnboarding = new Command(() => nav.PresentAsMainPage<OnboardingPageViewModel>());
             GoToSEP = new Command(async () => await Browser.OpenAsync("https://www.sep.com", BrowserLaunchMode.SystemPreferred));
             GoToJmDesignz = new Command(async () => await Browser.OpenAsync("https://twitter.com/jm_designz", BrowserLaunchMode.SystemPreferred));
@@ -33,6 +34,7 @@ namespace HealthNerd.ViewModels
             ? AppRes.Settings_IsAuthorizedButton_True
             : AppRes.Settings_IsAuthorizedButton_False;
 
+        public Command Dismiss { get; }
         public Command AuthorizeHealthCommand { get; }
         public Command GoToExportSettings { get; }
         public Command GoToOnboarding { get; }
@@ -54,5 +56,6 @@ namespace HealthNerd.ViewModels
                 OnPropertyChanged();
             }
         }
+
     }
 }

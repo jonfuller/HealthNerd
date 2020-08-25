@@ -171,7 +171,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nerd My Data.
+        ///   Looks up a localized string similar to Export to Spreadsheet.
         /// </summary>
         public static string MainPage_NerdOut_Button {
             get {

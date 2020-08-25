@@ -26,6 +26,26 @@ namespace HealthNerd.Utility.Mvvm
             await NavigateTo(_container.Resolve<TViewModel>(GetOverloads(resolveOverrides)));
         }
 
+        public async Task Modal<TViewModel>(params (string name, object arg)[] resolveOverrides) where TViewModel : ViewModelBase
+        {
+            await Modal(_container.Resolve<TViewModel>(GetOverloads(resolveOverrides)));
+        }
+
+        public async Task DismissModal()
+        {
+            await Navigator.PopModalAsync(animated: true);
+        }
+
+        public async Task Modal(ViewModelBase viewModel)
+        {
+            var page = _viewLocator.CreateAndBindPageFor(viewModel);
+
+            await viewModel.BeforeAppearing();
+            await viewModel.BeforeFirstShown();
+
+            await Navigator.PushModalAsync(page, animated: true);
+        }
+
         public async Task NavigateTo(ViewModelBase viewModel)
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);

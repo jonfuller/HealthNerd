@@ -16,7 +16,7 @@
             <Image Grid.Row="1" Source="convert.png" />
             <Label Grid.Row="2" HorizontalOptions="CenterAndExpand"
                  FontSize="Title" TextColor="{StaticResource HealthNerdLogo_White}"
-                 Text="A Health-y Spreadsheet" />
+                 Text="{x:Static resources:AppRes.Onboarding_What_Title}" />
             <Label Grid.Row="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
                  TextColor="{StaticResource HealthNerdLogo_White}"
                  Text="{x:Static resources:AppRes.Onboarding_What_Body}" />

@@ -7,53 +7,83 @@
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
              xmlns:viewModels="clr-namespace:HealthNerd.ViewModels;assembly=HealthNerd"
              mc:Ignorable="d"
-             Title="{x:Static resources:AppRes.Settings_Title}"
+             ios:Page.ModalPresentationStyle="PageSheet"
              x:DataType="viewModels:SettingsViewModel"
              x:Class="HealthNerd.Pages.Settings">
-    <TableView Intent="Settings">
-        <TableRoot>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_GettingStarted}">
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="16,0">
-                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_AuthorizationStatusLabel}" />
-                        <Button VerticalOptions="Center" Text="{Binding HealthAuthorizationStatusText}" HorizontalOptions="EndAndExpand" Command="{Binding AuthorizeHealthCommand}" />
-                    </StackLayout>
-                </ViewCell>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="16,0">
-                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_FetchSinceDateLabel}" />
-                        <DatePicker VerticalOptions="Center" Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" ios:DatePicker.UpdateMode="WhenFinished" />
-                    </StackLayout>
-                </ViewCell>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="16,0">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource HealthNerdLogo_Blue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="25" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0"
+                    Text="✖️"
+                    Command="{Binding Dismiss}" />
+            <Label Grid.Row="0" Grid.Column="1"
+                   VerticalOptions="Center"
+                   Padding="0"
+                   Margin="0"
+                   HorizontalOptions="Center"
+                   FontSize="Title"  TextColor="{StaticResource HealthNerdLogo_White}" 
+                   Text="{x:Static resources:AppRes.Settings_Title}" />
+        </Grid>
+        <TableView Margin="0,-7,0,0" Intent="Settings" Grid.Row="1" Grid.Column="0">
+            <TableRoot>
+                <TableSection Title="{x:Static resources:AppRes.Settings_Section_GettingStarted}">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,0">
+                            <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_AuthorizationStatusLabel}" />
+                            <Button VerticalOptions="Center" Text="{Binding HealthAuthorizationStatusText}" HorizontalOptions="EndAndExpand" Command="{Binding AuthorizeHealthCommand}"
+                                    TextColor="{StaticResource HealthNerdLogo_Blue}"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,0">
+                            <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_FetchSinceDateLabel}" />
+                            <DatePicker VerticalOptions="Center" Date="{Binding EarliestFetchDate}" HorizontalOptions="EndAndExpand" ios:DatePicker.UpdateMode="WhenFinished" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
                                 Command="{Binding GoToExportSettings}" />
-                        </StackLayout.GestureRecognizers>
-                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_ExportSettingsLabel}" />
-                        <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
-                    </StackLayout>
-                </ViewCell>
-            </TableSection>
-            <TableSection Title="{x:Static resources:AppRes.Settings_Section_About}">
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="16,0">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer
+                            </StackLayout.GestureRecognizers>
+                            <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_GettingStarted_ExportSettingsLabel}" />
+                            <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="{x:Static resources:AppRes.Settings_Section_About}">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
                                 Command="{Binding GoToOnboarding}" />
-                        </StackLayout.GestureRecognizers>
-                        <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_FirstTimeSetup}" />
-                        <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
-                    </StackLayout>
-                </ViewCell>
-                <TextCell TextColor="{StaticResource NormalTextColor}"
-                    Command="{Binding GoToSEP}"
-                    Text="{x:Static resources:AppRes.Settings_About_MadeBy}" />
-                <TextCell TextColor="{StaticResource NormalTextColor}"
-                    Command="{Binding GoToJmDesignz}"
-                    Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}" Detail="{x:Static resources:AppRes.Settings_About_ArtworkBy_Detail}"/>
-            </TableSection>
-        </TableRoot>
-    </TableView>
+                            </StackLayout.GestureRecognizers>
+                            <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_FirstTimeSetup}" />
+                            <Label VerticalOptions="Center" Text="›" HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
+                    <TextCell TextColor="{StaticResource NormalTextColor}"
+                        Command="{Binding GoToSEP}"
+                        Text="{x:Static resources:AppRes.Settings_About_MadeBy}" />
+                    <TextCell TextColor="{StaticResource NormalTextColor}"
+                        Command="{Binding GoToJmDesignz}"
+                        Text="{x:Static resources:AppRes.Settings_About_ArtworkBy}" Detail="{x:Static resources:AppRes.Settings_About_ArtworkBy_Detail}"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </Grid>
 </ContentPage>

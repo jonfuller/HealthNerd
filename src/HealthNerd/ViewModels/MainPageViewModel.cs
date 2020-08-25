@@ -32,7 +32,7 @@ namespace HealthNerd.ViewModels
                 QueryHealthCommand.ChangeCanExecute();
             });
 
-            GoToSettings = new Command(() => nav.NavigateTo<SettingsViewModel>());
+            GoToSettings = new Command(async () => await nav.Modal<SettingsViewModel>());
 
             QueryHealthCommand = new Command(async () =>
                 {
