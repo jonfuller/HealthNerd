@@ -11,19 +11,20 @@
               <RowDefinition Height="Auto"></RowDefinition>
               <RowDefinition Height="50*"></RowDefinition>
               <RowDefinition Height="10*"></RowDefinition>
-              <RowDefinition Height="10*"></RowDefinition>
-              <RowDefinition Height="10*"></RowDefinition>
+              <RowDefinition Height="20*"></RowDefinition>
           </Grid.RowDefinitions>
           <Image Grid.Row="1" Source="connect_to_health.png" />
           <Label Grid.Row="2" HorizontalOptions="CenterAndExpand"
                  FontSize="Title" TextColor="{StaticResource HealthNerdLogo_White}"
                  Text="{x:Static resources:AppRes.Onboarding_Auth_Title}" />
-          <Label Grid.Row="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
-                 TextColor="{StaticResource HealthNerdLogo_White}"
-                 Text="{x:Static resources:AppRes.Onboarding_Auth_Body}" />
-          <Button Grid.Row="4" TextColor="{StaticResource HealthNerdLogo_Yellow}" FontSize="Large"
-                 Text="{x:Static resources:AppRes.Onboarding_Auth_Button}"
-                 Command="{Binding AuthorizeHealthCommand}"/>
+          <StackLayout Grid.Row="3">
+              <Label HorizontalTextAlignment="Center"
+                     TextColor="{StaticResource HealthNerdLogo_White}"
+                     Text="{x:Static resources:AppRes.Onboarding_Auth_Body}" />
+              <Button TextColor="{StaticResource HealthNerdLogo_Yellow}" FontSize="Large"
+                      Text="{x:Static resources:AppRes.Onboarding_Auth_Button}"
+                      Command="{Binding AuthorizeHealthCommand}"/>
+          </StackLayout>
       </Grid>
   </ContentView.Content>
 </ContentView>
