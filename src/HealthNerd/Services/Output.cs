@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
@@ -7,10 +6,7 @@ using HealthKitData.Core;
 using HealthKitData.Core.Excel;
 using HealthKitData.Core.Excel.Settings;
 using HealthNerd.Utility;
-using NodaTime;
-using NodaTime.Extensions;
 using OfficeOpenXml;
-using Xamarin.Essentials;
 
 namespace HealthNerd.Services
 {
@@ -18,9 +14,9 @@ namespace HealthNerd.Services
     {
         private static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IClock clock)
+        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IFileCreator fileCreator)
         {
-            var file = GetFileName(clock);
+            var file = fileCreator.GetFileName();
 
             WriteExcelReport(file, records, workouts, GetSettings(settings));
 
@@ -34,11 +30,6 @@ namespace HealthNerd.Services
 
                 excelFile.SaveAs(file);
             }
-
-            static FileInfo GetFileName(IClock clock) =>
-                new FileInfo(Path.Combine(
-                    FileSystem.CacheDirectory,
-                    $"HealthNerd-{clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture)}.xlsx"));
 
             static Settings GetSettings(ISettingsStore settings)
             {

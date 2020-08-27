@@ -22,7 +22,7 @@ namespace HealthNerd.ViewModels
         private bool _isQueryingHealth;
         private string _operationStatus;
 
-        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics, IHealthStore healthStore)
+        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics, IHealthStore healthStore, IFileCreator fileCreator)
         {
             _settings = settings;
 
@@ -53,7 +53,7 @@ namespace HealthNerd.ViewModels
 
                         OperationStatus = AppRes.MainPage_Status_SavingFile;
                         logOperation.Verbose("Creating output report");
-                        var excelReport = Output.CreateExcelReport(records, workouts, _settings, clock);
+                        var excelReport = Output.CreateExcelReport(records, workouts, _settings, fileCreator);
 
                         OperationStatus = AppRes.MainPage_Status_SharingFile;
                         logOperation.Verbose("Sharing file {File}", excelReport);
