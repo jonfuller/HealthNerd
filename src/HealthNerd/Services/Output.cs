@@ -12,11 +12,11 @@ namespace HealthNerd.Services
 {
     public static class Output
     {
-        private static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        public static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IFileCreator fileCreator)
+        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IFileManager fileManager)
         {
-            var file = fileCreator.GetFileName();
+            var file = fileManager.GetNewFileName();
 
             WriteExcelReport(file, records, workouts, GetSettings(settings));
 

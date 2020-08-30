@@ -84,7 +84,6 @@
     <Compile Include="Services\FirebaseAnalyticsService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Services\AlertPresenter.cs" />
     <Compile Include="Services\Authorizer.cs" />
     <Compile Include="Services\HealthStore.cs" />
     <Compile Include="Services\PreferenceKeys.cs" />

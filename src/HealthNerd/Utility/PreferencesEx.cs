@@ -27,15 +27,18 @@ namespace HealthNerd.Utility
             return ToOpt(Preferences.Get(key, (string) null));
         }
 
+        private static readonly LocalDatePattern LocalDatePattern = LocalDatePattern.Iso;
+
         public static Option<LocalDate> GetLocalDate(string key)
         {
-            return OptionExtensions.Flatten(GetString(key)
-                   .Select(value => LocalDatePattern.Iso.Parse(value).ToOption()));
+            return GetString(key)
+               .Select(value => LocalDatePattern.Parse(value).ToOption())
+               .Flatten();
         }
 
         public static void SetLocalDate(string key, LocalDate date)
         {
-            Preferences.Set(key, LocalDatePattern.Iso.Format(date));
+            Preferences.Set(key, LocalDatePattern.Format(date));
         }
 
         static Option<T> ToOpt<T>(T target)

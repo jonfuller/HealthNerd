@@ -56,10 +56,10 @@ namespace HealthNerd.iOS
 
             container.Register(Log.Logger);
             container.Register<IAuthorizer, Authorizer>();
-            container.Register<IAlertPresenter, AlertPresenter>();
+            container.Register<HealthNerd.Services.IActionPresenter, ActionPresenter>();
             container.Register<IClock>(SystemClock.Instance);
-            container.Register<IFileCreator, ClockBasedFileCreator>(
-                new ClockBasedFileCreator(container.Resolve<IClock>(), FileSystem.CacheDirectory));
+            container.Register<IFileManager, FileManager>(
+                new FileManager(container.Resolve<IClock>(), FileSystem.CacheDirectory));
             container.Register<ISettingsStore, SettingsStore>();
             container.Register<IFirebaseAnalyticsService, FirebaseAnalyticsService>();
             container.Register<AuthorizeHealthCommand>();
