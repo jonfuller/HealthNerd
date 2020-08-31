@@ -26,7 +26,7 @@ namespace HealthNerd.ViewModels
         private bool _isQueryingHealth;
         private string _operationStatus;
 
-        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics, IHealthStore healthStore, IFileManager fileManager, IActionPresenter actionPresenter)
+        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics, IHealthStore healthStore, IFileManager fileManager, IActionPresenter actionPresenter, IShare share)
         {
             var latestEligibleTime = clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().Minus(Period.FromMinutes(5));
 
@@ -77,7 +77,7 @@ namespace HealthNerd.ViewModels
                     {
                         logger.Verbose("Sharing file {File}", file);
                         OperationStatus = AppRes.MainPage_Status_SharingFile;
-                        await Share.RequestAsync(new ShareFileRequest
+                        await share.RequestAsync(new ShareFileRequest
                         {
                             File = new ShareFile(file.FullName, contentType.Name)
                         });
@@ -128,7 +128,7 @@ namespace HealthNerd.ViewModels
 
             OperationStatus = AppRes.MainPage_Status_SavingFile;
             logger.Verbose("Creating output report");
-            return  Output.CreateExcelReport(records, workouts, _settings, fileManager);
+            return Output.CreateExcelReport(records, workouts, _settings, fileManager);
 
             async Task<(Workout[] workouts, Record[] records)> QueryHealth(DateInterval dateRange)
             {
