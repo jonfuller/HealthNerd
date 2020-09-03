@@ -1,4 +1,6 @@
-﻿using Firebase.Crashlytics;
+﻿using System;
+using System.Threading.Tasks;
+using Firebase.Crashlytics;
 using Foundation;
 using HealthKit;
 using HealthNerd.iOS.Services;
@@ -6,6 +8,8 @@ using HealthNerd.Services;
 using HealthNerd.Utility.Mvvm;
 using HealthNerd.ViewModels;
 using HealthNerd.ViewModels.OnboardingPages;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
 using NodaTime;
 using Serilog;
 using Serilog.Events;
@@ -44,24 +48,32 @@ namespace HealthNerd.iOS
 
         private static void ConfigureContainer(TinyIoCContainer container, IHaveMainPage mainApp)
         {
+            var appInsights = new TelemetryClient(new TelemetryConfiguration("97e6fd64-c506-4830-9530-fbe9a7274326"));
+
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Debug()
                .WriteTo.NSLog()
                .WriteTo.ApplicationInsights(
-                    instrumentationKey: "97e6fd64-c506-4830-9530-fbe9a7274326",
+                    appInsights,
                     TelemetryConverter.Traces,
                     restrictedToMinimumLevel: LogEventLevel.Information)
                .WriteTo.Debug(restrictedToMinimumLevel: LogEventLevel.Information)
                .CreateLogger();
 
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => LogUnhandled(e.ExceptionObject as Exception);
+            TaskScheduler.UnobservedTaskException += (s, e) => LogUnhandled(e.Exception);
+
             container.Register(Log.Logger);
             container.Register<IAuthorizer, Authorizer>();
-            container.Register<HealthNerd.Services.IActionPresenter, ActionPresenter>();
+            container.Register<IActionPresenter, ActionPresenter>();
+            container.Register<IShare, HealthNerd.Services.Share>();
             container.Register<IClock>(SystemClock.Instance);
             container.Register<IFileManager, FileManager>(
                 new FileManager(container.Resolve<IClock>(), FileSystem.CacheDirectory));
             container.Register<ISettingsStore, SettingsStore>();
-            container.Register<IFirebaseAnalyticsService, FirebaseAnalyticsService>();
+            container.Register<IAnalytics>(new MultiAnalytics(
+                new FirebaseAnalytics(),
+                new AppInsightsAnalytics(appInsights)));
             container.Register<AuthorizeHealthCommand>();
             container.Register<IHealthStore>(new HealthStore(new HKHealthStore()));
 
@@ -79,6 +91,12 @@ namespace HealthNerd.iOS
 
             container.Register<INavigationService>(navigator);
 
+            void LogUnhandled(Exception ex)
+            {
+                Log.Logger.Error(ex, "Unhandled exception");
+                appInsights.TrackException(ex);
+                appInsights.Flush();
+            }
         }
     }
 }

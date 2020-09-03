@@ -13,9 +13,9 @@ namespace HealthNerd.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private readonly ISettingsStore _settings;
-        private readonly IFirebaseAnalyticsService _analytics;
+        private readonly IAnalytics _analytics;
 
-        public SettingsViewModel(AuthorizeHealthCommand commander, ISettingsStore settings, INavigationService nav, IFirebaseAnalyticsService analytics)
+        public SettingsViewModel(AuthorizeHealthCommand commander, ISettingsStore settings, INavigationService nav, IAnalytics analytics)
         {
             _settings = settings;
             _analytics = analytics;

@@ -12,9 +12,9 @@ namespace HealthNerd.ViewModels
     public class ExportSettingsViewModel : ViewModelBase
     {
         private readonly ISettingsStore _settings;
-        private readonly IFirebaseAnalyticsService _analytics;
+        private readonly IAnalytics _analytics;
 
-        public ExportSettingsViewModel(ISettingsStore settings, IFirebaseAnalyticsService analytics, INavigationService nav)
+        public ExportSettingsViewModel(ISettingsStore settings, IAnalytics analytics, INavigationService nav)
         {
             _settings = settings;
             _analytics = analytics;

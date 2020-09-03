@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Firebase.Analytics;
 using Foundation;
 using HealthNerd.Services;
 
 namespace HealthNerd.iOS.Services
 {
-    public class FirebaseAnalyticsService : IFirebaseAnalyticsService
+    public class FirebaseAnalytics : IAnalytics
     {
         public void LogEvent(string eventId)
         {
@@ -20,19 +19,12 @@ namespace HealthNerd.iOS.Services
             });
         }
 
-        public void SetUserId(string userId)
-        {
-#if true
-            Analytics.SetUserId(userId);
-#endif
-        }
-
         public void LogEvent(string eventId, IDictionary<string, string> parameters)
         {
 #if true
             if (parameters == null)
             {
-              Analytics.LogEvent(eventId, parameters: null);
+              Firebase.Analytics.Analytics.LogEvent(eventId, parameters: null);
               return;
             }
 
@@ -45,7 +37,7 @@ namespace HealthNerd.iOS.Services
             }
 
             var parametersDictionary = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(values.ToArray(), keys.ToArray(), keys.Count);
-            Analytics.LogEvent(eventId, parametersDictionary);
+            Firebase.Analytics.Analytics.LogEvent(eventId, parametersDictionary);
 #endif
         }
     }

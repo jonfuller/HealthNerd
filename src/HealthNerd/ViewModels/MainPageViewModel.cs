@@ -26,7 +26,7 @@ namespace HealthNerd.ViewModels
         private bool _isQueryingHealth;
         private string _operationStatus;
 
-        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IFirebaseAnalyticsService analytics, IHealthStore healthStore, IFileManager fileManager, IActionPresenter actionPresenter, IShare share)
+        public MainPageViewModel(AuthorizeHealthCommand authorizer, IClock clock, ISettingsStore settings, INavigationService nav, ILogger logger, IAnalytics analytics, IHealthStore healthStore, IFileManager fileManager, IActionPresenter actionPresenter, IShare share)
         {
             var latestEligibleTime = clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().Minus(Period.FromMinutes(5));
 
@@ -107,7 +107,7 @@ namespace HealthNerd.ViewModels
                 (null, LocalDateTime.FromDateTime(DateTime.MinValue), null);
         }
 
-        private async Task<(FileInfo file, ContentType contentType)> ExportHealthToExcel(ILogger logger, ISettingsStore settings, IClock clock, IFileManager fileManager, IFirebaseAnalyticsService analytics, IHealthStore healthStore)
+        private async Task<(FileInfo file, ContentType contentType)> ExportHealthToExcel(ILogger logger, ISettingsStore settings, IClock clock, IFileManager fileManager, IAnalytics analytics, IHealthStore healthStore)
         {
             var queryRange = new DateInterval(
                 start: settings.SinceDate.Match(

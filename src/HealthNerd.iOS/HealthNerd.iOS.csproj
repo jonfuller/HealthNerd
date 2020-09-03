@@ -81,7 +81,7 @@
   <ItemGroup>
     <Compile Include="Annotations.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Services\FirebaseAnalyticsService.cs" />
+    <Compile Include="Services\FirebaseAnalytics.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\Authorizer.cs" />

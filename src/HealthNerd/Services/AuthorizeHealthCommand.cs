@@ -12,11 +12,11 @@ namespace HealthNerd.Services
         private readonly IAuthorizer _authorizer;
         private readonly IClock _clock;
         private readonly IActionPresenter _alertPresenter;
-        private readonly IFirebaseAnalyticsService _analytics;
+        private readonly IAnalytics _analytics;
         private readonly ILogger _logger;
         private readonly ISettingsStore _settings;
 
-        public AuthorizeHealthCommand(IAuthorizer authorizer, IClock clock, IActionPresenter alertPresenter, IFirebaseAnalyticsService analytics, ILogger logger, ISettingsStore settings)
+        public AuthorizeHealthCommand(IAuthorizer authorizer, IClock clock, IActionPresenter alertPresenter, IAnalytics analytics, ILogger logger, ISettingsStore settings)
         {
             _authorizer = authorizer;
             _clock = clock;

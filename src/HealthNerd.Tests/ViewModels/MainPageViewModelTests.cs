@@ -214,7 +214,7 @@ namespace HealthNerd.Tests.ViewModels
 
             var mockAuthorizer = new Mock<IAuthorizer>();
             var mockSettings = new Mock<ISettingsStore>();
-            var mockAnalytics = new Mock<IFirebaseAnalyticsService>();
+            var mockAnalytics = new Mock<IAnalytics>();
             var mockActionPresenter = new Mock<IActionPresenter>();
             var mockNavService = new Mock<INavigationService>();
             var mockFileManager = new Mock<IFileManager>();
