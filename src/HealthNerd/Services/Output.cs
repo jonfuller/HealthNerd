@@ -7,6 +7,7 @@ using HealthKitData.Core.Excel;
 using HealthKitData.Core.Excel.Settings;
 using HealthNerd.Utility;
 using LanguageExt;
+using NodaTime;
 using OfficeOpenXml;
 
 namespace HealthNerd.Services
@@ -15,15 +16,15 @@ namespace HealthNerd.Services
     {
         public static readonly ContentType XlsxContentType = new ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IFileManager fileManager)
+        public static (FileInfo filename, ContentType contentType) CreateExcelReport(IEnumerable<Record> records, IEnumerable<Workout> workouts, ISettingsStore settings, IFileManager fileManager, DateTimeZone zone)
         {
             var file = fileManager.GetNewFileName();
 
-            WriteExcelReport(file, records, workouts, GetSettings(settings), settings);
+            WriteExcelReport(file, records, workouts, GetSettings(settings), settings, zone);
 
             return (file, XlsxContentType);
 
-            static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings, ISettingsStore settingsStore)
+            static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings, ISettingsStore settingsStore, DateTimeZone zone)
             {
                 using var excelFile = new ExcelPackage();
 
@@ -31,7 +32,7 @@ namespace HealthNerd.Services
                     Some: c => c,
                     None: Enumerable.Empty<ExcelWorksheet>());
 
-                ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, customSheets);
+                ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, zone, customSheets);
 
                 excelFile.SaveAs(file);
             }

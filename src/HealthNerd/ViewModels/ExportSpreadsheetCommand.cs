@@ -142,11 +142,13 @@ namespace HealthNerd.ViewModels
 
         private async Task<(FileInfo file, ContentType contentType)> ExportHealthToExcel(ILogger logger, ISettingsStore settings, IClock clock, IFileManager fileManager, IAnalytics analytics, IHealthStore healthStore)
         {
+            var zone = DateTimeZoneProviders.Tzdb.GetSystemDefault();
+
             var queryRange = new DateInterval(
                 start: settings.SinceDate.Match(
                     Some: s => s,
                     None: LocalDate.FromDateTime(new DateTime(2020, 01, 01))),
-                end: clock.InTzdbSystemDefaultZone().GetCurrentDate());
+                end: clock.InZone(zone).GetCurrentDate());
 
             logger.Verbose("Starting nerd operation for {QueryRange}", queryRange);
 
@@ -161,7 +163,7 @@ namespace HealthNerd.ViewModels
 
             OperationStatus = AppRes.MainPage_Status_SavingFile;
             logger.Verbose("Creating output report");
-            return Output.CreateExcelReport(records, workouts, _settings, fileManager);
+            return Output.CreateExcelReport(records, workouts, _settings, fileManager, zone);
 
             async Task<(Workout[] workouts, Record[] records)> QueryHealth(DateInterval dateRange)
             {
