@@ -12,5 +12,6 @@
         public static string OmitEmptyColumnsOnMonthlySummary = nameof(OmitEmptyColumnsOnMonthlySummary);
         public static string OmitEmptyColumnsOnOverallSummary = nameof(OmitEmptyColumnsOnOverallSummary);
         public static string OmitEmptySheets = nameof(OmitEmptySheets);
+        public static string CustomSheetsLocation = nameof(CustomSheetsLocation);
     }
 }

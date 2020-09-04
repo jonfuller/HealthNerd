@@ -10,5 +10,6 @@ namespace HealthNerd.Services
         FileInfo GetNewFileName();
         Option<(FileInfo file, LocalDateTime exportTime, ContentType contentType)> GetLatestExportFile();
         void DeleteExportsBefore(LocalDateTime reference);
+        string SaveFile(string fileName, byte[] data);
     }
 }

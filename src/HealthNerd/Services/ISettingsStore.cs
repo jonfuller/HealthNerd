@@ -16,6 +16,7 @@ namespace HealthNerd.Services
         Option<bool> OmitEmptyColumnsOnMonthlySummary { get; }
         Option<bool> OmitEmptyColumnsOnOverallSummary { get; }
         Option<bool> OmitEmptySheets { get; }
+        Option<string> CustomSheetsLocation { get; }
 
         void SetSinceDate(LocalDate date);
         void SetDistanceUnit(LengthUnit unit);
@@ -27,5 +28,7 @@ namespace HealthNerd.Services
         void SetOmitEmptySheets(bool omit);
         void SetOmitEmptyColumnsOnMonthlySummary(bool omit);
         void SetOmitEmptyColumnsOnOverallSummary(bool omit);
+        void SetCustomSheetsLocation(string fileName);
+        void ClearCustomSheetsLocation();
     }
 }

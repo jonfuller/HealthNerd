@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using HealthNerd.Services;
 using HealthNerd.Utility;
 using HealthNerd.Utility.Mvvm;
+using Plugin.FilePicker;
 using Resources;
 using UnitsNet.Units;
 using Xamarin.Forms;
@@ -14,10 +16,38 @@ namespace HealthNerd.ViewModels
         private readonly ISettingsStore _settings;
         private readonly IAnalytics _analytics;
 
-        public ExportSettingsViewModel(ISettingsStore settings, IAnalytics analytics, INavigationService nav)
+        public ExportSettingsViewModel(ISettingsStore settings, IAnalytics analytics, INavigationService nav, IFileManager fileManager, IActionPresenter actionPresenter)
         {
             _settings = settings;
             _analytics = analytics;
+
+            BrowseForCustomSheetsLocation = new Command(async () =>
+            {
+                var fileData = await CrossFilePicker.Current.PickFile();
+                if (fileData == null)
+                    return; // user canceled file picking
+
+                var fileName = fileManager.SaveFile(fileData.FileName, fileData.DataArray);
+                settings.SetCustomSheetsLocation(fileName);
+                OnPropertyChanged(nameof(CustomSheetsLocation));
+                OnPropertyChanged(nameof(HasCustomSheetsLocation));
+                OnPropertyChanged(nameof(NoCustomSheetsLocation));
+            });
+
+            ChangeCustomSheetsLocation = new Command(() =>
+            {
+                actionPresenter.ActionSheet()
+                   .With("Change", BrowseForCustomSheetsLocation)
+                   .With("Clear", () =>
+                    {
+                        settings.ClearCustomSheetsLocation();
+                        OnPropertyChanged(nameof(CustomSheetsLocation));
+                        OnPropertyChanged(nameof(HasCustomSheetsLocation));
+                        OnPropertyChanged(nameof(NoCustomSheetsLocation));
+                    })
+                   .WithCancel("Cancel")
+                   .Show("Change Custom Sheets Location");
+            });
 
             Dismiss = new Command(() => nav.DismissModal());
             DistanceUnits = new List<PickerOption<LengthUnit>>
@@ -42,12 +72,27 @@ namespace HealthNerd.ViewModels
             };
         }
 
+        public bool NoCustomSheetsLocation => _settings.CustomSheetsLocation.IsNone;
+        public bool HasCustomSheetsLocation => _settings.CustomSheetsLocation.IsSome;
+
         public Command Dismiss { get; }
+        public Command BrowseForCustomSheetsLocation { get; }
+        public Command ChangeCustomSheetsLocation { get; }
 
         public List<PickerOption<LengthUnit>> DistanceUnits { get; }
         public List<PickerOption<MassUnit>> MassUnits { get; }
         public List<PickerOption<EnergyUnit>> EnergyUnits { get; }
         public List<PickerOption<DurationUnit>> DurationUnits { get; }
+
+        public string CustomSheetsLocation
+        {
+            get
+            {
+                return _settings.CustomSheetsLocation.Match(
+                    Some: value => Path.GetFileName(value),
+                    None: () => AppRes.Settings_UnitsOfMeasure_NotSet);
+            }
+        }
 
         public LengthUnit DistanceUnit
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HealthNerd.Services;
 using LanguageExt;
+using Xamarin.Forms;
 
 namespace HealthNerd.Utility
 {
@@ -20,12 +21,12 @@ namespace HealthNerd.Utility
             _actions = new List<ActionSheetItem>();
         }
 
-        public ActionSheetBuilder WithCancel(string text, Action cancelAction)
+        public ActionSheetBuilder WithCancel(string text, Action cancelAction = null)
         {
             _cancel = Prelude.Some(new ActionSheetItem
             {
                 Text = text,
-                ToTake = cancelAction
+                ToTake = cancelAction ?? (() =>{})
             });
             return this;
         }
@@ -49,6 +50,8 @@ namespace HealthNerd.Utility
             });
             return this;
         }
+
+        public ActionSheetBuilder With(string text, Command action) => With(text, () => action.Execute(null));
 
         public void Show(string title)
         {

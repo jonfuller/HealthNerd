@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HealthNerd.Services;
+using HealthNerd.Utility;
 using HealthNerd.Utility.Mvvm;
 using HealthNerd.ViewModels;
 using LanguageExt;

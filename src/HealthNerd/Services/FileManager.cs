@@ -7,6 +7,7 @@ using LanguageExt;
 using NodaTime;
 using NodaTime.Extensions;
 using NodaTime.Text;
+using Xamarin.Essentials;
 using static LanguageExt.Prelude;
 
 namespace HealthNerd.Services
@@ -57,6 +58,14 @@ namespace HealthNerd.Services
                     file.Delete();
                 }
             }
+        }
+
+        public string SaveFile(string fileName, byte[] data)
+        {
+            var file = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            File.WriteAllBytes(file, data);
+
+            return file;
         }
 
         public FileInfo GetNewFileName() => new FileInfo(Path.Combine(_directory, _exportFilePattern.Format(_clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime())));

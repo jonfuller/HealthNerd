@@ -6,6 +6,7 @@ using HealthKitData.Core;
 using HealthKitData.Core.Excel;
 using HealthKitData.Core.Excel.Settings;
 using HealthNerd.Utility;
+using LanguageExt;
 using OfficeOpenXml;
 
 namespace HealthNerd.Services
@@ -18,17 +19,27 @@ namespace HealthNerd.Services
         {
             var file = fileManager.GetNewFileName();
 
-            WriteExcelReport(file, records, workouts, GetSettings(settings));
+            WriteExcelReport(file, records, workouts, GetSettings(settings), settings);
 
             return (file, XlsxContentType);
 
-            static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings)
+            static void WriteExcelReport(FileInfo file, IEnumerable<Record> records, IEnumerable<Workout> workouts, Settings settings, ISettingsStore settingsStore)
             {
                 using var excelFile = new ExcelPackage();
 
-                ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, Enumerable.Empty<ExcelWorksheet>());
+                var customSheets = LoadCustom(settingsStore).Match(
+                    Some: c => c,
+                    None: Enumerable.Empty<ExcelWorksheet>());
+
+                ExcelReport.BuildReport(records.ToList(), workouts.ToList(), excelFile.Workbook, settings, customSheets);
 
                 excelFile.SaveAs(file);
+            }
+
+            static Option<IEnumerable<ExcelWorksheet>> LoadCustom(ISettingsStore settingsStore)
+            {
+                return settingsStore.CustomSheetsLocation
+                   .Map(s => new ExcelPackage(new FileInfo(s)).Workbook.Worksheets.AsEnumerable());
             }
 
             static Settings GetSettings(ISettingsStore settings)

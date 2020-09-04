@@ -20,6 +20,7 @@ namespace HealthNerd.iOS.Services
         public Option<bool> OmitEmptyColumnsOnMonthlySummary => PreferencesEx.GetBool(PreferenceKeys.OmitEmptyColumnsOnMonthlySummary);
         public Option<bool> OmitEmptyColumnsOnOverallSummary => PreferencesEx.GetBool(PreferenceKeys.OmitEmptyColumnsOnOverallSummary);
         public Option<bool> OmitEmptySheets => PreferencesEx.GetBool(PreferenceKeys.OmitEmptySheets);
+        public Option<string> CustomSheetsLocation => PreferencesEx.GetString(PreferenceKeys.CustomSheetsLocation);
 
         public bool IsHealthKitAuthorized => Preferences.ContainsKey(PreferenceKeys.HealthKitAuthorized);
 
@@ -32,6 +33,8 @@ namespace HealthNerd.iOS.Services
         public void SetOmitEmptySheets(bool omit) => Preferences.Set(PreferenceKeys.OmitEmptySheets, omit);
         public void SetOmitEmptyColumnsOnMonthlySummary(bool omit) => Preferences.Set(PreferenceKeys.OmitEmptyColumnsOnMonthlySummary, omit);
         public void SetOmitEmptyColumnsOnOverallSummary(bool omit) => Preferences.Set(PreferenceKeys.OmitEmptyColumnsOnOverallSummary, omit);
+        public void SetCustomSheetsLocation(string fileName) => Preferences.Set(PreferenceKeys.CustomSheetsLocation, fileName);
+        public void ClearCustomSheetsLocation() => Preferences.Remove(PreferenceKeys.CustomSheetsLocation);
 
         public void SetHealthKitAuthorized(Instant timestamp) => Preferences.Set(PreferenceKeys.HealthKitAuthorized, InstantPattern.ExtendedIso.Format(timestamp));
     }

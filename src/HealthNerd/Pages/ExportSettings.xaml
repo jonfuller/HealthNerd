@@ -58,6 +58,21 @@
                     <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptySheets}" On="{Binding OmitEmptySheets}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
                     <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnOverall}" On="{Binding OmitEmptyColumnsOnOverallSummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}"/>
                     <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}" />
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,0">
+                            <Label VerticalOptions="Center" Text="Custom Sheets" />
+                            <Button VerticalOptions="Center" HorizontalOptions="EndAndExpand"
+                                    Text="{Binding CustomSheetsLocation}"
+                                    IsVisible="{Binding NoCustomSheetsLocation}"
+                                    Command="{Binding BrowseForCustomSheetsLocation}"
+                                    TextColor="{StaticResource HealthNerdLogo_Blue}"/>
+                            <Button VerticalOptions="Center" HorizontalOptions="EndAndExpand"
+                                    Text="{Binding CustomSheetsLocation}"
+                                    IsVisible="{Binding HasCustomSheetsLocation}"
+                                    Command="{Binding ChangeCustomSheetsLocation}"
+                                    TextColor="{StaticResource HealthNerdLogo_Blue}"/>
+                        </StackLayout>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
