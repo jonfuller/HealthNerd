@@ -54,7 +54,7 @@ namespace HealthNerd.Tests.ViewModels
 
                     var sut = GetSut(healthStore: mockHealthStore.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockHealthStore.Verify(a => a.GetHealthRecordsAsync(It.IsAny<DateInterval>()));
                     mockHealthStore.Verify(a => a.GetWorkoutsAsync(It.IsAny<DateInterval>()));
@@ -74,7 +74,7 @@ namespace HealthNerd.Tests.ViewModels
                         healthStore: mockHealthStore.Object,
                         settings: mockSettings.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockHealthStore.Verify(a => a.GetHealthRecordsAsync(It.Is((DateInterval actual) =>
                         actual.Start == new LocalDate(2020, 01, 01) &&
@@ -94,7 +94,7 @@ namespace HealthNerd.Tests.ViewModels
                         clock: clock,
                         fileManager: mockFileManager.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     var fiveMinutesAgo = clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().Minus(Period.FromMinutes(5));
 
@@ -110,7 +110,7 @@ namespace HealthNerd.Tests.ViewModels
                     var sut = GetSut(
                         share: mockShare.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockShare.Verify(s => s.RequestAsync(It.IsAny<ShareFileRequest>()));
                 }
@@ -132,7 +132,7 @@ namespace HealthNerd.Tests.ViewModels
                         fileManager: mockFileManager.Object,
                         actionPresenter: mockActionPresenter.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockActionPresenter.Verify(a => a.DisplayActionSheet(
                         It.IsAny<string>(),
@@ -160,7 +160,7 @@ namespace HealthNerd.Tests.ViewModels
                             actions.First().ToTake()), // execute the "use recent export" option,
                         share: mockShare.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockShare.Verify(s => s.RequestAsync(It.Is((ShareFileRequest r) =>
                         r.File.FullPath.EndsWith("arbitrary.xlsx"))));
@@ -190,7 +190,7 @@ namespace HealthNerd.Tests.ViewModels
                             actions.Last().ToTake()), // execute the "create new" option,
                         share: mockShare.Object);
 
-                    sut.QueryHealthCommand.Execute(null);
+                    sut.Exporter.Command.Execute(null);
 
                     mockShare.Verify(s => s.RequestAsync(It.Is((ShareFileRequest r) =>
                         r.File.FullPath.EndsWith("newFile.xlsx"))));
@@ -231,17 +231,22 @@ namespace HealthNerd.Tests.ViewModels
                 logger,
                 settings ?? mockSettings.Object);
 
-            return new MainPageViewModel(
-                authCommand,
-                clock,
-                settings ?? mockSettings.Object,
-                navService ?? mockNavService.Object,
-                logger,
-                mockAnalytics.Object,
-                healthStore ?? new Mock<IHealthStore>().Object,
+            var exporter = new ExportSpreadsheetCommand(
                 fileManager ?? mockFileManager.Object,
                 actionPresenter ?? mockActionPresenter.Object,
-                share ?? new Mock<IShare>().Object);
+                settings ?? mockSettings.Object,
+                clock,
+                mockAnalytics.Object,
+                healthStore ?? new Mock<IHealthStore>().Object,
+                share ?? new Mock<IShare>().Object,
+                new Configuration(),
+                logger);
+
+            return new MainPageViewModel(
+                authCommand,
+                exporter,
+                settings ?? mockSettings.Object,
+                navService ?? mockNavService.Object);
         }
     }
 

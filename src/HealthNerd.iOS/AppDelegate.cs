@@ -75,6 +75,7 @@ namespace HealthNerd.iOS
                 new FirebaseAnalytics(),
                 new AppInsightsAnalytics(appInsights)));
             container.Register<AuthorizeHealthCommand>();
+            container.Register<ExportSpreadsheetCommand>();
             container.Register<IHealthStore>(new HealthStore(new HKHealthStore()));
 
             var navigator = new NavigationService(mainApp, new ViewLocator(), container);

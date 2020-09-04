@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:HealthNerd.ViewModels;assembly=HealthNerd"
              xmlns:resources="clr-namespace:Resources;assembly=Resources"
@@ -34,9 +33,9 @@
         <Frame VerticalOptions="CenterAndExpand">
             <StackLayout>
                 <Image Source="convert.png" Scale="0.7" />
-                <Button FontSize="Title" Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding QueryHealthCommand}" />
-                <ActivityIndicator IsRunning="true" IsVisible="{Binding IsQueryingHealth}"/>
-                <Label HorizontalOptions="Center" Text="{Binding OperationStatus}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Caption"/>
+                <Button FontSize="Title" Text="{x:Static resources:AppRes.MainPage_NerdOut_Button}" Command="{Binding Exporter.Command}" />
+                <ActivityIndicator IsRunning="true" IsVisible="{Binding Exporter.IsQueryingHealth}"/>
+                <Label HorizontalOptions="Center" Text="{Binding Exporter.OperationStatus}" TextColor="{StaticResource HealthNerdLogo_White}" FontSize="Caption"/>
             </StackLayout>
         </Frame>
         <Frame VerticalOptions="EndAndExpand" Padding="0">
