@@ -61,6 +61,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string ExportingSpreadsheet_HasRecent_Cancel {
+            get {
+                return ResourceManager.GetString("ExportingSpreadsheet_HasRecent_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string ExportingSpreadsheet_HasRecent_CreateNew {
+            get {
+                return ResourceManager.GetString("ExportingSpreadsheet_HasRecent_CreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found a Recent Export.
+        /// </summary>
+        public static string ExportingSpreadsheet_HasRecent_Title {
+            get {
+                return ResourceManager.GetString("ExportingSpreadsheet_HasRecent_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue with Previous (Today at {0}).
+        /// </summary>
+        public static string ExportingSpreadsheet_HasRecent_UseRecent {
+            get {
+                return ResourceManager.GetString("ExportingSpreadsheet_HasRecent_UseRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         public static string ExportSettings_CustomSheets_Change_Browse {

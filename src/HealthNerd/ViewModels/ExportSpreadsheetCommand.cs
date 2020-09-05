@@ -79,10 +79,10 @@ namespace HealthNerd.ViewModels
                     {
                         var latestFileTimeString = latestFile.exportTime.ToString("HH:mm", CultureInfo.CurrentUICulture);
                         _actionPresenter.ActionSheet()
-                           .WithCancel("Cancel", () => { })
-                           .With($"Continue with Previous (Today at {latestFileTimeString})", async () => await ShareFile(latestFile.file, latestFile.contentType))
-                           .With("Create New", async () => await ExportNewFile())
-                           .Show("Found a recent export.");
+                           .WithCancel(AppRes.ExportingSpreadsheet_HasRecent_Cancel, () => { })
+                           .With(string.Format(AppRes.ExportingSpreadsheet_HasRecent_UseRecent, latestFileTimeString), async () => await ShareFile(latestFile.file, latestFile.contentType))
+                           .With(AppRes.ExportingSpreadsheet_HasRecent_CreateNew, async () => await ExportNewFile())
+                           .Show(AppRes.ExportingSpreadsheet_HasRecent_Title);
                     }
                     else
                     {

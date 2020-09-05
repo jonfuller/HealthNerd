@@ -338,4 +338,17 @@ Convert your workout data, body measurements and more into a spreadsheet so you 
   <data name="Settings_ExcelExport_CustomSheets" xml:space="preserve">
     <value>Custom Sheets</value>
   </data>
+  <data name="ExportingSpreadsheet_HasRecent_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ExportingSpreadsheet_HasRecent_CreateNew" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="ExportingSpreadsheet_HasRecent_Title" xml:space="preserve">
+    <value>Found a Recent Export</value>
+  </data>
+  <data name="ExportingSpreadsheet_HasRecent_UseRecent" xml:space="preserve">
+    <value>Continue with Previous (Today at {0})</value>
+    <comment>Time of recent export</comment>
+  </data>
 </root>
