@@ -323,4 +323,19 @@ Convert your workout data, body measurements and more into a spreadsheet so you 
   <data name="Onboarding_What_Title" xml:space="preserve">
     <value>A Health-y Spreadsheet</value>
   </data>
+  <data name="ExportSettings_CustomSheets_Change_Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="ExportSettings_CustomSheets_Change_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ExportSettings_CustomSheets_Change_Title" xml:space="preserve">
+    <value>Change Custom Sheets Location</value>
+  </data>
+  <data name="ExportSettings_CustomSheets_Change_Clear" xml:space="preserve">
+    <value>Clear (Don't Use Custom Sheets)</value>
+  </data>
+  <data name="Settings_ExcelExport_CustomSheets" xml:space="preserve">
+    <value>Custom Sheets</value>
+  </data>
 </root>

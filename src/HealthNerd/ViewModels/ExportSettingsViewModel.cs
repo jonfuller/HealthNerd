@@ -37,16 +37,16 @@ namespace HealthNerd.ViewModels
             ChangeCustomSheetsLocation = new Command(() =>
             {
                 actionPresenter.ActionSheet()
-                   .With("Change", BrowseForCustomSheetsLocation)
-                   .With("Clear", () =>
+                   .With(AppRes.ExportSettings_CustomSheets_Change_Browse, BrowseForCustomSheetsLocation)
+                   .With(AppRes.ExportSettings_CustomSheets_Change_Clear, () =>
                     {
                         settings.ClearCustomSheetsLocation();
                         OnPropertyChanged(nameof(CustomSheetsLocation));
                         OnPropertyChanged(nameof(HasCustomSheetsLocation));
                         OnPropertyChanged(nameof(NoCustomSheetsLocation));
                     })
-                   .WithCancel("Cancel")
-                   .Show("Change Custom Sheets Location");
+                   .WithCancel(AppRes.ExportSettings_CustomSheets_Change_Cancel)
+                   .Show(AppRes.ExportSettings_CustomSheets_Change_Title);
             });
 
             Dismiss = new Command(() => nav.DismissModal());

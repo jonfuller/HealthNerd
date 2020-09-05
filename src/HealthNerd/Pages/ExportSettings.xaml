@@ -60,7 +60,7 @@
                     <SwitchCell Text="{x:Static resources:AppRes.Settings_ExcelExport_OmitEmptyColumnsOnMonthly}" On="{Binding OmitEmptyColumnsOnMonthlySummary}" OnColor="{StaticResource HealthNerdLogo_Yellow}" />
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="16,0">
-                            <Label VerticalOptions="Center" Text="Custom Sheets" />
+                            <Label VerticalOptions="Center" Text="{x:Static resources:AppRes.Settings_ExcelExport_CustomSheets}" />
                             <Button VerticalOptions="Center" HorizontalOptions="EndAndExpand"
                                     Text="{Binding CustomSheetsLocation}"
                                     IsVisible="{Binding NoCustomSheetsLocation}"

@@ -61,6 +61,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse.
+        /// </summary>
+        public static string ExportSettings_CustomSheets_Change_Browse {
+            get {
+                return ResourceManager.GetString("ExportSettings_CustomSheets_Change_Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string ExportSettings_CustomSheets_Change_Cancel {
+            get {
+                return ResourceManager.GetString("ExportSettings_CustomSheets_Change_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear (Don&apos;t Use Custom Sheets).
+        /// </summary>
+        public static string ExportSettings_CustomSheets_Change_Clear {
+            get {
+                return ResourceManager.GetString("ExportSettings_CustomSheets_Change_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Custom Sheets Location.
+        /// </summary>
+        public static string ExportSettings_CustomSheets_Change_Title {
+            get {
+                return ResourceManager.GetString("ExportSettings_CustomSheets_Change_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Settings.
         /// </summary>
         public static string ExportSettings_Title {
@@ -448,6 +484,15 @@ namespace Resources {
         public static string Settings_EnergyUnit_Kilocalories {
             get {
                 return ResourceManager.GetString("Settings_EnergyUnit_Kilocalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Sheets.
+        /// </summary>
+        public static string Settings_ExcelExport_CustomSheets {
+            get {
+                return ResourceManager.GetString("Settings_ExcelExport_CustomSheets", resourceCulture);
             }
         }
         
