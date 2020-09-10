@@ -1,23 +1,13 @@
 ﻿using System.Collections.Generic;
 using Foundation;
 using HealthNerd.Services;
+using HealthNerd.Utility;
 
 namespace HealthNerd.iOS.Services
 {
     public class FirebaseAnalytics : IAnalytics
     {
-        public void LogEvent(string eventId)
-        {
-            LogEvent(eventId, (IDictionary<string, string>)null);
-        }
-
-        public void LogEvent(string eventId, string paramName, string value)
-        {
-            LogEvent(eventId, new Dictionary<string, string>
-            {
-                { paramName, value }
-            });
-        }
+        public void TrackPage(string screenName) => LogEvent("screen_view", new Dictionary<string, string>{{ "screen_name", screenName }});
 
         public void LogEvent(string eventId, IDictionary<string, string> parameters)
         {

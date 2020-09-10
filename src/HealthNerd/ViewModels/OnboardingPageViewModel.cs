@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HealthNerd.Services;
 using HealthNerd.Utility.Mvvm;
 using HealthNerd.ViewModels.OnboardingPages;
 using Xamarin.Forms;
@@ -43,7 +44,8 @@ namespace HealthNerd.ViewModels
             OnboardingAuthViewModel authVm,
             OnboardingWhatViewModel whatVm,
             OnboardingSettingsViewModel settingsVm,
-            OnboardingFinishViewModel finish)
+            OnboardingFinishViewModel finish,
+            IAnalytics analytics) : base(analytics)
         {
             ViewModels = new List<OnboardingViewModelBase>
             {

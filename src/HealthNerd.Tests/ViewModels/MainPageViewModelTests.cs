@@ -247,7 +247,8 @@ namespace HealthNerd.Tests.ViewModels
                 authCommand,
                 exporter,
                 settings ?? mockSettings.Object,
-                navService ?? mockNavService.Object);
+                navService ?? mockNavService.Object,
+                mockAnalytics.Object);
         }
     }
 

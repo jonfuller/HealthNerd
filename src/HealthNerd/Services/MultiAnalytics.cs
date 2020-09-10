@@ -12,24 +12,16 @@ namespace HealthNerd.Services
             _providers = providers;
         }
 
+        public void TrackPage(string screenName) =>
+            EachProvider(p => p.TrackPage(screenName));
+
+        public void LogEvent(string eventId, IDictionary<string, string> parameters) =>
+            EachProvider(p => p.LogEvent(eventId, parameters));
+
         private void EachProvider(Action<IAnalytics> action)
         {
             foreach (var provider in _providers)
                 action(provider);
-        }
-        public void LogEvent(string eventId)
-        {
-            EachProvider(p => p.LogEvent(eventId));
-        }
-
-        public void LogEvent(string eventId, string paramName, string value)
-        {
-            EachProvider(p => p.LogEvent(eventId, paramName, value));
-        }
-
-        public void LogEvent(string eventId, IDictionary<string, string> parameters)
-        {
-            EachProvider(p => p.LogEvent(eventId, parameters));
         }
     }
 }

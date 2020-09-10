@@ -12,14 +12,9 @@ namespace HealthNerd.Services
             _client = client;
         }
 
-        public void LogEvent(string eventId)
+        public void TrackPage(string screenName)
         {
-            _client.TrackEvent(eventId);
-        }
-
-        public void LogEvent(string eventId, string paramName, string value)
-        {
-            _client.TrackEvent(eventId, new Dictionary<string, string>{{paramName, value}});
+            _client.TrackPageView(screenName);
         }
 
         public void LogEvent(string eventId, IDictionary<string, string> parameters)

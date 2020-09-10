@@ -15,7 +15,7 @@ namespace HealthNerd.ViewModels
         private readonly ISettingsStore _settings;
         private readonly IAnalytics _analytics;
 
-        public SettingsViewModel(AuthorizeHealthCommand commander, ISettingsStore settings, INavigationService nav, IAnalytics analytics)
+        public SettingsViewModel(AuthorizeHealthCommand commander, ISettingsStore settings, INavigationService nav, IAnalytics analytics) : base(analytics)
         {
             _settings = settings;
             _analytics = analytics;

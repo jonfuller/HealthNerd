@@ -9,7 +9,7 @@ namespace HealthNerd.ViewModels
     {
         private readonly ISettingsStore _settings;
 
-        public MainPageViewModel(AuthorizeHealthCommand authorizer, ExportSpreadsheetCommand exporter, ISettingsStore settings, INavigationService nav)
+        public MainPageViewModel(AuthorizeHealthCommand authorizer, ExportSpreadsheetCommand exporter, ISettingsStore settings, INavigationService nav, IAnalytics analytics) : base(analytics)
         {
             _settings = settings;
 

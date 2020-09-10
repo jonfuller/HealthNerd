@@ -55,7 +55,7 @@ namespace HealthNerd.ViewModels
             }
         }
 
-        public ExportSpreadsheetCommand(IFileManager fileManager, IActionPresenter actionPresenter, ISettingsStore settings, IClock clock, IAnalytics analytics, IHealthStore healthStore, IShare share, Configuration config, ILogger logger)
+        public ExportSpreadsheetCommand(IFileManager fileManager, IActionPresenter actionPresenter, ISettingsStore settings, IClock clock, IAnalytics analytics, IHealthStore healthStore, IShare share, Configuration config, ILogger logger) : base(analytics)
         {
             _latestEligibleTime = clock.InTzdbSystemDefaultZone().GetCurrentLocalDateTime().Minus(config.LatestEligibleExportPeriod);
 
