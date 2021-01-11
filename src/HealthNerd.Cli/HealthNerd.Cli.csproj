@@ -13,8 +13,14 @@
     <FileVersion>$(Version)</FileVersion>
     <Authors>Jon Fuller</Authors>
     <Description>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Description>
-    <Copyright>Copyright © 2019 SEP, Inc</Copyright>
+    <Copyright>Copyright © 2020 SEP, Inc</Copyright>
     <Title>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Title>
+    <Summary>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Summary>
+    <RepositoryUrl>https://github.com/jonfuller/HealthKitData</RepositoryUrl>
+
+    <PackageTags>HealthNerd HealthKit Fitness iOS Excel CSV</PackageTags>
+    <PackageProjectUrl>https://github.com/jonfuller/HealthKitData</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
@@ -23,6 +29,8 @@
     <PackageReference Include="Disposing" Version="1.0.0" />
     <PackageReference Include="HealthKitData.Core" Version="0.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
