@@ -15,6 +15,7 @@
     <Description>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Description>
     <Copyright>Copyright © 2019 SEP, Inc</Copyright>
     <Title>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Title>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
