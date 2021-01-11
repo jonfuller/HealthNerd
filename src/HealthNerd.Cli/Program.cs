@@ -17,10 +17,11 @@ namespace HealthNerd.Cli
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            var result = Parser.Default.ParseArguments<ExcelReportOptions, CreateSettingsOptions>(args)
+            var result = Parser.Default.ParseArguments<ExcelReportOptions, CreateSettingsOptions, HelpSettingsOptions>(args)
                .MapResult(
                     (ExcelReportOptions opts) => ReportActions.CreateReport(opts, stdErr),
                     (CreateSettingsOptions opts) => SettingsActions.CreateDefaultSettingsFile(opts, stdErr),
+                    (HelpSettingsOptions opts) => SettingsActions.ShowSettingsOptions(stdOut),
                     Err);
 
             var exitCode = await result;

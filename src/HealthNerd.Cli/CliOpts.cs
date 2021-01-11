@@ -25,6 +25,11 @@ namespace HealthNerd.Cli
         public string OutputFilename { get; set; }
     }
 
+    [Verb("settings-help", HelpText = "Shows possible values for all settings.")]
+    public class HelpSettingsOptions
+    {
+    }
+
     public record ExitCode
     {
         public static ExitCode Success = new (0, "Success");
