@@ -33,7 +33,7 @@ namespace HealthNerd.Cli
                 })
                .ToArray();
 
-            File.WriteAllText(filename, JsonConvert.SerializeObject(toSerialize));
+            File.WriteAllText(filename, JsonConvert.SerializeObject(toSerialize, Formatting.Indented));
         }
     }
 }

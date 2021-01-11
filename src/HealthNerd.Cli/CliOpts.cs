@@ -21,16 +21,17 @@ namespace HealthNerd.Cli
     [Verb("settings-generate", HelpText = "Generates a default settings file for use during Excel report creation.")]
     public class CreateSettingsOptions
     {
-        [Option(longName: "output", HelpText = "Path to output file.", Required = false, Default = "output.json")]
+        [Option(longName: "output", HelpText = "Path to output file.", Required = false, Default = "settings.json")]
         public string OutputFilename { get; set; }
     }
 
-    public class ExitCode
+    public record ExitCode
     {
-        public static ExitCode Success = new ExitCode(0, "Success");
-        public static ExitCode ParseError = new ExitCode(5, "Error parsing program arguments.");
-        public static ExitCode GeneralException(Exception e) => new ExitCode(-1, e.ToString());
-        public static ExitCode ExportFileNotFound(string filename) => new ExitCode(1, $"Export file not found: {filename}");
+        public static ExitCode Success = new (0, "Success");
+        public static ExitCode ParseError = new (5, "Error parsing program arguments.");
+        public static ExitCode GeneralException(Exception e) => new (-1, e.ToString());
+        public static ExitCode ExportFileNotFound(string filename) => new (1, $"Export file not found: {filename}");
+        public static ExitCode ExportFileExists(string filename) => new(2, $"File exists: {filename}");
 
         private ExitCode(int value, string message)
         {

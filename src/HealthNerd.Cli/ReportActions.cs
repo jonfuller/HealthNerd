@@ -14,10 +14,12 @@ namespace HealthNerd.Cli
 {
     public static class ReportActions
     {
-        public static Task<ExitCode> CreateReport(ExcelReportOptions opts, TextWriter stdOut, TextWriter stdErr)
+        public static Task<ExitCode> CreateReport(ExcelReportOptions opts, TextWriter stdErr)
         {
             if (!File.Exists(opts.PathToHealthExportFile))
                 return Task.FromResult(ExitCode.ExportFileNotFound(opts.PathToHealthExportFile));
+            if (File.Exists(opts.OutputFilename))
+                return Task.FromResult(ExitCode.ExportFileExists(opts.OutputFilename));
 
             var loader = Usable.Using(new StreamReader(opts.PathToHealthExportFile), reader =>
                 ZipUtilities.ReadArchive(
@@ -39,12 +41,11 @@ namespace HealthNerd.Cli
             }
 
             return Task.FromResult(ExitCode.Success);
-
         }
 
         static (IDisposable package, IEnumerable<ExcelWorksheet> customSheets) GetCustomSheets(ExcelReportOptions opts, TextWriter stdErr)
         {
-            var disposableNop = Disposing.Disposable.Create(() => { });
+            var disposableNop = Disposable.Create(() => { });
 
             if (opts.PathToCustomSheetsExcelFile == null)
             {

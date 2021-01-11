@@ -19,12 +19,15 @@ namespace HealthNerd.Cli
 
             var result = Parser.Default.ParseArguments<ExcelReportOptions, CreateSettingsOptions>(args)
                .MapResult(
-                    (ExcelReportOptions opts) => ReportActions.CreateReport(opts, stdOut, stdErr),
-                    (CreateSettingsOptions opts) => SettingsActions.CreateDefaultSettingsFile(opts),
+                    (ExcelReportOptions opts) => ReportActions.CreateReport(opts, stdErr),
+                    (CreateSettingsOptions opts) => SettingsActions.CreateDefaultSettingsFile(opts, stdErr),
                     Err);
 
             var exitCode = await result;
-            stdErr.WriteLine($"{exitCode.Value} - {exitCode.Message}");
+            if (exitCode != ExitCode.Success)
+            {
+                stdErr.WriteLine(exitCode.Message);
+            }
             return exitCode.Value;
         }
 
