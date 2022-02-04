@@ -1,10 +1,17 @@
 ﻿using System;
 using CommandLine;
+using Microsoft.Extensions.Logging;
 
 namespace HealthNerd.Cli
 {
+    interface IHasLogLevelOption
+    {
+        [Option('v', "log-level", Required = false, Default = Microsoft.Extensions.Logging.LogLevel.Information, HelpText = "The Doc ID to find the table in.")]
+        LogLevel LogLevel { get; set; }
+    }
+
     [Verb("excel-export", HelpText = "Creates Excel (XLSX) export of an Apple Health export file.")]
-    public class ExcelReportOptions
+    public record ExcelReportOptions : IHasLogLevelOption
     {
         [Option(longName: "export-file", HelpText = "Path to Apple Health export file.", Required = true)]
         public string PathToHealthExportFile { get; set; }
@@ -16,17 +23,18 @@ namespace HealthNerd.Cli
         public string PathToCustomSheetsExcelFile { get; set; }
         [Option(longName: "settings-file", HelpText = "Path to settings file.", Required = false)]
         public string PathToSettingsFile { get; set; }
+        public LogLevel LogLevel { get; set; }
     }
 
     [Verb("settings-generate", HelpText = "Generates a default settings file for use during Excel report creation.")]
-    public class CreateSettingsOptions
+    public record CreateSettingsOptions
     {
         [Option(longName: "output", HelpText = "Path to output file.", Required = false, Default = "settings.json")]
         public string OutputFilename { get; set; }
     }
 
     [Verb("settings-help", HelpText = "Shows possible values for all settings.")]
-    public class HelpSettingsOptions
+    public record HelpSettingsOptions
     {
     }
 

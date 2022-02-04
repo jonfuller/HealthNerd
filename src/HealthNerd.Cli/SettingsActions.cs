@@ -4,16 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthKitData.Core.Excel.Settings;
+using Microsoft.Extensions.Logging;
 
 namespace HealthNerd.Cli
 {
     public static class SettingsActions
     {
-        public static Task<ExitCode> CreateDefaultSettingsFile(CreateSettingsOptions opts, TextWriter stdErr)
+        public static Task<ExitCode> CreateDefaultSettingsFile(CreateSettingsOptions opts, ILoggerFactory loggerFactory)
         {
+            var logger = loggerFactory.CreateLogger(typeof(SettingsActions));
+            logger.LogInformation(opts.ToString());
+
             if (File.Exists(opts.OutputFilename))
             {
-                stdErr.WriteLine("Output file '' already exists. Aborting.");
+                logger.LogError($"Output file '{opts.OutputFilename}' already exists. Aborting.");
                 return Task.FromResult(ExitCode.ExportFileExists(opts.OutputFilename));
             }
             SettingsFileHelpers.ToFile(opts.OutputFilename, Settings.Default);
