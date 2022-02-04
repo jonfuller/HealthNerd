@@ -16,10 +16,10 @@
     <Copyright>Copyright © 2020 SEP, Inc</Copyright>
     <Title>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Title>
     <Summary>Export your Apple Health data to a spreadsheet to take your Health and nerdiness to the next level.</Summary>
-    <RepositoryUrl>https://github.com/jonfuller/HealthKitData</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jonfuller/HealthNerd</RepositoryUrl>
 
     <PackageTags>HealthNerd HealthKit Fitness iOS Excel CSV</PackageTags>
-    <PackageProjectUrl>https://github.com/jonfuller/HealthKitData</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jonfuller/HealthNerd</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
