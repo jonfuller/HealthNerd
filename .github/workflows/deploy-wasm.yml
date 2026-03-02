@@ -1,20 +1,25 @@
 name: Deploy HealthNerd WASM
 
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [master]
-    paths:
-      - 'src/HealthNerd.Wasm/**'
-      - '.github/workflows/deploy-wasm.yml'
   workflow_dispatch:  # allow manual trigger from GitHub Actions UI
 
 jobs:
   deploy:
+    # Only deploy when CI passed (skip on failure or manual trigger without context)
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout HealthNerd
         uses: actions/checkout@v4
+        with:
+          # On workflow_run the default sha is the workflow trigger sha, not the pushed commit.
+          # Pin to the sha that triggered CI so we build exactly what passed.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
@@ -46,5 +51,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git add -A
           git diff --staged --quiet && echo "No changes to deploy" && exit 0
-          git commit -m "Deploy HealthNerd WASM from HealthNerd@${{ github.sha }}"
+          git commit -m "Deploy HealthNerd WASM from HealthNerd@${{ github.event.workflow_run.head_sha || github.sha }}"
           git push
