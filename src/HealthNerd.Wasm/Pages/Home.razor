@@ -1,0 +1,308 @@
+@page "/"
+@using System.IO
+@using System.IO.Compression
+@using System.Linq
+@using HealthKitData.Core.DataExport
+@using HealthKitData.Core.Excel
+@using HealthKitData.Core.Excel.Settings
+@using NodaTime
+@using OfficeOpenXml
+@inject IJSRuntime JS
+@inject LocalStorageService Storage
+
+<div class="app-container">
+    <header>
+        <h1>HealthNerd</h1>
+        <p>Export Apple Health data to Excel</p>
+    </header>
+
+    <!-- ───── FILES ───── -->
+    <div class="card">
+        <h2>Files</h2>
+
+        <div class="file-row">
+            <label>Apple Health Export (.zip)</label>
+            <InputFile OnChange="OnExportFileChanged" accept=".zip" />
+            @if (_exportFileName is not null)
+            {
+                <span class="file-name">✓ @_exportFileName</span>
+            }
+        </div>
+
+        <div class="file-row">
+            <label>Custom Sheets (.xlsx) <span class="hint">— optional, sheets named "custom…" are included</span></label>
+            <InputFile OnChange="OnCustomSheetsChanged" accept=".xlsx" />
+            @if (_customSheetsFileName is not null)
+            {
+                <span class="file-name">✓ @_customSheetsFileName</span>
+            }
+        </div>
+    </div>
+
+    <!-- ───── SETTINGS ───── -->
+    <div class="card">
+        <h2>
+            Settings
+            <button class="btn-ghost" @onclick="ResetSettings">Reset to defaults</button>
+        </h2>
+
+        <div class="settings-grid">
+            <label>Distance unit</label>
+            <select @bind="_settings.DistanceUnit" @bind:after="SaveSettings">
+                <option value="Mile">Mile</option>
+                <option value="Meter">Meter</option>
+            </select>
+
+            <label>Weight unit</label>
+            <select @bind="_settings.MassUnit" @bind:after="SaveSettings">
+                <option value="Pound">Pound</option>
+                <option value="Kilogram">Kilogram</option>
+            </select>
+
+            <label>Energy unit</label>
+            <select @bind="_settings.EnergyUnit" @bind:after="SaveSettings">
+                <option value="Calorie">Calorie</option>
+                <option value="Kilocalorie">Kilocalorie</option>
+            </select>
+
+            <label>Duration unit</label>
+            <select @bind="_settings.DurationUnit" @bind:after="SaveSettings">
+                <option value="Minute">Minute</option>
+                <option value="Hour">Hour</option>
+            </select>
+
+            <label>Monthly summaries</label>
+            <input type="number" min="1" max="24"
+                   @bind="_settings.NumberOfMonthlySummaries"
+                   @bind:after="SaveSettings" />
+
+            <label>Data since</label>
+            <input type="date"
+                   @bind="_settings.SinceDate"
+                   @bind:after="SaveSettings" />
+        </div>
+
+        <hr class="settings-divider" />
+
+        <div class="settings-checks">
+            <label>
+                <input type="checkbox"
+                       @bind="_settings.OmitEmptyColumnsOnMonthlySummary"
+                       @bind:after="SaveSettings" />
+                Omit empty columns on monthly summary
+            </label>
+            <label>
+                <input type="checkbox"
+                       @bind="_settings.OmitEmptyColumnsOnOverallSummary"
+                       @bind:after="SaveSettings" />
+                Omit empty columns on overall summary
+            </label>
+            <label>
+                <input type="checkbox"
+                       @bind="_settings.OmitEmptySheets"
+                       @bind:after="SaveSettings" />
+                Omit empty sheets
+            </label>
+        </div>
+
+        <hr class="settings-divider" />
+
+        <div class="settings-row">
+            <label>Custom sheets placement</label>
+            <select @bind="_settings.CustomSheetsPlacement" @bind:after="SaveSettings">
+                <option value="BeforeSummary">Before summary</option>
+                <option value="AfterSummary">After summary</option>
+            </select>
+        </div>
+
+        <div class="settings-checks">
+            <label>
+                <input type="checkbox"
+                       @bind="_settings.UseConstantNameForMostRecentMonthlySummarySheet"
+                       @bind:after="SaveSettings" />
+                Use constant sheet name for most recent month
+            </label>
+            <label>
+                <input type="checkbox"
+                       @bind="_settings.UseConstantNameForPreviousMonthlySummarySheet"
+                       @bind:after="SaveSettings" />
+                Use constant sheet name for previous month
+            </label>
+        </div>
+    </div>
+
+    <!-- ───── GENERATE ───── -->
+    <div class="card">
+        <div class="generate-section">
+            <button class="btn-primary"
+                    @onclick="GenerateExcel"
+                    disabled="@(_generating || _exportFile is null)">
+                @(_generating ? "Generating…" : "Generate Excel")
+            </button>
+
+            @if (_statusMessage is not null)
+            {
+                <span class="status @_statusClass">@_statusMessage</span>
+            }
+        </div>
+
+        @if (_exportFile is null)
+        {
+            <p class="hint" style="margin-top:.5rem">Select an Apple Health export ZIP above to get started.</p>
+        }
+    </div>
+</div>
+
+@code {
+    private WebSettings _settings = new();
+    private IBrowserFile? _exportFile;
+    private string?       _exportFileName;
+    private IBrowserFile? _customSheetsFile;
+    private string?       _customSheetsFileName;
+    private bool   _generating;
+    private string? _statusMessage;
+    private string  _statusClass = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _settings = await Storage.LoadAsync();
+    }
+
+    private void OnExportFileChanged(InputFileChangeEventArgs e)
+    {
+        _exportFile = e.File;
+        _exportFileName = e.File.Name;
+        _statusMessage = null;
+    }
+
+    private void OnCustomSheetsChanged(InputFileChangeEventArgs e)
+    {
+        _customSheetsFile = e.File;
+        _customSheetsFileName = e.File.Name;
+    }
+
+    private Task SaveSettings() => Storage.SaveAsync(_settings);
+
+    private async Task ResetSettings()
+    {
+        _settings = new WebSettings();
+        await Storage.ClearAsync();
+    }
+
+    private async Task GenerateExcel()
+    {
+        if (_exportFile is null) return;
+
+        _generating = true;
+        SetStatus("Reading export file…", "");
+        StateHasChanged();
+
+        try
+        {
+            // Read the Apple Health export ZIP into memory
+            byte[] exportBytes;
+            using (var buf = new MemoryStream())
+            {
+                await using var stream = _exportFile.OpenReadStream(maxAllowedSize: 512L * 1024 * 1024);
+                await stream.CopyToAsync(buf);
+                exportBytes = buf.ToArray();
+            }
+
+            // Read optional custom sheets XLSX
+            byte[]? customBytes = null;
+            if (_customSheetsFile is not null)
+            {
+                using var buf = new MemoryStream();
+                await using var stream = _customSheetsFile.OpenReadStream(maxAllowedSize: 50L * 1024 * 1024);
+                await stream.CopyToAsync(buf);
+                customBytes = buf.ToArray();
+            }
+
+            // Resolve browser timezone before leaving async context
+            var tzName = await JS.InvokeAsync<string>("getBrowserTimeZone");
+
+            SetStatus("Generating Excel…", "");
+            StateHasChanged();
+
+            var currentSettings = _settings; // capture for background thread
+            var excelBytes = await Task.Run(() => BuildExcel(exportBytes, customBytes, currentSettings, tzName));
+
+            SetStatus("Downloading…", "");
+            StateHasChanged();
+
+            await JS.InvokeVoidAsync(
+                "downloadFile",
+                "health-export.xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                excelBytes);
+
+            SetStatus("Done — file downloaded.", "success");
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Error: {ex.Message}", "error");
+        }
+        finally
+        {
+            _generating = false;
+        }
+    }
+
+    private void SetStatus(string message, string cssClass)
+    {
+        _statusMessage = message;
+        _statusClass   = cssClass;
+    }
+
+    // ── Core processing (runs on thread-pool via Task.Run) ──────────────────
+
+    private static byte[] BuildExcel(byte[] exportBytes, byte[]? customBytes, WebSettings ws, string tzName)
+    {
+        // Locate and parse apple_health_export/export.xml inside the ZIP
+        using var zipStream = new MemoryStream(exportBytes);
+        var loader = ZipUtilities.ReadArchive(
+                zipStream,
+                entry => entry.FullName == "apple_health_export/export.xml",
+                entry => new XmlReaderExportLoader(entry.Open()))
+           .FirstOrDefault()
+            ?? throw new InvalidOperationException(
+                "apple_health_export/export.xml not found in ZIP. " +
+                "Make sure you upload the export.zip produced by the Health app.");
+
+        // Filter records by since-date.
+        // Record.Start is assumed to be NodaTime.LocalDate (verify at compile time).
+        // If HealthKitData.Core uses a different type (e.g. Instant), adjust the
+        // comparison accordingly.
+        var sinceDate = LocalDate.FromDateTime(ws.SinceDate);
+        var records  = loader.Records .Where(r => r.Start >= sinceDate).ToList();
+        var workouts = loader.Workouts.Where(w => w.Start >= sinceDate).ToList();
+
+        // Load custom sheets (sheets whose names begin with "custom")
+        ExcelPackage? customPackage = null;
+        IEnumerable<ExcelWorksheet> customSheets = Enumerable.Empty<ExcelWorksheet>();
+        if (customBytes is not null)
+        {
+            customPackage = new ExcelPackage(new MemoryStream(customBytes));
+            customSheets = customPackage.Workbook.Worksheets
+               .Where(w => w.Name.StartsWith("custom", StringComparison.CurrentCultureIgnoreCase))
+               .ToList();
+        }
+
+        // Resolve timezone (falls back to UTC if name not found in TZDB)
+        DateTimeZone tz;
+        try { tz = DateTimeZoneProviders.Tzdb[tzName]; }
+        catch { tz = DateTimeZone.Utc; }
+
+        using var excelFile = new ExcelPackage();
+        try
+        {
+            var settings = SettingsMapper.ToExcelSettings(ws);
+            ExcelReport.BuildReport(records, workouts, excelFile.Workbook, settings, tz, customSheets);
+            return excelFile.GetAsByteArray();
+        }
+        finally
+        {
+            customPackage?.Dispose();
+        }
+    }
+}
