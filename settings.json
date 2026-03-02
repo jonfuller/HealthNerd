@@ -1,0 +1,46 @@
+[
+  {
+    "name": "OmitEmptySheets",
+    "value": true
+  },
+  {
+    "name": "OmitEmptyColumnsOnOverallSummary",
+    "value": false
+  },
+  {
+    "name": "OmitEmptyColumnsOnMonthlySummary",
+    "value": false
+  },
+  {
+    "name": "NumberOfMonthlySummaries",
+    "value": 3
+  },
+  {
+    "name": "UseConstantNameForMostRecentMonthlySummarySheet",
+    "value": true
+  },
+  {
+    "name": "UseConstantNameForPreviousMonthlySummarySheet",
+    "value": true
+  },
+  {
+    "name": "DistanceUnit",
+    "value": "Mile"
+  },
+  {
+    "name": "DurationUnit",
+    "value": "Minute"
+  },
+  {
+    "name": "WeightUnit",
+    "value": "Pound"
+  },
+  {
+    "name": "EnergyUnit",
+    "value": "Kilocalorie"
+  },
+  {
+    "name": "CustomSheetsPlacement",
+    "value": "AfterSummary"
+  }
+]
