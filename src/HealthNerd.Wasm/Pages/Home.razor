@@ -224,8 +224,9 @@
             SetStatus("Generating Excel…", "");
             StateHasChanged();
 
-            var currentSettings = _settings; // capture for background thread
-            var excelBytes = await Task.Run(() => BuildExcel(exportBytes, customBytes, currentSettings, tzName));
+            var currentSettings = _settings;
+            // NOTE: In Blazor WebAssembly this still runs on the UI thread; large exports may temporarily freeze the UI.
+            var excelBytes = BuildExcel(exportBytes, customBytes, currentSettings, tzName);
 
             SetStatus("Downloading…", "");
             StateHasChanged();
