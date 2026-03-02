@@ -271,12 +271,11 @@
                 "Make sure you upload the export.zip produced by the Health app.");
 
         // Filter records by since-date.
-        // Record.Start is assumed to be NodaTime.LocalDate (verify at compile time).
-        // If HealthKitData.Core uses a different type (e.g. Instant), adjust the
-        // comparison accordingly.
+        // Record.StartDate : NodaTime.LocalDate  (confirmed from HealthKitData.Core.dll)
+        // Workout.Start    : NodaTime.LocalDate
         var sinceDate = LocalDate.FromDateTime(ws.SinceDate);
-        var records  = loader.Records .Where(r => r.Start >= sinceDate).ToList();
-        var workouts = loader.Workouts.Where(w => w.Start >= sinceDate).ToList();
+        var records  = loader.Records .Where(r => r.StartDate >= sinceDate).ToList();
+        var workouts = loader.Workouts.Where(w => w.Start    >= sinceDate).ToList();
 
         // Load custom sheets (sheets whose names begin with "custom")
         ExcelPackage? customPackage = null;
