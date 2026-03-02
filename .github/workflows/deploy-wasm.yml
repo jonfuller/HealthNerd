@@ -1,0 +1,50 @@
+name: Deploy HealthNerd WASM
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'src/HealthNerd.Wasm/**'
+      - '.github/workflows/deploy-wasm.yml'
+  workflow_dispatch:  # allow manual trigger from GitHub Actions UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout HealthNerd
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish Blazor WASM
+        run: dotnet publish src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release -o ./publish
+
+      - name: Checkout htmltools
+        uses: actions/checkout@v4
+        with:
+          repository: jonfuller/htmltools
+          token: ${{ secrets.HTMLTOOLS_DEPLOY_TOKEN }}
+          path: htmltools
+
+      - name: Copy WASM output to htmltools/healthnerd
+        run: |
+          rm -rf htmltools/healthnerd
+          mkdir -p htmltools/healthnerd
+          cp -r ./publish/wwwroot/. htmltools/healthnerd/
+          # Ensure Jekyll ignores _framework/ files
+          touch htmltools/.nojekyll
+
+      - name: Commit and push to htmltools
+        run: |
+          cd htmltools
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy HealthNerd WASM from HealthNerd@${{ github.sha }}"
+          git push
