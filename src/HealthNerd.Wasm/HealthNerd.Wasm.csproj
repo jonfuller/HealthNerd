@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Trimming disabled: HealthKitData.Core and EPPlus use XML reflection -->
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="HealthKitData.Core" Version="0.4.0" />
+    <!-- EPPlus 6+ required: avoids System.Drawing dependency not available in WASM -->
+    <PackageReference Include="EPPlus" Version="6.2.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NodaTime" Version="3.1.0" />
+    <PackageReference Include="Disposing" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
