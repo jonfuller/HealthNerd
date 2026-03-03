@@ -4,8 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!-- Trimming disabled: HealthKitData.Core and EPPlus use XML reflection -->
-    <PublishTrimmed>false</PublishTrimmed>
+    <!-- Trimming enabled to reduce the 200+ assembly payload.
+         Reflection-heavy packages are rooted via TrimmerRootAssembly below. -->
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NodaTime" Version="3.1.0" />
     <PackageReference Include="Disposing" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- Preserve assemblies that use reflection internally so the trimmer
+       doesn't remove members they need at runtime. -->
+  <ItemGroup>
+    <TrimmerRootAssembly Include="HealthKitData.Core" />
+    <TrimmerRootAssembly Include="EPPlus" />
+    <TrimmerRootAssembly Include="Newtonsoft.Json" />
   </ItemGroup>
 
 </Project>
