@@ -25,11 +25,7 @@ jobs:
         run: dotnet restore src/HealthNerd.Wasm/HealthNerd.Wasm.csproj
 
       - name: Build
-        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -v normal 2>&1 | tee /tmp/build-output.txt; exit ${PIPESTATUS[0]}
-
-      - name: Show build errors
-        if: failure()
-        run: grep -E "error CS|Error\(s\)|error :" /tmp/build-output.txt || cat /tmp/build-output.txt
+        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore
 
       - name: Publish (dry-run to verify WASM output)
         run: dotnet publish src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -o ./publish
