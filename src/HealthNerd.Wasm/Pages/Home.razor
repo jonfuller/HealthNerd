@@ -270,12 +270,10 @@
                 "Make sure you upload the export.zip produced by the Health app.");
 
         // Filter records by since-date.
-        // Record.StartDate : NodaTime.Instant
-        // Workout.DateRange : NodaTime.DateInterval (DateRange.Start is LocalDate)
-        var sinceInstant   = Instant.FromDateTimeUtc(DateTime.SpecifyKind(ws.SinceDate, DateTimeKind.Utc));
-        var sinceLocalDate = LocalDate.FromDateTime(ws.SinceDate);
-        var records  = loader.Records .Where(r => r.StartDate        >= sinceInstant).ToList();
-        var workouts = loader.Workouts.Where(w => w.DateRange.Start  >= sinceLocalDate).ToList();
+        // Both Record.StartDate and Workout.StartDate are NodaTime.Instant.
+        var sinceInstant = Instant.FromDateTimeUtc(DateTime.SpecifyKind(ws.SinceDate, DateTimeKind.Utc));
+        var records  = loader.Records .Where(r => r.StartDate >= sinceInstant).ToList();
+        var workouts = loader.Workouts.Where(w => w.StartDate >= sinceInstant).ToList();
 
         // Load custom sheets (sheets whose names begin with "custom")
         ExcelPackage? customPackage = null;
