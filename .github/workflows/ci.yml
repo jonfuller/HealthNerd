@@ -18,11 +18,14 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Install WASM workload
+        run: dotnet workload install wasm-tools
+
       - name: Restore
         run: dotnet restore src/HealthNerd.Wasm/HealthNerd.Wasm.csproj
 
       - name: Build
-        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore
+        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -v normal
 
       - name: Publish (dry-run to verify WASM output)
         run: dotnet publish src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -o ./publish
