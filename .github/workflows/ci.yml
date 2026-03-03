@@ -25,7 +25,14 @@ jobs:
         run: dotnet restore src/HealthNerd.Wasm/HealthNerd.Wasm.csproj
 
       - name: Build
-        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -v normal
+        run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -v normal 2>&1 | tee /tmp/build-output.txt; exit ${PIPESTATUS[0]}
+
+      - name: Upload build log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: /tmp/build-output.txt
 
       - name: Publish (dry-run to verify WASM output)
         run: dotnet publish src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -o ./publish
