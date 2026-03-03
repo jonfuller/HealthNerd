@@ -110,7 +110,6 @@
         <div class="settings-row">
             <label>Custom sheets placement</label>
             <select @bind="_settings.CustomSheetsPlacement" @bind:after="SaveSettings">
-                <option value="BeforeSummary">Before summary</option>
                 <option value="AfterSummary">After summary</option>
             </select>
         </div>
@@ -271,11 +270,12 @@
                 "Make sure you upload the export.zip produced by the Health app.");
 
         // Filter records by since-date.
-        // Record.StartDate : NodaTime.LocalDate  (confirmed from HealthKitData.Core.dll)
-        // Workout.Start    : NodaTime.LocalDate
-        var sinceDate = LocalDate.FromDateTime(ws.SinceDate);
-        var records  = loader.Records .Where(r => r.StartDate >= sinceDate).ToList();
-        var workouts = loader.Workouts.Where(w => w.Start    >= sinceDate).ToList();
+        // Record.StartDate : NodaTime.Instant
+        // Workout.DateRange : NodaTime.DateInterval (DateRange.Start is LocalDate)
+        var sinceInstant   = Instant.FromDateTimeUtc(DateTime.SpecifyKind(ws.SinceDate, DateTimeKind.Utc));
+        var sinceLocalDate = LocalDate.FromDateTime(ws.SinceDate);
+        var records  = loader.Records .Where(r => r.StartDate        >= sinceInstant).ToList();
+        var workouts = loader.Workouts.Where(w => w.DateRange.Start  >= sinceLocalDate).ToList();
 
         // Load custom sheets (sheets whose names begin with "custom")
         ExcelPackage? customPackage = null;

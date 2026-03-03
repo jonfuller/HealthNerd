@@ -26,9 +26,7 @@ public static class SettingsMapper
             OmitEmptyColumnsOnOverallSummary = ws.OmitEmptyColumnsOnOverallSummary,
             OmitEmptySheets                  = ws.OmitEmptySheets,
 
-            CustomSheetsPlacement = ws.CustomSheetsPlacement == "BeforeSummary"
-                ? CustomSheetsPlacement.BeforeSummary
-                : CustomSheetsPlacement.AfterSummary,
+            CustomSheetsPlacement = CustomSheetsPlacement.AfterSummary,
 
             UseConstantNameForMostRecentMonthlySummarySheet = ws.UseConstantNameForMostRecentMonthlySummarySheet,
             UseConstantNameForPreviousMonthlySummarySheet   = ws.UseConstantNameForPreviousMonthlySummarySheet,
