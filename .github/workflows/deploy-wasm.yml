@@ -5,6 +5,11 @@ on:
     workflows: [CI]
     types: [completed]
     branches: [master]
+  push:
+    branches: [master]
+    paths:
+      - 'src/HealthNerd.Wasm/**'
+      - '.github/workflows/deploy-wasm.yml'
   workflow_dispatch:  # allow manual trigger from GitHub Actions UI
 
 jobs:
