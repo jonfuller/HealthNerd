@@ -27,12 +27,9 @@ jobs:
       - name: Build
         run: dotnet build src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -v normal 2>&1 | tee /tmp/build-output.txt; exit ${PIPESTATUS[0]}
 
-      - name: Upload build log
+      - name: Show build errors
         if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: /tmp/build-output.txt
+        run: grep -E "error CS|Error\(s\)|error :" /tmp/build-output.txt || cat /tmp/build-output.txt
 
       - name: Publish (dry-run to verify WASM output)
         run: dotnet publish src/HealthNerd.Wasm/HealthNerd.Wasm.csproj -c Release --no-restore -o ./publish
